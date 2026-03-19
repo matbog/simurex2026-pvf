@@ -7,6 +7,8 @@ repo_name: matbog/simurex2026-pvf
 theme:
   name: material
   language: fr
+  logo: assets/logo.png
+  favicon: assets/favicon.png
   palette:
     - scheme: default
       primary: white
