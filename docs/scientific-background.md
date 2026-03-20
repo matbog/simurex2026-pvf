@@ -1,6 +1,7 @@
-# Scientific background
+# Rappels scientifiques
 
-## Why view factors matter
+## Pourquoi les facteur de forme sont important
+
 
 Radiative heat transfer depends not only on temperature and material properties, but also on geometry.
 

@@ -1,17 +1,17 @@
-# Exercises & mini-projects
+# Exercices & mini-projet
 
-## Exercise 1 — First computation
+## Exercice 1 — Cas académiques
 
 Compute the view factor between two simple planar surfaces.
 
-## Exercise 2 — Effect of distance and orientation
+## Exercice 2 — Calcul de la MRT
 
 Study how the view factor changes when the geometry changes.
 
-## Exercise 3 — Visibility and obstruction
+## Exercice 3 — Matrice de facteur de forme 
 
 Add an obstructing surface and compare the results with and without obstruction handling.
 
-## Mini-project
+## Confort dans un environnement urbain
 
 Build a small geometric scene and discuss the dominant radiative exchanges.

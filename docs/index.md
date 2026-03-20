@@ -1,24 +1,29 @@
-# SIMUREX – Computation of View Factors
+# SIMUREX 2026 – Calcul de facteur de forme et échanges radiatifs
 
-## Doctoral school session at IBPSA 2026
+## Ecole thématique SIMUREX, IBPSA 2026
 
-This session introduces the computation of radiative view factors for thermal and building simulation applications, with a practical focus on the Python library `pyviewfactor`.
+Cette session introduit le calcul des facteurs de vue radiatifs dans le cadre 
+d’applications en thermique et en simulation du bâtiment, avec un accent particulier sur
+l’utilisation pratique de la bibliothèque Python `pyviewfactor`.
 
-The course is part of the **SIMUREX** school session associated with **IBPSA 2026**.
+Ce cours s’inscrit dans le cadre de la session de formation SIMUREX, associée à 
+[IBPSA France 2026](https://conference2026.ibpsa.fr/).
 
-!!! info "Session focus"
-    We combine scientific background, Python setup, and hands-on exercises.
+!!! info "Objectif de la session"
+    Le contenu combine des éléments de contexte scientifique, la mise en place d’un environnement Python, ainsi que des exercices pratiques.
 
-## What this site contains
+![Facteur de forme entre un individu et une scène urbaine](assets/FF_sceneUrbaine_cyl.png)
 
-- **Get started** — prepare a clean Python environment
-- **Scientific background** — understand why view factors matter
-- **Exercises & mini-projects** — work on guided problems
-- **About pyviewfactor** — learn more about the library used in the session
+## Contenu du site
 
-## Quick links
+* Prise en main — préparer un environnement Python propre
+* Contexte scientifique — comprendre l’importance des facteurs de vue en thermique
+* Exercices et mini-projets — travailler sur des problèmes guidés
+* À propos de `pyviewfactor` — en savoir plus sur la bibliothèque utilisée durant la session
+
+## Liens Rapides
 
 - [Get started](get-started.md)
-- [Scientific background](scientific-background.md)
-- [Exercises & mini-projects](exercises.md)
-- [About pyviewfactor](about-pyviewfactor.md)
+- [Rappels scientifiques](scientific-background.md)
+- [Exercices & mini-projet](exercises.md)
+- [A propos de `pyviewfactor`](about-pyviewfactor.md)

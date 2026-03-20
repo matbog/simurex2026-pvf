@@ -1,35 +1,49 @@
 # Get started
 
-This page explains how to prepare a clean Python environment and run the examples used during the session.
+Comment créer un environnement Python propre pour faire tourner les exercices de
+la session. 
 
-## 1. Create a clean Python environment
+## 1. Créer un environnement Python propre
 
-We recommend using a dedicated conda environment.
+Il est recommandé d'utiliser un environnement Python "vierge". 
+Selon vos préférence, utilisez `conda`, `miniconda`, `venv`, ...
 
+* Conda : 
 ```bash
 conda create -n simurex-pvf python=3.11
 conda activate simurex-pvf
 ```
-## 2. Install the required packages
+
+* `venv`
+
+
+## 2. Installer les packages nécessaires 
 
 ```bash
-pip install numpy scipy matplotlib pyvista jupyter
-pip install pyviewfactor
+pip install requirements
 ```
 
-3. Retrieve the session material
+## 3. Récupérer les fichiers sources 
 
-```
+_selon ou on heberge les fichiers
+
+* Notebooks / Scripts
+```bash
 git clone https://github.com/matbog/simurex2026-pvf.git
-cd simurex2026-pvf
+cd simurex2026-pvf/session
 ```
 
-## 4. Check that the environment works
+* Geométries 
+```bash
+cd simurex2026-pvf/session/datasets
+```
+
+## 4. Vérifier que tout s'importe 
 
 ```python
 import numpy as np
 import pyvista as pv
-import pyviewfactor
+import pyviewfactor as pvf
 
 print("Environment OK")
 ```
