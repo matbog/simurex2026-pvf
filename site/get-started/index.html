@@ -333,10 +333,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-clean-python-environment" class="md-nav__link">
+  <a href="#1-creer-un-environnement-python-propre" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Create a clean Python environment
+        1. Créer un environnement Python propre
       
     </span>
   </a>
@@ -344,10 +344,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-install-the-required-packages" class="md-nav__link">
+  <a href="#2-installer-les-packages-necessaires" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Install the required packages
+        2. Installer les packages nécessaires
       
     </span>
   </a>
@@ -355,10 +355,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-check-that-the-environment-works" class="md-nav__link">
+  <a href="#3-recuperer-les-fichiers-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Check that the environment works
+        3. Récupérer les fichiers sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-verifier-que-tout-simporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Vérifier que tout s'importe
       
     </span>
   </a>
@@ -481,10 +492,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-create-a-clean-python-environment" class="md-nav__link">
+  <a href="#1-creer-un-environnement-python-propre" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Create a clean Python environment
+        1. Créer un environnement Python propre
       
     </span>
   </a>
@@ -492,10 +503,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-install-the-required-packages" class="md-nav__link">
+  <a href="#2-installer-les-packages-necessaires" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Install the required packages
+        2. Installer les packages nécessaires
       
     </span>
   </a>
@@ -503,10 +514,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-check-that-the-environment-works" class="md-nav__link">
+  <a href="#3-recuperer-les-fichiers-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Check that the environment works
+        3. Récupérer les fichiers sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-verifier-que-tout-simporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Vérifier que tout s'importe
       
     </span>
   </a>
@@ -534,26 +556,44 @@
 
 
 <h1 id="get-started">Get started<a class="headerlink" href="#get-started" title="Permanent link">&para;</a></h1>
-<p>This page explains how to prepare a clean Python environment and run the examples used during the session.</p>
-<h2 id="1-create-a-clean-python-environment">1. Create a clean Python environment<a class="headerlink" href="#1-create-a-clean-python-environment" title="Permanent link">&para;</a></h2>
-<p>We recommend using a dedicated conda environment.</p>
+<p>Comment créer un environnement Python propre pour faire tourner les exercices de
+la session. </p>
+<h2 id="1-creer-un-environnement-python-propre">1. Créer un environnement Python propre<a class="headerlink" href="#1-creer-un-environnement-python-propre" title="Permanent link">&para;</a></h2>
+<p>Il est recommandé d'utiliser un environnement Python "vierge". 
+Selon vos préférence, utilisez <code>conda</code>, <code>miniconda</code>, <code>venv</code>, ...</p>
+<ul>
+<li>
+<p>Conda : 
 <div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
 conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
+</code></pre></div></p>
+</li>
+<li>
+<p><code>venv</code></p>
+</li>
+</ul>
+<h2 id="2-installer-les-packages-necessaires">2. Installer les packages nécessaires<a class="headerlink" href="#2-installer-les-packages-necessaires" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>requirements
 </code></pre></div>
-<h2 id="2-install-the-required-packages">2. Install the required packages<a class="headerlink" href="#2-install-the-required-packages" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>scipy<span class="w"> </span>matplotlib<span class="w"> </span>pyvista<span class="w"> </span>jupyter
-pip<span class="w"> </span>install<span class="w"> </span>pyviewfactor
-</code></pre></div>
-<ol>
-<li>Retrieve the session material</li>
-</ol>
-<div class="highlight"><pre><span></span><code>git clone https://github.com/matbog/simurex2026-pvf.git
-cd simurex2026-pvf
-</code></pre></div>
-<h2 id="4-check-that-the-environment-works">4. Check that the environment works<a class="headerlink" href="#4-check-that-the-environment-works" title="Permanent link">&para;</a></h2>
+<h2 id="3-recuperer-les-fichiers-sources">3. Récupérer les fichiers sources<a class="headerlink" href="#3-recuperer-les-fichiers-sources" title="Permanent link">&para;</a></h2>
+<p>_selon ou on heberge les fichiers</p>
+<ul>
+<li>
+<p>Notebooks / Scripts
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
+<span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/session
+</code></pre></div></p>
+</li>
+<li>
+<p>Geométries 
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/session/datasets
+</code></pre></div></p>
+</li>
+</ul>
+<h2 id="4-verifier-que-tout-simporte">4. Vérifier que tout s'importe<a class="headerlink" href="#4-verifier-que-tout-simporte" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Environment OK&quot;</span><span class="p">)</span>
 </code></pre></div>
