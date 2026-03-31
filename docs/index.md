@@ -27,3 +27,6 @@ Ce cours s’inscrit dans le cadre de la session de formation SIMUREX, associée
 - [Rappels scientifiques](scientific-background.md)
 - [Exercices & mini-projet](exercises.md)
 - [A propos de `pyviewfactor`](about-pyviewfactor.md)
+
+---
+M.B & E.W 

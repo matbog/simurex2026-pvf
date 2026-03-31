@@ -1,17 +1,18 @@
-# Exercices & mini-projet
+# Cas d'applications et mini-projet
 
-## Exercice 1 — Cas académiques
+## Application 1 — Cas académiques
 
 Compute the view factor between two simple planar surfaces.
 
-## Exercice 2 — Calcul de la MRT
+## Application 2 — Calcul de la MRT 
 
-Study how the view factor changes when the geometry changes.
+Application aux calcul de la MRT, si on connait les températures de surfaces d'une scène
 
-## Exercice 3 — Matrice de facteur de forme 
+## Application 3 — Matrice de facteur de forme pour une scène
 
-Add an obstructing surface and compare the results with and without obstruction handling.
-
+Pour une scène "urbaine" complète, calcul préliminaire à la thermioque pour définir
+**tous** les facteurs de formes cellule à cellule. 
+ 
 ## Confort dans un environnement urbain
 
-Build a small geometric scene and discuss the dominant radiative exchanges.
+

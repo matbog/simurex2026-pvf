@@ -12,7 +12,7 @@ theme:
   palette:
     - scheme: default
       primary: white
-      accent: indigo
+      accent: pink
   features:
     - navigation.sections
     - navigation.top
@@ -20,7 +20,9 @@ theme:
     - content.tabs.link
     - search.suggest
     - search.highlight
-
+extra_css:
+  - assets/extra.css
+  
 markdown_extensions:
   - admonition
   - attr_list

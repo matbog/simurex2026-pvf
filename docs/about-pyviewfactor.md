@@ -2,7 +2,7 @@
 
 ## What is pyviewfactor?
 
-`pyviewfactor` is a Python library dedicated to the computation of radiative view factors between planar facets.
+[`pyviewfactor`](https://gitlab.com/arep-dev/pyViewFactor) is a Python library dedicated to the computation of radiative view factors between planar facets.
 
 ## Why use it in this session?
 

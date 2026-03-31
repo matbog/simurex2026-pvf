@@ -14,7 +14,7 @@ conda create -n simurex-pvf python=3.11
 conda activate simurex-pvf
 ```
 
-* `venv`
+* `venv` : 
 
 
 ## 2. Installer les packages nécessaires 
@@ -22,6 +22,8 @@ conda activate simurex-pvf
 ```bash
 pip install requirements
 ```
+
+
 
 ## 3. Récupérer les fichiers sources 
 
