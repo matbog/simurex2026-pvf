@@ -924,7 +924,7 @@
 <h1 id="about-pyviewfactor">About pyViewFactor<a class="headerlink" href="#about-pyviewfactor" title="Permanent link">&para;</a></h1>
 <h2 id="1-pourquoi-parler-de-pyviewfactor-dans-cette-formation">1. Pourquoi parler de <code>pyViewFactor</code> dans cette formation ?<a class="headerlink" href="#1-pourquoi-parler-de-pyviewfactor-dans-cette-formation" title="Permanent link">&para;</a></h2>
 <p><strong><code>pyViewFactor</code></strong> est une bibliothèque Python dédiée au calcul des
-<strong>facteurs de forme radiatifs</strong> (<em>view factors</em>) entre surfaces planes.</p>
+<strong>facteurs de forme</strong> (<em>view factors</em>) entre surfaces planes.</p>
 <p>Elle a été développée pour des cas où les échanges radiatifs dépendent fortement de la
 géométrie :</p>
 <ul>
@@ -941,21 +941,21 @@ orientation, distance, visibilité et obstructions.</p>
 </div>
 <p>Dans cette formation, <code>pyViewFactor</code> sert de support pratique pour passer :</p>
 <ol>
-<li>d'une formulation scientifique des échanges radiatifs ;</li>
-<li>à un calcul numérique sur des géométries réelles ;</li>
+<li>d'une formulation scientifique des échanges radiatifs,</li>
+<li>à un calcul numérique sur des géométries réelles,</li>
 <li>puis à une intégration dans un workflow Python reproductible.</li>
 </ol>
 <h2 id="2-pourquoi-utiliser-une-bibliotheque-dediee">2. Pourquoi utiliser une bibliothèque dédiée ?<a class="headerlink" href="#2-pourquoi-utiliser-une-bibliotheque-dediee" title="Permanent link">&para;</a></h2>
 <p>Les facteurs de forme peuvent être calculés de plusieurs manières, mais les outils
-généralistes ne sont pas toujours adaptés à un usage pédagogique ou scientifique léger.</p>
+généralistes ne sont pas toujours adaptés à un usage pédagogique ou scientifique ouvert 
+et interopérable. </p>
 <h3 id="21-limites-frequentes-des-approches-existantes">2.1 Limites fréquentes des approches existantes<a class="headerlink" href="#21-limites-frequentes-des-approches-existantes" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p><strong>EnergyPlus</strong><br />
+<p>Liste non exhaustive : 
+- <strong>EnergyPlus</strong><br />
   Très utile pour la simulation énergétique, mais les facteurs de forme sont intégrés
   dans un modèle plus global. Le contrôle fin des surfaces, des maillages et des tests
   géométriques est moins direct.</p>
-</li>
+<ul>
 <li>
 <p><strong>Radiance</strong><br />
   Très puissant pour le ray tracing et l'éclairage, mais il demande une expertise
@@ -967,13 +967,19 @@ généralistes ne sont pas toujours adaptés à un usage pédagogique ou scienti
   Très complet pour la simulation numérique, mais plus lourd à mettre en place lorsqu'on
   veut seulement explorer ou enseigner le calcul de facteurs de forme.</p>
 </li>
+<li>
+<p>Code ASTER, </p>
+</li>
+<li>
+<p>...</p>
+</li>
 </ul>
 <h3 id="22-besoin-cible">2.2 Besoin ciblé<a class="headerlink" href="#22-besoin-cible" title="Permanent link">&para;</a></h3>
 <p>Dans beaucoup d'applications de recherche :</p>
 <ul>
-<li>les surfaces sont issues de maillages polygonaux ;</li>
-<li>les interactions surface-surface sont nombreuses ;</li>
-<li>les obstructions peuvent modifier fortement les échanges ;</li>
+<li>les surfaces sont issues de maillages polygonaux,</li>
+<li>les interactions surface-surface sont nombreuses,</li>
+<li>les obstructions peuvent modifier fortement les échanges,</li>
 <li>on souhaite garder la main sur chaque étape du calcul.</li>
 </ul>
 <div class="admonition success">
@@ -984,13 +990,13 @@ des facteurs de forme sur des géométries planes issues de maillages.</p>
 <h2 id="3-fonctionnalites-principales">3. Fonctionnalités principales<a class="headerlink" href="#3-fonctionnalites-principales" title="Permanent link">&para;</a></h2>
 <p>La bibliothèque permet notamment de :</p>
 <ul>
-<li>tester si deux faces sont orientées de manière compatible pour échanger du rayonnement ;</li>
-<li>tester si une obstruction bloque la ligne de vue entre deux faces ;</li>
-<li>calculer un facteur de forme entre deux surfaces planes ;</li>
-<li>calculer une matrice complète de facteurs de forme sur un maillage ;</li>
-<li>exploiter la réciprocité des facteurs de forme ;</li>
-<li>visualiser la distribution des facteurs de forme depuis une cellule donnée ;</li>
-<li>intégrer ces calculs dans des workflows Python basés sur <code>PyVista</code>, <code>NumPy</code>, <code>SciPy</code> et <code>Numba</code>.</li>
+<li>tester si deux faces sont orientées de manière compatible pour échanger du rayonnement,</li>
+<li>tester si une obstruction bloque la ligne de vue entre deux faces,</li>
+<li>calculer un facteur de forme entre deux surfaces planes,</li>
+<li>calculer une matrice complète de facteurs de forme sur un maillage,</li>
+<li>exploiter la réciprocité des facteurs de forme,</li>
+<li>visualiser la distribution des facteurs de forme depuis une cellule donnée,</li>
+<li><strong>intégrer ces calculs dans des workflows Python</strong> basés sur <code>PyVista</code>, <code>NumPy</code>, <code>SciPy</code> et <code>Numba</code>.</li>
 </ul>
 <h2 id="4-principe-de-la-methode">4. Principe de la méthode<a class="headerlink" href="#4-principe-de-la-methode" title="Permanent link">&para;</a></h2>
 <p>La méthode utilisée dans <code>pyViewFactor</code> s'appuie sur une formulation classique du
@@ -1007,7 +1013,7 @@ contributions associées aux paires d'arêtes des deux polygones.</p>
 <h3 id="42-strategie-numerique">4.2 Stratégie numérique<a class="headerlink" href="#42-strategie-numerique" title="Permanent link">&para;</a></h3>
 <p><code>pyViewFactor</code> utilise deux intégrateurs complémentaires :</p>
 <ul>
-<li><strong>Gauss–Legendre</strong> : rapide, utilisé pour la majorité des paires de faces disjointes ;</li>
+<li><strong>Gauss–Legendre</strong> : rapide, utilisé pour la majorité des paires de faces disjointes,</li>
 <li><strong><code>SciPy</code> <code>dblquad</code></strong> : plus robuste, utilisé pour les cas plus délicats, notamment les
 faces partageant un sommet ou une arête.</li>
 </ul>
@@ -1095,7 +1101,7 @@ chaque paire de faces.</p>
 </table>
 <p>Deux modes existent :</p>
 <ul>
-<li><code>strict=False</code> : test principalement basé sur les centroïdes, plus permissif ;</li>
+<li><code>strict=False</code> : test principalement basé sur les centroïdes, plus permissif,</li>
 <li><code>strict=True</code> : test plus pénalisant, qui vérifie les positions relatives des sommets pour éviter de valider des cas partiellement visibles.</li>
 </ul>
 <div class="admonition warning">
@@ -1141,7 +1147,7 @@ chaque paire de faces.</p>
 </table>
 <p>Modes d'obstruction :</p>
 <ul>
-<li><code>strict=False</code> : un rayon centroïde-centroïde est testé ;</li>
+<li><code>strict=False</code> : un rayon centroïde-centroïde est testé,</li>
 <li><code>strict=True</code> : plusieurs rayons sommet-sommet sont testés, ce qui rend le critère plus conservatif.</li>
 </ul>
 <h3 id="54-integration-numerique-du-facteur-de-forme">5.4 Intégration numérique du facteur de forme<a class="headerlink" href="#54-integration-numerique-du-facteur-de-forme" title="Permanent link">&para;</a></h3>
@@ -1179,7 +1185,7 @@ chaque paire de faces.</p>
 </table>
 <p>En pratique :</p>
 <ul>
-<li>les faces disjointes sont traitées par Gauss–Legendre ;</li>
+<li>les faces disjointes sont traitées par Gauss–Legendre,</li>
 <li>les faces qui partagent au moins un sommet sont légèrement décalées avec <code>epsilon</code>, puis traitées par <code>dblquad</code>.</li>
 </ul>
 <h3 id="55-fonctions-haut-niveau">5.5 Fonctions haut niveau<a class="headerlink" href="#55-fonctions-haut-niveau" title="Permanent link">&para;</a></h3>
@@ -1240,25 +1246,25 @@ chaque paire de faces.</p>
 <h2 id="7-performance-et-compromis">7. Performance et compromis<a class="headerlink" href="#7-performance-et-compromis" title="Permanent link">&para;</a></h2>
 <p>Le design de <code>pyViewFactor</code> repose sur :</p>
 <ul>
-<li><code>NumPy</code> pour les tableaux et opérations vectorisées ;</li>
-<li><code>Numba</code> pour accélérer les noyaux numériques ;</li>
-<li><code>SciPy</code> pour un fallback robuste ;</li>
+<li><code>NumPy</code> pour les tableaux et opérations vectorisées,</li>
+<li><code>Numba</code> pour accélérer les noyaux numériques,</li>
+<li><code>SciPy</code> pour un fallback robuste,</li>
 <li><code>PyVista</code> pour manipuler les géométries 3D.</li>
 </ul>
 <p>Les principaux compromis sont :</p>
 <ul>
-<li><strong>rapidité vs robustesse</strong> : Gauss–Legendre est rapide, <code>dblquad</code> est plus robuste ;</li>
-<li><strong>mode strict vs mode permissif</strong> : le mode strict évite certains faux positifs, mais peut rejeter des cas partiels ;</li>
+<li><strong>rapidité vs robustesse</strong> : Gauss–Legendre est rapide, <code>dblquad</code> est plus robuste,</li>
+<li><strong>mode strict vs mode permissif</strong> : le mode strict évite certains faux positifs, mais peut rejeter des cas partiels,</li>
 <li><strong>maillage grossier vs maillage raffiné</strong> : un maillage plus fin représente mieux les visibilités partielles, mais augmente le nombre de paires à calculer.</li>
 </ul>
 <h2 id="8-cas-dusage">8. Cas d'usage<a class="headerlink" href="#8-cas-dusage" title="Permanent link">&para;</a></h2>
 <p><code>pyViewFactor</code> peut être utilisé pour :</p>
 <ul>
-<li>construire une matrice d'échanges radiatifs longue longueur d'onde ;</li>
-<li>analyser l'effet d'une géométrie urbaine sur les échanges radiatifs ;</li>
-<li>alimenter un calcul de température radiante moyenne ;</li>
-<li>produire des abaques pour des cas de validation ;</li>
-<li>comparer des méthodes numériques de calcul de facteurs de forme ;</li>
+<li>construire une matrice d'échanges radiatifs longue longueur d'onde,</li>
+<li>analyser l'effet d'une géométrie urbaine sur les échanges radiatifs,</li>
+<li>alimenter un calcul de température radiante moyenne,</li>
+<li>produire des abaques pour des cas de validation,</li>
+<li>comparer des méthodes numériques de calcul de facteurs de forme,</li>
 <li>servir de support pédagogique pour relier théorie, géométrie et simulation.</li>
 </ul>
 <h2 id="9-ressources">9. Ressources<a class="headerlink" href="#9-ressources" title="Permanent link">&para;</a></h2>

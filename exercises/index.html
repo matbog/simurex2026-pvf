@@ -795,7 +795,7 @@ associées sont dans <code>session/src_data/.</code></p>
 </ul>
 </li>
 <li>
-<p>Code essentiel
+<p>Code essentiel :
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_visibility</span><span class="p">,</span> <span class="n">compute_viewfactor</span>
 
@@ -832,7 +832,7 @@ associées sont dans <code>session/src_data/.</code></p>
 </ul>
 </li>
 <li>
-<p>Code essentiel
+<p>Code essentiel :
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
 
 <span class="n">vis</span> <span class="o">=</span> <span class="n">pvf</span><span class="o">.</span><span class="n">get_visibility</span><span class="p">(</span><span class="n">face1</span><span class="p">,</span> <span class="n">face2</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -866,7 +866,7 @@ associées sont dans <code>session/src_data/.</code></p>
 </ul>
 </li>
 <li>
-<p>Code essentiel
+<p>Code essentiel :
 <div class="highlight"><pre><span></span><code><span class="n">f_num</span> <span class="o">=</span> <span class="n">pvf</span><span class="o">.</span><span class="n">compute_viewfactor</span><span class="p">(</span>
     <span class="n">rectangle</span><span class="p">,</span>
     <span class="n">square</span>
@@ -900,7 +900,7 @@ associées sont dans <code>session/src_data/.</code></p>
 </ul>
 </li>
 <li>
-<p>Code essentiel
+<p>Code essentiel :
 <div class="highlight"><pre><span></span><code><span class="n">sphere</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="n">theta_resolution</span><span class="o">=</span><span class="n">res</span><span class="p">,</span> <span class="n">phi_resolution</span><span class="o">=</span><span class="n">res</span><span class="p">)</span>
 <span class="n">sphere</span><span class="o">.</span><span class="n">triangulate</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -930,7 +930,7 @@ associées sont dans <code>session/src_data/.</code></p>
 </ul>
 </li>
 <li>
-<p>Code essentiel
+<p>Code essentiel :
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">n_cells</span><span class="p">)</span>
@@ -968,7 +968,7 @@ associées sont dans <code>session/src_data/.</code></p>
 </ul>
 </li>
 <li>
-<p>Code essentiel
+<p>Code essentiel :
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
 
@@ -1001,7 +1001,7 @@ associées sont dans <code>session/src_data/.</code></p>
 </ul>
 </li>
 <li>
-<p>Code essentiel
+<p>Code essentiel :
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">pvf</span><span class="o">.</span><span class="n">get_visibility</span><span class="p">(</span><span class="n">patch</span><span class="p">,</span> <span class="n">wall</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
     <span class="k">if</span> <span class="n">pvf</span><span class="o">.</span><span class="n">get_obstruction</span><span class="p">(</span><span class="n">patch</span><span class="p">,</span> <span class="n">wall</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
         <span class="n">F</span> <span class="o">+=</span> <span class="n">pvf</span><span class="o">.</span><span class="n">compute_viewfactor</span><span class="p">(</span><span class="n">patch</span><span class="p">,</span> <span class="n">wall</span><span class="p">)</span>
@@ -1029,7 +1029,7 @@ associées sont dans <code>session/src_data/.</code></p>
 </ul>
 </li>
 <li>
-<p>Code essentiel
+<p>Code essentiel :
 <div class="highlight"><pre><span></span><code><span class="n">F</span> <span class="o">=</span> <span class="n">pvf</span><span class="o">.</span><span class="n">compute_viewfactor_matrix</span><span class="p">(</span>
     <span class="n">mesh</span><span class="p">,</span>
     <span class="n">obstacles</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span>
