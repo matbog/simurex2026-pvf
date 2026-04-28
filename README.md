@@ -1,22 +1,22 @@
-# SIMUREX 2026 — Factuers de Formes & Echanges Radiatifs
+# SIMUREX 2026 — Facteurs de Formes & Echanges Radiatifs
 
-Repository associé à la session **SIMUREX 2026 ([IBPSA France](https://conference2026.ibpsa.fr/))** dédiée au calcul des
-**facteurs de forme radiatifs** et à leur utilisation en thermique du bâtiment et en
-confort thermique.
+Dépôt associé à la session **SIMUREX 2026 ([IBPSA France](https://conference2026.ibpsa.fr/))**
+dédiée au calcul des **facteurs de forme** et à leur utilisation dans les calculs radiatifs, 
+dans le domaine de la thermique du bâtiment ou du confort thermique.
 
 ## 🔗 Accès au site
 
 👉 https://matbog.github.io/simurex2026-pvf/
 
 Le site contient :
-- une introduction scientifique aux facteurs de forme
-- un guide de prise en main Python
-- des exercices progressifs
-- une présentation de la bibliothèque `pyviewfactor`
+- une introduction scientifique aux facteurs de forme,
+- un guide de prise en main Python,
+- des exercices progressifs,
+- une présentation de la bibliothèque `pyviewfactor`.
 
 ## 📁 Contenu du dépôt
 
-Ce repository regroupe :
+Ce dépôt regroupe :
 ```bash
 .
 ├── docs/ # Sources du site MkDocs
@@ -27,10 +27,10 @@ Ce repository regroupe :
 ```
 
 ### 📘 Documentation
-- [`get-started.md`](docs/get-started.md) — installation et environnement Python
-- [`scientific-background.md`](docs/scientific-background.md) — rappels physiques
-- [`exercises.md`](docs/exercises.md) — exercices guidés
-- [`about-pyviewfactor.md`](docs/about-pyviewfactor.md) — présentation de la bibliothèque
+- [`get-started.md`](docs/get-started.md) — installation et environnement Python,
+- [`scientific-background.md`](docs/scientific-background.md) — rappels physiques,
+- [`exercises.md`](docs/exercises.md) — exercices guidés,
+- [`about-pyviewfactor.md`](docs/about-pyviewfactor.md) — présentation de la bibliothèque.
 
 ## 🚀 Démarrage rapide
 
