@@ -48,6 +48,13 @@ Ensuite, lancez un script dans le dossier `session/.`
 
 Voir le guide complet : [Get Started](https://matbog.github.io/simurex2026-pvf/get-started/)
 
+
+## 📄 Licence
+
+- Le contenu pédagogique de ce dépôt (cours, documentation, exercices) est sous licence **CC BY 4.0**
+- La bibliothèque `pyviewfactor` est sous licence **MIT** (voir [dépôt dédié](https://gitlab.com/arep-dev/pyViewFactor))
+
+
 ## 👨‍🏫 Auteurs
 
 [Mateusz Bogdan — AREP L’hypercube](https://github.com/matbog)
