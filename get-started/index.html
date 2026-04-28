@@ -27,7 +27,7 @@
     
     
       
-        <title>Quick Start - SIMUREX 2026 – pyViewFactor</title>
+        <title>Get Started - SIMUREX 2026 – pyViewFactor</title>
       
     
     
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Quick Start
+              Get Started
             
           </span>
         </div>
@@ -291,7 +291,7 @@
   <span class="md-ellipsis">
     
   
-    Quick Start
+    Get Started
   
 
     
@@ -309,7 +309,7 @@
   <span class="md-ellipsis">
     
   
-    Quick Start
+    Get Started
   
 
     
@@ -335,10 +335,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-creer-un-environnement-python-propre" class="md-nav__link">
+  <a href="#1-recuperer-les-fichiers-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Créer un environnement Python propre
+        1. Récupérer les fichiers sources
       
     </span>
   </a>
@@ -346,10 +346,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-installer-les-packages-necessaires" class="md-nav__link">
+  <a href="#2-creer-un-environnement-python-propre" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Installer les packages nécessaires
+        2. Créer un environnement Python propre
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Créer un environnement Python propre">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-avec-conda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A — Avec conda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-avec-miniconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B — Avec Miniconda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-avec-venv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C — Avec venv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-installer-les-packages-necessaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Installer les packages nécessaires
       
     </span>
   </a>
@@ -357,10 +407,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-recuperer-les-fichiers-sources" class="md-nav__link">
+  <a href="#4-utilisation-de-jupyter-optionnel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Récupérer les fichiers sources
+        4. Utilisation de Jupyter (optionnel)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Utilisation de Jupyter (optionnel)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installer-jupyter-dans-lenvironnement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installer Jupyter dans l’environnement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajouter-lenvironnement-comme-noyau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ajouter l’environnement comme noyau
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lancer-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lancer Jupyter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectionner-le-bon-noyau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sélectionner le bon noyau
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verifier-linstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Vérifier l'installation
       
     </span>
   </a>
@@ -368,10 +479,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-verifier-que-tout-simporte" class="md-nav__link">
+  <a href="#6-problemes-frequents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Vérifier que tout s'importe
+        6. Problèmes fréquents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-desactiver-ou-supprimer-lenvironnement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Désactiver ou supprimer l'environnement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume-rapide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Résumé rapide
       
     </span>
   </a>
@@ -494,10 +627,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-creer-un-environnement-python-propre" class="md-nav__link">
+  <a href="#1-recuperer-les-fichiers-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Créer un environnement Python propre
+        1. Récupérer les fichiers sources
       
     </span>
   </a>
@@ -505,10 +638,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-installer-les-packages-necessaires" class="md-nav__link">
+  <a href="#2-creer-un-environnement-python-propre" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Installer les packages nécessaires
+        2. Créer un environnement Python propre
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Créer un environnement Python propre">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-avec-conda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A — Avec conda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-avec-miniconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B — Avec Miniconda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-avec-venv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C — Avec venv
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-installer-les-packages-necessaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Installer les packages nécessaires
       
     </span>
   </a>
@@ -516,10 +699,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-recuperer-les-fichiers-sources" class="md-nav__link">
+  <a href="#4-utilisation-de-jupyter-optionnel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Récupérer les fichiers sources
+        4. Utilisation de Jupyter (optionnel)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Utilisation de Jupyter (optionnel)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installer-jupyter-dans-lenvironnement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installer Jupyter dans l’environnement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajouter-lenvironnement-comme-noyau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ajouter l’environnement comme noyau
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lancer-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lancer Jupyter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectionner-le-bon-noyau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sélectionner le bon noyau
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verifier-linstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Vérifier l'installation
       
     </span>
   </a>
@@ -527,10 +771,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-verifier-que-tout-simporte" class="md-nav__link">
+  <a href="#6-problemes-frequents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Vérifier que tout s'importe
+        6. Problèmes fréquents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-desactiver-ou-supprimer-lenvironnement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Désactiver ou supprimer l'environnement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume-rapide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Résumé rapide
       
     </span>
   </a>
@@ -558,46 +824,245 @@
 
 
 <h1 id="get-started">Get started<a class="headerlink" href="#get-started" title="Permanent link">&para;</a></h1>
-<p>Comment créer un environnement Python propre pour faire tourner les exercices de
-la session. </p>
-<h2 id="1-creer-un-environnement-python-propre">1. Créer un environnement Python propre<a class="headerlink" href="#1-creer-un-environnement-python-propre" title="Permanent link">&para;</a></h2>
-<p>Il est recommandé d'utiliser un environnement Python "vierge". 
-Selon vos préférence, utilisez <code>conda</code>, <code>miniconda</code>, <code>venv</code>, ...</p>
-<ul>
-<li>
-<p>Conda : 
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
-conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
-</code></pre></div></p>
-</li>
-<li>
-<p><code>venv</code> : </p>
-</li>
-</ul>
-<h2 id="2-installer-les-packages-necessaires">2. Installer les packages nécessaires<a class="headerlink" href="#2-installer-les-packages-necessaires" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>requirements
-</code></pre></div>
-<h2 id="3-recuperer-les-fichiers-sources">3. Récupérer les fichiers sources<a class="headerlink" href="#3-recuperer-les-fichiers-sources" title="Permanent link">&para;</a></h2>
-<p>_selon ou on heberge les fichiers</p>
-<ul>
-<li>
-<p>Notebooks / Scripts
+<p>Ce document explique comment préparer un environnement Python propre pour faire tourner
+les exercices de la session.</p>
+<p>L'objectif est d'éviter les conflits avec les packages déjà installés sur votre machine,
+et de garantir que tout le monde utilise une configuration proche.</p>
+<h2 id="1-recuperer-les-fichiers-sources">1. Récupérer les fichiers sources<a class="headerlink" href="#1-recuperer-les-fichiers-sources" title="Permanent link">&para;</a></h2>
+<p>Commencez par récupérer les notebooks, scripts et données nécessaires à la session.</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
 <span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/session
-</code></pre></div></p>
-</li>
-<li>
-<p>Geométries 
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/session/datasets
-</code></pre></div></p>
-</li>
+</code></pre></div>
+<p>Les géométries et jeux de données utilisés pendant la session se trouvent dans :</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>src_data
+</code></pre></div>
+<h2 id="2-creer-un-environnement-python-propre">2. Créer un environnement Python propre<a class="headerlink" href="#2-creer-un-environnement-python-propre" title="Permanent link">&para;</a></h2>
+<p>Il est recommandé d'utiliser un environnement Python dédié à la session.</p>
+<p>Vous pouvez utiliser l'une des solutions suivantes :</p>
+<ul>
+<li><code>conda</code>, si Anaconda ou Miniconda est déjà installé ;</li>
+<li><code>miniconda</code>, si vous voulez une installation légère de conda ;</li>
+<li><code>venv</code>, si vous préférez utiliser uniquement les outils Python standards.</li>
 </ul>
-<h2 id="4-verifier-que-tout-simporte">4. Vérifier que tout s'importe<a class="headerlink" href="#4-verifier-que-tout-simporte" title="Permanent link">&para;</a></h2>
+<p>Python <code>3.11</code> est recommandé.</p>
+<h3 id="option-a-avec-conda">Option A — Avec conda<a class="headerlink" href="#option-a-avec-conda" title="Permanent link">&para;</a></h3>
+<p>Si <code>conda</code> est déjà installé sur votre machine :</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
+conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
+</code></pre></div>
+<p>Pour vérifier que le bon environnement est actif :</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>--version
+which<span class="w"> </span>python
+</code></pre></div>
+<p>Sous Windows, utilisez plutôt :</p>
+<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="p">-</span><span class="n">-version</span>
+<span class="nb">where </span><span class="n">python</span>
+</code></pre></div>
+<hr />
+<h3 id="option-b-avec-miniconda">Option B — Avec Miniconda<a class="headerlink" href="#option-b-avec-miniconda" title="Permanent link">&para;</a></h3>
+<p>Miniconda est une version légère d'Anaconda. Elle installe uniquement <code>conda</code>, Python
+et les outils de base.</p>
+<p>Après installation de Miniconda, ouvrez un nouveau terminal puis vérifiez que <code>conda</code>
+est disponible :</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>--version
+</code></pre></div>
+<p>Créez ensuite l'environnement de travail :</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
+conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
+</code></pre></div>
+<p>Si la commande <code>conda</code> n'est pas reconnue, fermez puis rouvrez le terminal. Sur Windows,
+vous pouvez aussi utiliser le terminal <strong>Anaconda Prompt</strong> ou <strong>Miniconda Prompt</strong>.</p>
+<hr />
+<h3 id="option-c-avec-venv">Option C — Avec venv<a class="headerlink" href="#option-c-avec-venv" title="Permanent link">&para;</a></h3>
+<p><code>venv</code> est inclus avec Python. Cette option est utile si vous ne souhaitez pas utiliser
+conda.</p>
+<p>Depuis le dossier de la session :</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</code></pre></div>
+<p>Activez ensuite l'environnement.</p>
+<p>Sur Linux ou macOS :</p>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</code></pre></div>
+<p>Sur Windows avec PowerShell :</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</code></pre></div>
+<p>Sur Windows avec <code>cmd.exe</code> :</p>
+<div class="highlight"><pre><span></span><code>.venv\Scripts\activate.bat
+</code></pre></div>
+<p>Vérifiez ensuite que l'environnement est actif :</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>--version
+pip<span class="w"> </span>--version
+</code></pre></div>
+<p>Si l'activation a fonctionné, le nom de l'environnement apparaît généralement au début
+de la ligne de commande, par exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>.venv<span class="o">)</span><span class="w"> </span>user@machine:~/simurex2026-pvf/session$
+</code></pre></div>
+<h2 id="3-installer-les-packages-necessaires">3. Installer les packages nécessaires<a class="headerlink" href="#3-installer-les-packages-necessaires" title="Permanent link">&para;</a></h2>
+<p>Une fois l'environnement activé, mettez d'abord <code>pip</code> à jour :</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</code></pre></div>
+<p>Installez ensuite les dépendances de la session. A priori les bonnes versions des
+dépendances sont : 
+<div class="highlight"><pre><span></span><code>numpy==1.26.4
+pyvista==0.45
+scipy==1.11.4
+numba==0.61.2
+tqdm==4.65.0
+</code></pre></div>
+MLais vous pouvez utiliser directement :
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div></p>
+<h2 id="4-utilisation-de-jupyter-optionnel">4. Utilisation de Jupyter (optionnel)<a class="headerlink" href="#4-utilisation-de-jupyter-optionnel" title="Permanent link">&para;</a></h2>
+<p>Les exercices sont fournis sous forme de scripts Python.
+Cependant, si vous préférez travailler avec Jupyter Notebook ou JupyterLab, vous pouvez
+utiliser votre environnement comme noyau.</p>
+<h3 id="installer-jupyter-dans-lenvironnement">Installer Jupyter dans l’environnement<a class="headerlink" href="#installer-jupyter-dans-lenvironnement" title="Permanent link">&para;</a></h3>
+<p>Assurez-vous que votre environnement est activé, puis installez :</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
+</code></pre></div>
+<h3 id="ajouter-lenvironnement-comme-noyau">Ajouter l’environnement comme noyau<a class="headerlink" href="#ajouter-lenvironnement-comme-noyau" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
+</code></pre></div>
+<h3 id="lancer-jupyter">Lancer Jupyter<a class="headerlink" href="#lancer-jupyter" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>notebook
+</code></pre></div>
+ou :
+<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>lab
+</code></pre></div></p>
+<h3 id="selectionner-le-bon-noyau">Sélectionner le bon noyau<a class="headerlink" href="#selectionner-le-bon-noyau" title="Permanent link">&para;</a></h3>
+<p>Dans l’interface Jupyter :</p>
+<ul>
+<li>Ouvrez un notebook</li>
+<li>Sélectionnez le noyau :
+<div class="highlight"><pre><span></span><code>Python<span class="w"> </span><span class="o">(</span>simurex-pvf<span class="o">)</span>
+</code></pre></div></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title"> </p>
+<p>Même si Jupyter est installé, les packages ne seront disponibles que si le bon noyau est sélectionné.</p>
+</div>
+<h2 id="5-verifier-linstallation">5. Vérifier l'installation<a class="headerlink" href="#5-verifier-linstallation" title="Permanent link">&para;</a></h2>
+<p>Dans un terminal où l'environnement est activé, lancez Python :</p>
+<div class="highlight"><pre><span></span><code>python
+</code></pre></div>
+<p>Puis testez les imports principaux :</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Environment OK&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Vous pouvez aussi vérifier les versions installées :</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;numpy:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pyvista:&quot;</span><span class="p">,</span> <span class="n">pv</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pyviewfactor:&quot;</span><span class="p">,</span> <span class="n">pvf</span><span class="o">.</span><span class="n">__version__</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pvf</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;version non déclarée&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="6-problemes-frequents">6. Problèmes fréquents<a class="headerlink" href="#6-problemes-frequents" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><code>pip install -r requirements.txt</code> ne trouve pas le fichier</p>
+<ul>
+<li>Vérifiez que vous êtes dans le bon dossier :
+<div class="highlight"><pre><span></span><code><span class="nb">pwd</span>
+ls
+</code></pre></div></li>
+<li>Sous Windows :
+<div class="highlight"><pre><span></span><code>cd
+dir
+</code></pre></div></li>
+</ul>
+<p>Le fichier <code>requirements.txt</code> doit apparaître dans la liste.</p>
+</li>
+<li>
+<p><code>conda activate simurex-pvf</code> ne fonctionne pas</p>
+<ul>
+<li>Essayez d'initialiser conda :</li>
+</ul>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>init
+</code></pre></div>
+<ul>
+<li>Fermez puis rouvrez le terminal.</li>
+</ul>
+<p>Sur Windows, utilisez <strong>Anaconda Prompt</strong> ou <strong>Miniconda Prompt</strong>.</p>
+</li>
+<li>
+<p>Jupyter n'utilise pas le bon environnement</p>
+<ul>
+<li>Vérifiez que le noyau Jupyter a bien été installé :</li>
+</ul>
+<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>kernelspec<span class="w"> </span>list
+</code></pre></div>
+<ul>
+<li>Si nécessaire, réinstallez le noyau depuis l'environnement actif :</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>pyvista</code> ne s'affiche pas correctement</p>
+<ul>
+<li>Sur certaines machines ou connexions distantes, l'affichage 3D peut nécessiter une configuration supplémentaire.</li>
+<li>Pour tester rapidement PyVista :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+
+<span class="n">sphere</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()</span>
+<span class="n">sphere</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</code></pre></div>
+<p>Si une fenêtre 3D ne s'ouvre pas, le problème vient probablement de l'affichage graphique, pas forcément de l'installation Python.</p>
+</li>
+</ul>
+<h2 id="7-desactiver-ou-supprimer-lenvironnement">7. Désactiver ou supprimer l'environnement<a class="headerlink" href="#7-desactiver-ou-supprimer-lenvironnement" title="Permanent link">&para;</a></h2>
+<p>Pour désactiver l'environnement courant :</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>deactivate
+</code></pre></div>
+<p>ou, si vous utilisez <code>venv</code> :</p>
+<div class="highlight"><pre><span></span><code>deactivate
+</code></pre></div>
+<p>Pour supprimer l'environnement conda :</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>remove<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span>--all
+</code></pre></div>
+<p>Pour supprimer un environnement <code>venv</code>, supprimez simplement le dossier <code>.venv</code> :</p>
+<div class="highlight"><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>.venv
+</code></pre></div>
+<p>Sous Windows PowerShell :</p>
+<div class="highlight"><pre><span></span><code><span class="nb">Remove-Item</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="p">.</span><span class="n">venv</span>
+</code></pre></div>
+<hr />
+<h2 id="resume-rapide">Résumé rapide<a class="headerlink" href="#resume-rapide" title="Permanent link">&para;</a></h2>
+<p>Avec conda ou Miniconda :</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
+<span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/session
+
+conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
+conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
+
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
+</code></pre></div>
+<p>Avec <code>venv</code> :</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
+<span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/session
+
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
+</code></pre></div>
+<p>Sur Windows, remplacez l'activation de <code>venv</code> par :</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
 </code></pre></div>
 
 
