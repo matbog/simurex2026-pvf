@@ -51,7 +51,7 @@ Voir le guide complet : [Get Started](https://matbog.github.io/simurex2026-pvf/g
 
 ## 📄 Licence
 
-- Le contenu pédagogique de ce dépôt (cours, documentation, exercices) est sous licence **CC BY 4.0**
+- Le contenu pédagogique de ce dépôt (cours, documentation, exercices) est sous licence  [**CC BY 4.0**](https://creativecommons.org/licenses/by/4.0/)
 - La bibliothèque `pyviewfactor` est sous licence **MIT** (voir [dépôt dédié](https://gitlab.com/arep-dev/pyViewFactor))
 
 

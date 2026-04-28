@@ -30,4 +30,4 @@ Ce cours s’inscrit dans le cadre d'une session de formation SIMUREX, associée
 
 
 ---
-Mateusz BOGDAN & Edouard WALTHER, with ❤︎
+© Mateusz BOGDAN & Edouard WALTHER 2026 — CC BY 4.0, with ❤︎
