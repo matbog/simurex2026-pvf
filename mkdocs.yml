@@ -46,7 +46,7 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - Quick Start: get-started.md
+  - Get Started: get-started.md
   - Rappel Scientifiques: scientific-background.md
   - Exercices & Mini-Project: exercises.md
   - A propos de pyviewfactor: about-pyviewfactor.md

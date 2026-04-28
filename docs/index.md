@@ -16,17 +16,11 @@ Ce cours s’inscrit dans le cadre de la session de formation SIMUREX, associée
 
 ## Contenu du site
 
-* Prise en main — préparer un environnement Python propre
-* Contexte scientifique — comprendre l’importance des facteurs de vue en thermique
-* Exercices et mini-projets — travailler sur des problèmes guidés
-* À propos de `pyviewfactor` — en savoir plus sur la bibliothèque utilisée durant la session
+* [Get started](get-started.md) : Prise en main, préparer un environnement Python propre
+* [Rappels scientifiques](scientific-background.md) : comprendre l’importance des facteurs de vue en thermique
+* [Exercices & mini-projet](exercises.md) : travailler sur des problèmes guidés
+* [A propos de `pyviewfactor`](about-pyviewfactor.md) : en savoir plus sur la bibliothèque utilisée durant la session
 
-## Liens Rapides
-
-- [Get started](get-started.md)
-- [Rappels scientifiques](scientific-background.md)
-- [Exercices & mini-projet](exercises.md)
-- [A propos de `pyviewfactor`](about-pyviewfactor.md)
 
 ---
-M.B & E.W 
+M.B & E.W with ❤︎

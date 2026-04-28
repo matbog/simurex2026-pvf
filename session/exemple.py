@@ -1,3 +1,0 @@
-import pyviewfactor as pvf 
-
-# [...] 

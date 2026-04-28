@@ -1,66 +1,5 @@
 # Get started
 
-Comment créer un environnement Python propre pour faire tourner les exercices de
-la session. 
-
-## 1. Créer un environnement Python propre
-
-Il est recommandé d'utiliser un environnement Python "vierge". 
-Selon vos préférence, utilisez `conda`, `miniconda`, `venv`, ...
-
-* Conda : 
-```bash
-conda create -n simurex-pvf python=3.11
-conda activate simurex-pvf
-```
-
-* `venv` : 
-
-
-## 2. Installer les packages nécessaires 
-
-A priori les bonnes versions des dépendances sont : 
-```
-numpy==1.26.4
-pyvista==0.45
-scipy==1.11.4
-numba==0.61.2
-tqdm==4.65.0
-```
-mais fonctionnement probable avec des versions plus récentes (non testé)
-
-```bash
-pip install requirements.txt
-```
-
-
-## 3. Récupérer les fichiers sources 
-
-_selon ou on heberge les fichiers
-
-* Notebooks / Scripts
-```bash
-git clone https://github.com/matbog/simurex2026-pvf.git
-cd simurex2026-pvf/session
-```
-
-* Geométries 
-```bash
-cd simurex2026-pvf/session/src_data
-```
-
-## 4. Vérifier que tout s'importe 
-
-```python
-import numpy as np
-import pyvista as pv
-import pyviewfactor as pvf
-
-print("Environment OK")
-```
-
-# Get started
-
 Ce document explique comment préparer un environnement Python propre pour faire tourner
 les exercices de la session.
 
@@ -83,9 +22,6 @@ Les géométries et jeux de données utilisés pendant la session se trouvent da
 cd src_data
 ```
 
-> Si les fichiers sont distribués autrement que par GitHub, par exemple via une archive
-`.zip`, un dossier partagé ou une plateforme de formation, téléchargez-les puis 
-placez-vous dans le dossier de la session avant de continuer.
 
 
 ## 2. Créer un environnement Python propre
@@ -251,14 +187,15 @@ jupyter lab
 ### Sélectionner le bon noyau
 
 Dans l’interface Jupyter :
-* Ouvrez un notebook
-* Sélectionnez le noyau :
+
+- Ouvrez un notebook
+- Sélectionnez le noyau :
 ```bash
 Python (simurex-pvf)
 ```
 
-### ⚠️ Important
-Même si Jupyter est installé, les packages ne seront disponibles que si le bon noyau est sélectionné.
+!!! warning " "
+    Même si Jupyter est installé, les packages ne seront disponibles que si le bon noyau est sélectionné.
 
 
 
@@ -296,72 +233,62 @@ print("pyviewfactor:", pvf.__version__ if hasattr(pvf, "__version__") else "vers
 
 ## 6. Problèmes fréquents
 
-### `pip install -r requirements.txt` ne trouve pas le fichier
+* `pip install -r requirements.txt` ne trouve pas le fichier
+    * Vérifiez que vous êtes dans le bon dossier :
+    ```bash
+    pwd
+    ls
+    ```
+    * Sous Windows :
+    ```cmd
+    cd
+    dir
+    ```
 
-Vérifiez que vous êtes dans le bon dossier :
+    Le fichier `requirements.txt` doit apparaître dans la liste.
 
-```bash
-pwd
-ls
-```
 
-Sous Windows :
 
-```cmd
-cd
-dir
-```
+*  `conda activate simurex-pvf` ne fonctionne pas
 
-Le fichier `requirements.txt` doit apparaître dans la liste.
+    * Essayez d'initialiser conda :
 
----
+    ```bash
+    conda init
+    ```
 
-### `conda activate simurex-pvf` ne fonctionne pas
+    * Fermez puis rouvrez le terminal.
 
-Essayez d'initialiser conda :
+    Sur Windows, utilisez **Anaconda Prompt** ou **Miniconda Prompt**.
 
-```bash
-conda init
-```
+*  Jupyter n'utilise pas le bon environnement
 
-Fermez puis rouvrez le terminal.
+    * Vérifiez que le noyau Jupyter a bien été installé :
 
-Sur Windows, utilisez **Anaconda Prompt** ou **Miniconda Prompt**.
+    ```bash
+    jupyter kernelspec list
+    ```
 
----
+    * Si nécessaire, réinstallez le noyau depuis l'environnement actif :
 
-### Jupyter n'utilise pas le bon environnement
+    ```bash
+    python -m ipykernel install --user --name simurex-pvf --display-name "Python (simurex-pvf)"
+    ```
 
-Vérifiez que le noyau Jupyter a bien été installé :
+*  `pyvista` ne s'affiche pas correctement
 
-```bash
-jupyter kernelspec list
-```
+    * Sur certaines machines ou connexions distantes, l'affichage 3D peut nécessiter une configuration supplémentaire.
+    * Pour tester rapidement PyVista :
 
-Si nécessaire, réinstallez le noyau depuis l'environnement actif :
+    ```python
+    import pyvista as pv
 
-```bash
-python -m ipykernel install --user --name simurex-pvf --display-name "Python (simurex-pvf)"
-```
+    sphere = pv.Sphere()
+    sphere.plot()
+    ```
 
----
+    Si une fenêtre 3D ne s'ouvre pas, le problème vient probablement de l'affichage graphique, pas forcément de l'installation Python.
 
-### `pyvista` ne s'affiche pas correctement
-
-Sur certaines machines ou connexions distantes, l'affichage 3D peut nécessiter une configuration supplémentaire.
-
-Pour tester rapidement PyVista :
-
-```python
-import pyvista as pv
-
-sphere = pv.Sphere()
-sphere.plot()
-```
-
-Si une fenêtre 3D ne s'ouvre pas, le problème vient probablement de l'affichage graphique, pas forcément de l'installation Python.
-
----
 
 ## 7. Désactiver ou supprimer l'environnement
 
