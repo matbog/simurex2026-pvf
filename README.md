@@ -45,7 +45,7 @@ pip install -r requirements.txt
 pip install pyviewfactor
 ```
 Ensuite, lancez un script dans le dossier `session/.`
-
+    
 Voir le guide complet : [Get Started](https://matbog.github.io/simurex2026-pvf/get-started/)
 
 
@@ -58,4 +58,5 @@ Voir le guide complet : [Get Started](https://matbog.github.io/simurex2026-pvf/g
 ## 👨‍🏫 Auteurs
 
 [Mateusz Bogdan — AREP L’hypercube](https://github.com/matbog)
+
 [Edouard Walther — INSA Strasbourg / ICube](https://github.com/eddes)
