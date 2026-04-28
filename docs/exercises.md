@@ -44,7 +44,7 @@ associées sont dans `session/src_data/.`
     * le résultat de get_visibility
     * la valeur du facteur de forme
 
-* Code essentiel
+* Code essentiel :
 ```python
 import pyvista as pv
 from pyviewfactor import get_visibility, compute_viewfactor
@@ -73,7 +73,7 @@ if get_visibility(rectangle, triangle)[0]:
     * différence strict=False / strict=True
     * rayons centroïde vs sommet
 
-* Code essentiel
+* Code essentiel :
 ```python
 import pyviewfactor as pvf
 
@@ -101,7 +101,7 @@ if vis and unobstructed:
     * erreur relative
     * comparaison courbe analytique / numérique
 
-* Code essentiel
+* Code essentiel :
 ```python
 f_num = pvf.compute_viewfactor(
     rectangle,
@@ -131,7 +131,7 @@ for h in h_values:
     * évolution de F(wall → sphere)
     * nombre de facettes visibles
 
-* Code essentiel
+* Code essentiel :
 ```python
 sphere = pv.Sphere(theta_resolution=res, phi_resolution=res)
 sphere.triangulate(inplace=True)
@@ -155,7 +155,7 @@ for i in range(sphere.n_cells):
 * Observer :
     * sum(F_i) ≈ 1
 
-* Code essentiel
+* Code essentiel :
 ```python
 import numpy as np
 
@@ -189,7 +189,7 @@ print(Fmat[:, ref_id].sum())
     * utilisation de geom_id
     * export VTK
 
-* Code essentiel
+* Code essentiel :
 ```python
 import pyvista as pv
 import pyviewfactor as pvf
@@ -216,7 +216,7 @@ for idx in doorman_cells:
     * classification visibilité / obstruction
     * influence des paramètres strict
 
-* Code essentiel
+* Code essentiel :
 ```python
 if pvf.get_visibility(patch, wall)[0]:
     if pvf.get_obstruction(patch, wall, mesh)[0]:
@@ -240,7 +240,7 @@ F_wall_sky = sum(F_patch for patch in sky)
     * temps de calcul
     * écart entre méthodes
 
-* Code essentiel
+* Code essentiel :
 ```python
 F = pvf.compute_viewfactor_matrix(
     mesh,

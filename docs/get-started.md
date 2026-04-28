@@ -9,18 +9,23 @@ et de garantir que tout le monde utilise une configuration proche.
 
 ## 1. Récupérer les fichiers sources
 
-Commencez par récupérer les notebooks, scripts et données nécessaires à la session.
+* Commencez par récupérer les scripts et données nécessaires à la session.
 
-```bash
-git clone https://github.com/matbog/simurex2026-pvf.git
-cd simurex2026-pvf/session
-```
+    ```bash
+    git clone https://github.com/matbog/simurex2026-pvf.git
+    cd simurex2026-pvf/
+    ```
 
-Les géométries et jeux de données utilisés pendant la session se trouvent dans :
+* Les scripts avec les exercices se trouvent dans :
+    ```bash
+    session/
+    ```
 
-```bash
-cd src_data
-```
+* Les géométries et jeux de données utilisés pendant la session se trouvent dans :
+
+    ```bash
+    session/src_data/
+    ```
 
 
 
@@ -30,8 +35,8 @@ Il est recommandé d'utiliser un environnement Python dédié à la session.
 
 Vous pouvez utiliser l'une des solutions suivantes :
 
-- `conda`, si Anaconda ou Miniconda est déjà installé ;
-- `miniconda`, si vous voulez une installation légère de conda ;
+- `conda`, si `Anaconda` ou `Miniconda` est déjà installé,
+- `miniconda`, si vous voulez une installation légère de `conda`,
 - `venv`, si vous préférez utiliser uniquement les outils Python standards.
 
 Python `3.11` est recommandé.
@@ -60,14 +65,13 @@ python --version
 where python
 ```
 
----
 
 ### Option B — Avec Miniconda
 
-Miniconda est une version légère d'Anaconda. Elle installe uniquement `conda`, Python
+`Miniconda` est une version légère d'`Anaconda`. Elle installe uniquement `conda`, Python
 et les outils de base.
 
-Après installation de Miniconda, ouvrez un nouveau terminal puis vérifiez que `conda`
+Après installation de `Miniconda`, ouvrez un nouveau terminal puis vérifiez que `conda`
 est disponible :
 
 ```bash
@@ -84,12 +88,11 @@ conda activate simurex-pvf
 Si la commande `conda` n'est pas reconnue, fermez puis rouvrez le terminal. Sur Windows,
 vous pouvez aussi utiliser le terminal **Anaconda Prompt** ou **Miniconda Prompt**.
 
----
 
 ### Option C — Avec venv
 
 `venv` est inclus avec Python. Cette option est utile si vous ne souhaitez pas utiliser
-conda.
+`conda`.
 
 Depuis le dossier de la session :
 
@@ -148,14 +151,18 @@ scipy==1.11.4
 numba==0.61.2
 tqdm==4.65.0
 ```
-MLais vous pouvez utiliser directement :
+
+Mais vous pouvez utiliser directement :
 ```bash
 python -m pip install -r requirements.txt
 ```
 
+Puis installez la librairie `pyViewFactor` avec : 
+```bash
+pip install pyviewfactor
+```
 
-
-## 4. Utilisation de Jupyter (optionnel)
+## 4. Utilisation de Jupyter
 
 Les exercices sont fournis sous forme de scripts Python.
 Cependant, si vous préférez travailler avec Jupyter Notebook ou JupyterLab, vous pouvez

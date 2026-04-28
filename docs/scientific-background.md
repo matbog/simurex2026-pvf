@@ -2,13 +2,14 @@
 
 ## 1. Pourquoi le rayonnement est important ?
 
-Dans les problèmes de thermique du bâtiment, de microclimat urbain et de confort thermique, le **rayonnement thermique** joue un rôle central.
+Dans les problèmes de thermique du bâtiment, de microclimat urbain et de confort 
+thermique, le **rayonnement thermique** joue un rôle central.
 
 Contrairement à la conduction ou à la convection, le rayonnement :
 
-- ne nécessite pas de contact matériel direct ;
-- dépend fortement de la géométrie ;
-- couple potentiellement toutes les surfaces visibles entre elles ;
+- ne nécessite pas de contact matériel direct,
+- dépend fortement de la géométrie,
+- couple potentiellement toutes les surfaces visibles entre elles,
 - devient très sensible aux masques, aux orientations et aux températures de surface.
 
 !!! info "Idée clé"
@@ -40,9 +41,9 @@ $$
 
 Dans de nombreux modèles bâtiment et urbains, on fait les hypothèses suivantes :
 
-- surfaces **diffuses** : l'émission est répartie selon la loi de Lambert ;
-- surfaces **grises** : les propriétés radiatives sont moyennées sur le domaine spectral considéré ;
-- échanges en **grande longueur d'onde** pour les échanges thermiques entre parois ;
+- surfaces **diffuses** : l'émission est répartie selon la [loi de Lambert](https://fr.wikipedia.org/wiki/Loi_de_Lambert),
+- surfaces **grises** : les propriétés radiatives sont moyennées sur le domaine spectral considéré, 
+- échanges en **grande longueur d'onde** pour les échanges thermiques entre parois,
 - réflexions spéculaires négligées.
 
 Ces hypothèses simplifient fortement les équations tout en restant adaptées à de nombreux cas d'étude.
@@ -54,12 +55,15 @@ Ces hypothèses simplifient fortement les équations tout en restant adaptées �
 
 Le facteur de forme \(F_{i,j}\) représente la **fraction du rayonnement émis par la surface \(i\)** qui atteint directement la surface \(j\).
 
+_Dit autrememnt, \(F_{i,j}\) est la fraction du champ de vision de la facatte \(i\) occupée par la facette \(j\)_
+
+
 Il dépend de :
 
-- la distance entre les deux surfaces ;
-- leur orientation relative ;
-- leur taille ;
-- leur visibilité ;
+- la distance entre les deux surfaces,
+- leur orientation relative,
+- leur taille,
+- leur visibilité,
 - la présence éventuelle d'obstacles.
 
 Il ne dépend pas directement des températures.
@@ -75,8 +79,8 @@ $$
 
 où :
 
-- \(r\) est la distance entre deux points des surfaces ;
-- \(\theta_i\) est l'angle entre la normale à \(S_i\) et la direction reliant les deux points ;
+- \(r\) est la distance entre deux points des surfaces,
+- \(\theta_i\) est l'angle entre la normale à \(S_i\) et la direction reliant les deux points,
 - \(\theta_j\) est l'angle équivalent côté \(S_j\).
 
 !!! note "Conséquence"
@@ -159,10 +163,10 @@ La MRT est souvent l'une des variables les plus influentes dans les indices de c
 
 Elle dépend fortement :
 
-- des températures de surface ;
-- du ciel visible ;
-- de l'ombrage ;
-- de la géométrie urbaine ;
+- des températures de surface,
+- du ciel visible,
+- de l'ombrage,
+- de la géométrie urbaine,
 - de la position de l'individu.
 
 🔗 Ressource complémentaire : [Calcul de MRT](https://lhypercube.arep.fr/thematiques/confort/calcul_mrt/)
@@ -176,11 +180,11 @@ Elle dépend fortement :
 
 Dans des cas simples, il existe des solutions analytiques. Mais dans des géométries réelles, plusieurs difficultés apparaissent :
 
-- surfaces polygonales quelconques ;
-- orientations variées ;
-- surfaces adjacentes ou quasi adjacentes ;
-- masques et obstructions ;
-- scènes ouvertes ;
+- surfaces polygonales quelconques,
+- orientations variées,
+- surfaces adjacentes ou quasi adjacentes,
+- masques et obstructions,
+- scènes ouvertes,
 - grand nombre de paires de surfaces.
 
 Pour un maillage de \(N\) faces, une matrice complète peut contenir \(N^2\) interactions potentielles.
@@ -197,8 +201,8 @@ Elles donnent des résultats exacts ou quasi exacts pour des configurations simp
 
 Elles sont très utiles pour :
 
-- comprendre les tendances ;
-- valider un code ;
+- comprendre les tendances,
+- valider un code,
 - construire des cas tests.
 
 Limite : elles ne couvrent pas les géométries complexes.
@@ -209,14 +213,14 @@ Le principe est de lancer un grand nombre de rayons depuis une surface et de com
 
 Avantages :
 
-- méthode très générale ;
-- gestion naturelle des obstructions ;
+- méthode très générale,
+- gestion naturelle des obstructions,
 - adaptée à des scènes complexes.
 
 Limites :
 
-- bruit statistique ;
-- convergence parfois lente ;
+- bruit statistique,
+- convergence parfois lente,
 - besoin d'un grand nombre de rayons pour les faibles facteurs de forme.
 
 ### 8.3 Méthodes hémicube ou raster
@@ -225,13 +229,13 @@ Ces méthodes projettent la scène sur un hémicube ou une discrétisation angul
 
 Avantages :
 
-- efficaces dans certains contextes graphiques ;
+- efficaces dans certains contextes graphiques,
 - gestion possible des masques.
 
 Limites :
 
-- précision dépendante de la résolution ;
-- artefacts de discrétisation ;
+- précision dépendante de la résolution,
+- artefacts de discrétisation,
 - moins adaptées lorsque l'on cherche une formulation numérique contrôlée.
 
 ### 8.4 Intégration numérique directe

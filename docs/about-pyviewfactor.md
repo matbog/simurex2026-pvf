@@ -3,7 +3,7 @@
 ## 1. Pourquoi parler de `pyViewFactor` dans cette formation ?
 
 **`pyViewFactor`** est une bibliothèque Python dédiée au calcul des
-**facteurs de forme radiatifs** (*view factors*) entre surfaces planes.
+**facteurs de forme** (*view factors*) entre surfaces planes.
 
 Elle a été développée pour des cas où les échanges radiatifs dépendent fortement de la
 géométrie :
@@ -20,19 +20,20 @@ géométrie :
 
 Dans cette formation, `pyViewFactor` sert de support pratique pour passer :
 
-1. d'une formulation scientifique des échanges radiatifs ;
-2. à un calcul numérique sur des géométries réelles ;
+1. d'une formulation scientifique des échanges radiatifs,
+2. à un calcul numérique sur des géométries réelles,
 3. puis à une intégration dans un workflow Python reproductible.
-
 
 
 ## 2. Pourquoi utiliser une bibliothèque dédiée ?
 
 Les facteurs de forme peuvent être calculés de plusieurs manières, mais les outils
-généralistes ne sont pas toujours adaptés à un usage pédagogique ou scientifique léger.
+généralistes ne sont pas toujours adaptés à un usage pédagogique ou scientifique ouvert 
+et interopérable. 
 
 ### 2.1 Limites fréquentes des approches existantes
 
+Liste non exhaustive : 
 - **EnergyPlus**  
   Très utile pour la simulation énergétique, mais les facteurs de forme sont intégrés
   dans un modèle plus global. Le contrôle fin des surfaces, des maillages et des tests
@@ -46,14 +47,18 @@ généralistes ne sont pas toujours adaptés à un usage pédagogique ou scienti
 - **OpenFOAM**  
   Très complet pour la simulation numérique, mais plus lourd à mettre en place lorsqu'on
   veut seulement explorer ou enseigner le calcul de facteurs de forme.
+  
+- Code ASTER, 
+
+- ...
 
 ### 2.2 Besoin ciblé
 
 Dans beaucoup d'applications de recherche :
 
-- les surfaces sont issues de maillages polygonaux ;
-- les interactions surface-surface sont nombreuses ;
-- les obstructions peuvent modifier fortement les échanges ;
+- les surfaces sont issues de maillages polygonaux,
+- les interactions surface-surface sont nombreuses,
+- les obstructions peuvent modifier fortement les échanges,
 - on souhaite garder la main sur chaque étape du calcul.
 
 !!! success "Objectif de `pyViewFactor`"
@@ -61,18 +66,17 @@ Dans beaucoup d'applications de recherche :
     des facteurs de forme sur des géométries planes issues de maillages.
 
 
-
 ## 3. Fonctionnalités principales
 
 La bibliothèque permet notamment de :
 
-- tester si deux faces sont orientées de manière compatible pour échanger du rayonnement ;
-- tester si une obstruction bloque la ligne de vue entre deux faces ;
-- calculer un facteur de forme entre deux surfaces planes ;
-- calculer une matrice complète de facteurs de forme sur un maillage ;
-- exploiter la réciprocité des facteurs de forme ;
-- visualiser la distribution des facteurs de forme depuis une cellule donnée ;
-- intégrer ces calculs dans des workflows Python basés sur `PyVista`, `NumPy`, `SciPy` et `Numba`.
+- tester si deux faces sont orientées de manière compatible pour échanger du rayonnement,
+- tester si une obstruction bloque la ligne de vue entre deux faces,
+- calculer un facteur de forme entre deux surfaces planes,
+- calculer une matrice complète de facteurs de forme sur un maillage,
+- exploiter la réciprocité des facteurs de forme,
+- visualiser la distribution des facteurs de forme depuis une cellule donnée,
+- **intégrer ces calculs dans des workflows Python** basés sur `PyVista`, `NumPy`, `SciPy` et `Numba`.
 
 ## 4. Principe de la méthode
 
@@ -96,7 +100,7 @@ contributions associées aux paires d'arêtes des deux polygones.
 
 `pyViewFactor` utilise deux intégrateurs complémentaires :
 
-- **Gauss–Legendre** : rapide, utilisé pour la majorité des paires de faces disjointes ;
+- **Gauss–Legendre** : rapide, utilisé pour la majorité des paires de faces disjointes,
 - **`SciPy` `dblquad`** : plus robuste, utilisé pour les cas plus délicats, notamment les
 faces partageant un sommet ou une arête.
 
@@ -147,7 +151,7 @@ Fonctions associées :
 
 Deux modes existent :
 
-- `strict=False` : test principalement basé sur les centroïdes, plus permissif ;
+- `strict=False` : test principalement basé sur les centroïdes, plus permissif,
 - `strict=True` : test plus pénalisant, qui vérifie les positions relatives des sommets pour éviter de valider des cas partiellement visibles.
 
 !!! warning "Interprétation du mode strict"
@@ -170,7 +174,7 @@ Fonctions associées :
 
 Modes d'obstruction :
 
-- `strict=False` : un rayon centroïde-centroïde est testé ;
+- `strict=False` : un rayon centroïde-centroïde est testé,
 - `strict=True` : plusieurs rayons sommet-sommet sont testés, ce qui rend le critère plus conservatif.
 
 ### 5.4 Intégration numérique du facteur de forme
@@ -189,7 +193,7 @@ Fonctions associées :
 
 En pratique :
 
-- les faces disjointes sont traitées par Gauss–Legendre ;
+- les faces disjointes sont traitées par Gauss–Legendre,
 - les faces qui partagent au moins un sommet sont légèrement décalées avec `epsilon`, puis traitées par `dblquad`.
 
 ### 5.5 Fonctions haut niveau
@@ -239,26 +243,26 @@ if visible:
 
 Le design de `pyViewFactor` repose sur :
 
-- `NumPy` pour les tableaux et opérations vectorisées ;
-- `Numba` pour accélérer les noyaux numériques ;
-- `SciPy` pour un fallback robuste ;
+- `NumPy` pour les tableaux et opérations vectorisées,
+- `Numba` pour accélérer les noyaux numériques,
+- `SciPy` pour un fallback robuste,
 - `PyVista` pour manipuler les géométries 3D.
 
 Les principaux compromis sont :
 
-- **rapidité vs robustesse** : Gauss–Legendre est rapide, `dblquad` est plus robuste ;
-- **mode strict vs mode permissif** : le mode strict évite certains faux positifs, mais peut rejeter des cas partiels ;
+- **rapidité vs robustesse** : Gauss–Legendre est rapide, `dblquad` est plus robuste,
+- **mode strict vs mode permissif** : le mode strict évite certains faux positifs, mais peut rejeter des cas partiels,
 - **maillage grossier vs maillage raffiné** : un maillage plus fin représente mieux les visibilités partielles, mais augmente le nombre de paires à calculer.
 
 ## 8. Cas d'usage
 
 `pyViewFactor` peut être utilisé pour :
 
-- construire une matrice d'échanges radiatifs longue longueur d'onde ;
-- analyser l'effet d'une géométrie urbaine sur les échanges radiatifs ;
-- alimenter un calcul de température radiante moyenne ;
-- produire des abaques pour des cas de validation ;
-- comparer des méthodes numériques de calcul de facteurs de forme ;
+- construire une matrice d'échanges radiatifs longue longueur d'onde,
+- analyser l'effet d'une géométrie urbaine sur les échanges radiatifs,
+- alimenter un calcul de température radiante moyenne,
+- produire des abaques pour des cas de validation,
+- comparer des méthodes numériques de calcul de facteurs de forme,
 - servir de support pédagogique pour relier théorie, géométrie et simulation.
 
 
