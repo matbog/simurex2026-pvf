@@ -1,6 +1,6 @@
 site_name: SIMUREX 2026 – pyViewFactor
 site_url: https://matbog.github.io/simurex2026-pvf/
-site_description: IBPSA 2026 - Ecole thématique SIMUREX - sessoin calcul des facteurs de forme
+site_description: IBPSA 2026 - Ecole thématique SIMUREX - session calcul des Facteurs de Forme
 repo_url: https://github.com/matbog/simurex2026-pvf
 repo_name: matbog/simurex2026-pvf
 
@@ -47,7 +47,7 @@ extra_javascript:
 nav:
   - Home: index.md
   - Get Started: get-started.md
-  - Rappel Scientifiques: scientific-background.md
+  - Rappels Scientifiques: scientific-background.md
   - Visibilité et Obstruction: visibility_obstruction.md
-  - Exercices & Mini-Project: exercises.md
+  - Exercices & Mini-Projet: exercises.md
   - A propos de pyviewfactor: about-pyviewfactor.md
