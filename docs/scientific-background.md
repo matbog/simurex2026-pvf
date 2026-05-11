@@ -312,7 +312,7 @@ $$
 Et en décomponsant la distance \(\delta_{k,l}\) : 
 
 $$
-\overrightarrow{\delta_{k,l}} =y
+\overrightarrow{\delta_{k,l}} =
 \overrightarrow{P_k Q_l}
 + \lambda_Q \, \overrightarrow{Q_l Q_{l+1}}
 - \lambda_P \, \overrightarrow{P_k P_{k+1}}

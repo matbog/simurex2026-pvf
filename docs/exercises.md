@@ -422,8 +422,9 @@ Hypothèses utilisées :
 * \(T_{core}\) est approché par la température moyenne de l'air sur la journée,
 * \(h_c = 8\,W.m^{-2}.K^{-1}\),
 * pas de temps horaire,
-* modèle solaire isotrope pour la composante diffuse,
-* pas de masques solaires urbains dans le calcul courtwave.
+* rayonnement solaire direct corrigé par les masques urbains,
+* diffus ciel pondéré par le `SVF`,
+* réflexion courte longueur d'onde du sol représentée par un terme isotrope simplifié.
 
 ### 3.4 - Matériaux
 
@@ -437,24 +438,50 @@ Les propriétés sont définies dans le dictionnaire `MATERIALS` du script.
 
 Ces valeurs sont des ordres de grandeur destinés à l'exercice. L'objectif est de produire une réponse thermique plausible, pas de représenter un bâtiment réel complet.
 
-### 3.5 - Solaire avec pvlib
+### 3.5 - Solaire avec pvlib et masques urbains
 
-Le script utilise `pvlib` pour calculer la position solaire et le rayonnement incident dans le plan de chaque maille :
+Le script utilise `pvlib` pour calculer la position solaire à chaque pas horaire.
+Le rayonnement incident est ensuite estimé avec une correction géométrique simple :
+
+\[
+K_{\downarrow,i}
+= DNI \max(0, \vec{n_i}\cdot\vec{s}) V_{sun,i}
++ DHI \, SVF_i
++ \rho_g GHI \frac{1 - \cos(\beta_i)}{2}
+\]
+
+avec :
+
+| Terme | Sens |
+|---|---|
+| \(\vec{n_i}\) | normale de la maille |
+| \(\vec{s}\) | direction solaire calculée avec `pvlib` |
+| \(V_{sun,i}\) | visibilité directe du soleil : 1 si le rayon n'est pas bloqué, 0 sinon |
+| \(SVF_i\) | part de ciel visible par la maille |
+| \(\beta_i\) | inclinaison de la maille |
+| \(\rho_g\) | albédo du sol |
+
+Le terme direct est donc ombré par la géométrie : pour chaque maille orientée vers
+le soleil, un rayon est lancé depuis le centre de la maille dans la direction solaire.
+Si ce rayon intersecte une autre face de la scène, la maille est considérée à l'ombre
+pour la composante directe.
 
 ```python
 solar_position = pv_location.get_solarposition(times)
 
-total_irrad = pvlib.irradiance.get_total_irradiance(
-    surface_tilt=tilt,
-    surface_azimuth=azimuth,
-    solar_zenith=solar_zenith,
-    solar_azimuth=solar_azimuth,
-    dni=dni,
-    ghi=ghi,
-    dhi=dhi,
-    albedo=GROUND_ALBEDO,
-    model="isotropic",
+sun_vector = solar_vector_from_zenith_azimuth(
+    solar_zenith,
+    solar_azimuth,
 )
+
+incidence_cos = np.maximum(normals @ sun_vector, 0.0)
+sun_visible = compute_sun_visibility(mesh, sun_vector, incidence_cos)
+
+direct = dni * incidence_cos * sun_visible
+diffuse_sky = dhi * svf
+reflected_ground = ghi * GROUND_ALBEDO * 0.5 * (1.0 - np.cos(tilt_rad))
+
+shortwave = direct + diffuse_sky + reflected_ground
 ```
 
 Les orientations des mailles sont déduites des normales :
@@ -463,10 +490,15 @@ Les orientations des mailles sont déduites des normales :
 * `surface_azimuth_deg` : azimut selon la convention `pvlib`,
 * `SCENE_AZIMUTH_OFFSET_DEG` : correction si l'axe `y` de la scène n'est pas le nord géographique.
 
+!!! warning "Limite du modèle solaire"
+    Le direct solaire est masqué par la géométrie, mais le diffus reste représenté
+    par une approximation isotrope pondérée par le `SVF`. Le script ne modélise pas
+    un ciel anisotrope complet ni les réflexions solaires multiples entre façades.
+
 Ressources utiles :
 
 * [`pvlib.location.Location.get_solarposition`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.location.Location.get_solarposition.html)
-* [`pvlib.irradiance.get_total_irradiance`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.irradiance.get_total_irradiance.html)
+* [`pyvista.PolyDataFilters.ray_trace`](https://docs.pyvista.org/api/core/_autosummary/pyvista.PolyDataFilters.ray_trace.html)
 
 ### 3.6 - Flux GLO
 
@@ -521,7 +553,7 @@ Champs exportés :
 | `SVF` | sky view factor par maille |
 | `surface_id` | type de surface : sol, façade, toiture, autre |
 | `surface_tilt_deg`, `surface_azimuth_deg` | orientation géographique des mailles |
-| `K_down_XXh_Wm2` | solaire incident calculé avec `pvlib` |
+| `K_down_XXh_Wm2` | solaire incident calculé avec `pvlib`, `SVF` et masques urbains |
 | `T_surface_XXh_C` | température de surface estimée |
 | `q_GLO_XXh_Wm2` | flux GLO net par maille |
 | `q_GLO_mean_24h_Wm2` | moyenne 24 h |

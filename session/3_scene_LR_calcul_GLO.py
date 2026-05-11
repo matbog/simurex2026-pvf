@@ -13,8 +13,9 @@ Hypotheses principales
 - Le ciel est le complement de fermeture :
   SVF_i = F_i->sky = 1 - sum_j(F_i->j).
 - Les temperatures de surface sont estimees avec un modele 1R1C simple par
-  cellule : convection avec l'air, absorption solaire calculee avec pvlib,
-  echange GLO avec le ciel et conduction vers une couche profonde simplifiee.
+  cellule : convection avec l'air, absorption solaire calculee avec pvlib et
+  corrigee par les masques urbains, echange GLO avec le ciel et conduction vers
+  une couche profonde simplifiee.
 - La temperature radiative du ciel est approximee par T_sky = T_air - 15 degC.
 """
 
@@ -27,6 +28,8 @@ import pandas as pd
 import pvlib
 import pyvista as pv
 import pyviewfactor as pvf
+from pyviewfactor.pvf_geometry_preprocess import FaceMeshPreprocessor
+from pyviewfactor.pvf_visibility_obstruction import is_ray_blocked
 
 
 # =============================================================================
@@ -349,14 +352,72 @@ def compute_cell_orientation(mesh):
     return tilt, azimuth
 
 
-def compute_cell_shortwave_poa(mesh, location, times, ghi, dni, dhi):
+def solar_vector_from_zenith_azimuth(zenith_deg, azimuth_deg):
     """
-    Compute incident shortwave radiation on each cell using pvlib.
+    Return the unit vector pointing from the scene toward the sun.
+
+    Coordinates follow the scene convention: x East, y North, z Up.
+    pvlib azimuth is 0 deg North, 90 deg East, 180 deg South, 270 deg West.
+    """
+    zenith = np.radians(zenith_deg)
+    azimuth = np.radians(azimuth_deg)
+
+    return np.array([
+        np.sin(zenith) * np.sin(azimuth),
+        np.sin(zenith) * np.cos(azimuth),
+        np.cos(zenith),
+    ])
+
+
+def compute_sun_visibility(mesh, sun_vector, incidence_cos, obstacle_triangles):
+    """
+    Return 1 when the cell center sees the sun, 0 when it is shadowed.
+
+    Only cells facing the sun are tested. The ray starts just above the cell
+    along the sun direction to avoid detecting the source cell itself.
+
+    This 3bis variant uses pyViewFactor's internal `is_ray_blocked` helper
+    instead of PyVista's `ray_trace`.
+    """
+    visible = np.zeros(mesh.n_cells, dtype=float)
+
+    if sun_vector[2] <= 0.0:
+        return visible
+
+    centers = mesh.cell_centers().points
+    active = np.where(incidence_cos > 0.0)[0]
+
+    bounds = np.asarray(mesh.bounds, dtype=float)
+    diagonal = np.linalg.norm(bounds[[1, 3, 5]] - bounds[[0, 2, 4]])
+    ray_length = max(10.0 * diagonal, 1.0)
+    ray_offset = max(1e-6 * diagonal, 1e-5)
+
+    for cell_id in active:
+        start = centers[cell_id] + sun_vector * ray_offset
+        end = start + sun_vector * ray_length
+        blocked = is_ray_blocked(
+            start.astype(np.float64),
+            end.astype(np.float64),
+            obstacle_triangles,
+            eps=ray_offset,
+        )
+
+        if not blocked:
+            visible[cell_id] = 1.0
+
+    return visible
+
+
+def compute_cell_shortwave_poa(mesh, location, times, ghi, dni, dhi, svf):
+    """
+    Compute incident shortwave radiation on each cell using pvlib and geometry.
 
     The result has shape (n_hours, n_cells) and is expressed in W/m2.
     """
     print_section("Calcul du rayonnement solaire incident avec pvlib")
-    print("Modele : get_total_irradiance(..., model='isotropic')")
+    print("Direct : DNI * cos(theta) * visibilite solaire par is_ray_blocked")
+    print("Diffus ciel : DHI * SVF")
+    print("Reflechi sol : albedo * GHI * (1 - cos(tilt)) / 2")
     print(f"Albedo sol : {GROUND_ALBEDO:.2f}")
     print(f"Offset azimut scene : {SCENE_AZIMUTH_OFFSET_DEG:.1f} deg")
 
@@ -382,24 +443,43 @@ def compute_cell_shortwave_poa(mesh, location, times, ghi, dni, dhi):
     )
 
     poa = np.zeros((len(times), mesh.n_cells), dtype=float)
+    normals = mesh.cell_data["Normals"]
+    tilt_rad = np.radians(tilt)
+    ground_reflected_factor = 0.5 * (1.0 - np.cos(tilt_rad))
+    obstacle_triangles = FaceMeshPreprocessor(
+        mesh,
+        rounding_decimal=ROUNDING_DECIMAL,
+    ).triangles
+    print(f"Triangles obstacles pour is_ray_blocked : {len(obstacle_triangles)}")
 
     for k in range(len(times)):
-        total_irrad = pvlib.irradiance.get_total_irradiance(
-            surface_tilt=tilt,
-            surface_azimuth=azimuth,
-            solar_zenith=float(solar_position[zenith_column].iloc[k]),
-            solar_azimuth=float(solar_position["azimuth"].iloc[k]),
-            dni=float(dni[k]),
-            ghi=float(ghi[k]),
-            dhi=float(dhi[k]),
-            albedo=GROUND_ALBEDO,
-            model="isotropic",
+        solar_zenith = float(solar_position[zenith_column].iloc[k])
+        solar_azimuth = float(solar_position["azimuth"].iloc[k])
+        sun_vector = solar_vector_from_zenith_azimuth(solar_zenith, solar_azimuth)
+
+        incidence_cos = np.maximum(normals @ sun_vector, 0.0)
+        sun_visible = compute_sun_visibility(
+            mesh,
+            sun_vector,
+            incidence_cos,
+            obstacle_triangles,
         )
-        poa[k, :] = np.maximum(np.asarray(total_irrad["poa_global"]), 0.0)
+
+        direct = float(dni[k]) * incidence_cos * sun_visible
+        diffuse_sky = float(dhi[k]) * svf
+        reflected_ground = float(ghi[k]) * GROUND_ALBEDO * ground_reflected_factor
+
+        poa[k, :] = np.maximum(direct + diffuse_sky + reflected_ground, 0.0)
+        mesh.cell_data[f"sun_visible_{times.hour[k]:02d}h"] = sun_visible
 
     print_stats("Zenith solaire", solar_position[zenith_column].to_numpy(), "deg")
     print_stats("Azimut solaire", solar_position["azimuth"].to_numpy(), "deg")
     print_stats("K_down toutes cellules", poa, "W/m2")
+    print_stats(
+        "Fraction cellules au soleil",
+        np.vstack([mesh.cell_data[f"sun_visible_{hour:02d}h"] for hour in times.hour]),
+        "-",
+    )
     for target_hour in (9, 12, 15):
         matches = np.where(times.hour == target_hour)[0]
         if len(matches) > 0:
@@ -685,6 +765,7 @@ def main():
         ghi,
         dni,
         dhi,
+        svf,
     )
 
     surface_temperatures_k, fluxes, _ = compute_24h_lw_fluxes(
