@@ -1,0 +1,1421 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="IBPSA 2026 - Ecole thématique SIMUREX - sessoin calcul des facteurs de forme">
+      
+      
+      
+        <link rel="canonical" href="https://matbog.github.io/simurex2026-pvf/visibility_obstruction/">
+      
+      
+        <link rel="prev" href="../scientific-background/">
+      
+      
+        <link rel="next" href="../exercises/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Visibilté et Obstruction - SIMUREX 2026 – pyViewFactor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tests-de-visibilite-et-dobstruction" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href=".." title="SIMUREX 2026 – pyViewFactor" class="md-header__button md-logo" aria-label="SIMUREX 2026 – pyViewFactor" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SIMUREX 2026 – pyViewFactor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Visibilté et Obstruction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/matbog/simurex2026-pvf" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    matbog/simurex2026-pvf
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SIMUREX 2026 – pyViewFactor" class="md-nav__button md-logo" aria-label="SIMUREX 2026 – pyViewFactor" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    SIMUREX 2026 – pyViewFactor
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/matbog/simurex2026-pvf" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    matbog/simurex2026-pvf
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scientific-background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rappel Scientifiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visibilté et Obstruction
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visibilté et Obstruction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-test-de-visibilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Test de visibilité
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Test de visibilité">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-principe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Principe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-formulation-geometrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Formulation géométrique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Interprétation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-modes-strict-et-non-strict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Modes strict et non strict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Modes strict et non strict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-non-strict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode non strict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-strict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode strict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-test-dobstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Test d’obstruction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Test d’obstruction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-principe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Principe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Formulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-algorithme-utilise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Algorithme utilisé
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-filtrage-spatial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Filtrage spatial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-modes-strict-et-non-strict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Modes strict et non strict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Modes strict et non strict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-non-strict_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode non strict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-strict_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode strict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-difficultes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Difficultés pratiques
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Difficultés pratiques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-bruit-geometrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Bruit géométrique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cas-degeneres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Cas dégénérés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-gestion-numerique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Gestion numérique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-lien-avec-pyviewfactor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Lien avec pyViewFactor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Lien avec pyViewFactor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-test-de-visibilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Test de visibilité
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-test-dobstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Test d’obstruction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-pretraitement-geometrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Prétraitement géométrique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-impact-sur-les-facteurs-de-forme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Impact sur les facteurs de forme
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercices & Mini-Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about-pyviewfactor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A propos de pyviewfactor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-test-de-visibilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Test de visibilité
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Test de visibilité">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-principe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Principe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-formulation-geometrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Formulation géométrique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Interprétation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-modes-strict-et-non-strict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Modes strict et non strict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Modes strict et non strict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-non-strict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode non strict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-strict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode strict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-test-dobstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Test d’obstruction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Test d’obstruction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-principe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Principe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Formulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-algorithme-utilise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Algorithme utilisé
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-filtrage-spatial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Filtrage spatial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-modes-strict-et-non-strict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Modes strict et non strict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Modes strict et non strict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-non-strict_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode non strict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-strict_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mode strict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-difficultes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Difficultés pratiques
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Difficultés pratiques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-bruit-geometrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Bruit géométrique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cas-degeneres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Cas dégénérés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-gestion-numerique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Gestion numérique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-lien-avec-pyviewfactor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Lien avec pyViewFactor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Lien avec pyViewFactor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-test-de-visibilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Test de visibilité
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-test-dobstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Test d’obstruction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-pretraitement-geometrique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Prétraitement géométrique
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-impact-sur-les-facteurs-de-forme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Impact sur les facteurs de forme
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="tests-de-visibilite-et-dobstruction">Tests de visibilité et d’obstruction<a class="headerlink" href="#tests-de-visibilite-et-dobstruction" title="Permanent link">&para;</a></h1>
+<div class="admonition success">
+<p class="admonition-title">Comprendre par l'exemple</p>
+<p>Le fichier <code>1_understanding_visibility_obstruction.py</code> permet de comprendre les différentes stratégies décrites ci-dessous avec des exemples. </p>
+</div>
+<h2 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>Le calcul des facteurs de forme ne repose pas uniquement sur une intégration numérique.<br />
+Avant même d’évaluer une intégrale, il est nécessaire de déterminer si deux surfaces :</p>
+<ul>
+<li>peuvent <strong>géométriquement se voir</strong> (visibilité),</li>
+<li>sont <strong>effectivement visibles sans obstacle</strong> (obstruction).</li>
+</ul>
+<p>Ces deux étapes sont fondamentales car elles permettent :</p>
+<ul>
+<li>de réduire fortement le nombre de calculs,</li>
+<li>d’éviter des intégrations inutiles,</li>
+<li>de garantir la cohérence physique des résultats.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Pipeline</p>
+<p>Dans <code>pyViewFactor</code>, ces tests sont effectués <strong>avant toute intégration</strong>, et conditionnent directement le calcul des facteurs de forme.</p>
+</div>
+<h2 id="2-test-de-visibilite">2. Test de visibilité<a class="headerlink" href="#2-test-de-visibilite" title="Permanent link">&para;</a></h2>
+<h3 id="21-principe">2.1 Principe<a class="headerlink" href="#21-principe" title="Permanent link">&para;</a></h3>
+<p>Le test de visibilité consiste à vérifier si deux facettes sont <strong>orientées l’une vers l’autre</strong>.</p>
+<p>Autrement dit, même en l’absence d’obstacles, deux surfaces ne peuvent échanger du rayonnement que si :</p>
+<ul>
+<li>leurs normales sont orientées de manière compatible,</li>
+<li>leurs centres sont mutuellement visibles.</li>
+</ul>
+<hr />
+<h3 id="22-formulation-geometrique">2.2 Formulation géométrique<a class="headerlink" href="#22-formulation-geometrique" title="Permanent link">&para;</a></h3>
+<p>Soient deux facettes <span class="arithmatex">\(S_i\)</span> et <span class="arithmatex">\(S_j\)</span>, de centres <span class="arithmatex">\(C_i\)</span> et <span class="arithmatex">\(C_j\)</span>, et de normales <span class="arithmatex">\(\vec{n}_i\)</span>, <span class="arithmatex">\(\vec{n}_j\)</span>.</p>
+<p>On considère le vecteur :</p>
+<div class="arithmatex">\[
+\vec{v}_{ij} = C_i - C_j
+\]</div>
+<p>Les conditions de visibilité s’écrivent :</p>
+<div class="arithmatex">\[
+\vec{v}_{ij} \cdot \vec{n}_j &gt; 0
+\quad \text{et} \quad
+\vec{v}_{ij} \cdot \vec{n}_i &lt; 0
+\]</div>
+<p>Ces deux conditions garantissent que :</p>
+<ul>
+<li><span class="arithmatex">\(S_j\)</span> est orientée vers <span class="arithmatex">\(S_i\)</span>,</li>
+<li><span class="arithmatex">\(S_i\)</span> est orientée vers <span class="arithmatex">\(S_j\)</span>.</li>
+</ul>
+<hr />
+<h3 id="23-interpretation">2.3 Interprétation<a class="headerlink" href="#23-interpretation" title="Permanent link">&para;</a></h3>
+<p>Ce test revient à vérifier que :</p>
+<ul>
+<li>chaque surface "regarde" l’autre,</li>
+<li>les normales ne sont pas divergentes.</li>
+</ul>
+<hr />
+<h3 id="24-modes-strict-et-non-strict">2.4 Modes strict et non strict<a class="headerlink" href="#24-modes-strict-et-non-strict" title="Permanent link">&para;</a></h3>
+<p>Dans la pratique, deux stratégies existent :</p>
+<h4 id="mode-non-strict">Mode non strict<a class="headerlink" href="#mode-non-strict" title="Permanent link">&para;</a></h4>
+<ul>
+<li>basé sur les centroïdes,</li>
+<li>rapide,</li>
+<li>tolère les cas partiellement visibles.</li>
+</ul>
+<h4 id="mode-strict">Mode strict<a class="headerlink" href="#mode-strict" title="Permanent link">&para;</a></h4>
+<ul>
+<li>vérifie tous les points des facettes,</li>
+<li>rejette les cas partiellement visibles,</li>
+<li>plus conservatif.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Cas limites</p>
+<p>Dans les géométries réelles, une facette peut être partiellement visible. Le choix du mode strict dépend de l’application.</p>
+</div>
+<hr />
+<h2 id="3-test-dobstruction">3. Test d’obstruction<a class="headerlink" href="#3-test-dobstruction" title="Permanent link">&para;</a></h2>
+<h3 id="31-principe">3.1 Principe<a class="headerlink" href="#31-principe" title="Permanent link">&para;</a></h3>
+<p>Même si deux surfaces sont orientées correctement, elles peuvent être <strong>masquées par une troisième surface</strong>.</p>
+<p>Le test d’obstruction consiste à vérifier que le segment reliant les deux surfaces :</p>
+<ul>
+<li>ne coupe aucun obstacle.</li>
+</ul>
+<hr />
+<h3 id="32-formulation">3.2 Formulation<a class="headerlink" href="#32-formulation" title="Permanent link">&para;</a></h3>
+<p>On considère un rayon entre deux points :</p>
+<div class="arithmatex">\[
+\vec{r}(t) = (1 - t) \, P + t \, Q
+\quad \text{avec} \quad t \in (0,1)
+\]</div>
+<p>Le problème devient :</p>
+<blockquote>
+<p>Existe-t-il une intersection entre ce segment et une autre facette ?</p>
+</blockquote>
+<hr />
+<h3 id="33-algorithme-utilise">3.3 Algorithme utilisé<a class="headerlink" href="#33-algorithme-utilise" title="Permanent link">&para;</a></h3>
+<p>Une méthode classique est l’algorithme de <strong>Möller–Trumbore</strong> :</p>
+<ul>
+<li>test rapide d’intersection rayon-triangle,</li>
+<li>robuste numériquement,</li>
+<li>adapté aux maillages triangulés.</li>
+</ul>
+<hr />
+<h3 id="34-filtrage-spatial">3.4 Filtrage spatial<a class="headerlink" href="#34-filtrage-spatial" title="Permanent link">&para;</a></h3>
+<p>Pour éviter de tester toutes les facettes, un filtrage est appliqué :</p>
+<ul>
+<li>construction d’une <strong>boîte englobante (AABB)</strong>,</li>
+<li>sélection des triangles candidats,</li>
+<li>exclusion des faces testées.</li>
+</ul>
+<div class="admonition success">
+<p class="admonition-title">Optimisation clé</p>
+<p>Le filtrage spatial réduit fortement le coût du test d’obstruction.</p>
+</div>
+<hr />
+<h3 id="35-modes-strict-et-non-strict">3.5 Modes strict et non strict<a class="headerlink" href="#35-modes-strict-et-non-strict" title="Permanent link">&para;</a></h3>
+<h4 id="mode-non-strict_1">Mode non strict<a class="headerlink" href="#mode-non-strict_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>un seul rayon (centroïde → centroïde),</li>
+<li>rapide,</li>
+<li>approximation.</li>
+</ul>
+<h4 id="mode-strict_1">Mode strict<a class="headerlink" href="#mode-strict_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>rayons entre tous les sommets,</li>
+<li>plus précis,</li>
+<li>plus coûteux.</li>
+</ul>
+<hr />
+<h2 id="4-difficultes-pratiques">4. Difficultés pratiques<a class="headerlink" href="#4-difficultes-pratiques" title="Permanent link">&para;</a></h2>
+<h3 id="41-bruit-geometrique">4.1 Bruit géométrique<a class="headerlink" href="#41-bruit-geometrique" title="Permanent link">&para;</a></h3>
+<p>Les données issues de CAD contiennent souvent :</p>
+<ul>
+<li>des coordonnées quasi nulles,</li>
+<li>des arêtes non parfaitement partagées,</li>
+<li>des décalages minimes.</li>
+</ul>
+<p>Ces défauts peuvent conduire à :</p>
+<ul>
+<li>des faux positifs d’obstruction,</li>
+<li>des incohérences de visibilité.</li>
+</ul>
+<hr />
+<h3 id="42-cas-degeneres">4.2 Cas dégénérés<a class="headerlink" href="#42-cas-degeneres" title="Permanent link">&para;</a></h3>
+<p>Certains cas sont particulièrement sensibles :</p>
+<ul>
+<li>surfaces partageant une arête,</li>
+<li>surfaces partageant un sommet,</li>
+<li>surfaces quasi coplanaires,</li>
+<li>distances très faibles.</li>
+</ul>
+<h3 id="43-gestion-numerique">4.3 Gestion numérique<a class="headerlink" href="#43-gestion-numerique" title="Permanent link">&para;</a></h3>
+<p>Plusieurs solutions sont utilisées :</p>
+<ul>
+<li>arrondi des coordonnées,</li>
+<li>introduction d’un seuil <span class="arithmatex">\(\varepsilon\)</span>,</li>
+<li>exclusion des intersections aux extrémités,</li>
+<li>filtrage des triangles identiques.</li>
+</ul>
+<h2 id="5-lien-avec-pyviewfactor">5. Lien avec <code>pyViewFactor</code><a class="headerlink" href="#5-lien-avec-pyviewfactor" title="Permanent link">&para;</a></h2>
+<h3 id="51-test-de-visibilite">5.1 Test de visibilité<a class="headerlink" href="#51-test-de-visibilite" title="Permanent link">&para;</a></h3>
+<p>Le test de visibilité repose sur :</p>
+<ul>
+<li>les centroïdes,</li>
+<li>les normales,</li>
+<li>des produits scalaires.</li>
+</ul>
+<p>Implémentation : <code>get_visibility</code></p>
+<h3 id="52-test-dobstruction">5.2 Test d’obstruction<a class="headerlink" href="#52-test-dobstruction" title="Permanent link">&para;</a></h3>
+<p>Le test d’obstruction repose sur :</p>
+<ul>
+<li>ray tracing,</li>
+<li>intersection segment-triangle,</li>
+<li>filtrage AABB.</li>
+</ul>
+<p>Implémentation : <code>get_obstruction</code></p>
+<h3 id="53-pretraitement-geometrique">5.3 Prétraitement géométrique<a class="headerlink" href="#53-pretraitement-geometrique" title="Permanent link">&para;</a></h3>
+<p>Pour accélérer les calculs :</p>
+<ul>
+<li>stockage des normales, centres, aires,</li>
+<li>mise en cache des triangles.</li>
+</ul>
+<p>Voir les structures de prétraitement dans le code.</p>
+<h2 id="6-impact-sur-les-facteurs-de-forme">6. Impact sur les facteurs de forme<a class="headerlink" href="#6-impact-sur-les-facteurs-de-forme" title="Permanent link">&para;</a></h2>
+<p>Les tests de visibilité et d’obstruction conditionnent directement :</p>
+<ul>
+<li>quelles paires de surfaces sont intégrées,</li>
+<li>la sparsité de la matrice des facteurs de forme,</li>
+<li>la cohérence physique du modèle.</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">À retenir</p>
+<p>Une erreur de visibilité ou d’obstruction peut avoir un impact plus important que l’erreur d’intégration elle-même.</p>
+</div>
+<h2 id="7-conclusion">7. Conclusion<a class="headerlink" href="#7-conclusion" title="Permanent link">&para;</a></h2>
+<p>Les tests de visibilité et d’obstruction sont :</p>
+<ul>
+<li>indispensables pour le calcul des facteurs de forme,</li>
+<li>fortement dépendants de la qualité géométrique,</li>
+<li>souvent la partie la plus délicate du calcul.</li>
+</ul>
+<p>Ils constituent un compromis entre :</p>
+<ul>
+<li>précision,</li>
+<li>robustesse,</li>
+<li>performance.</li>
+</ul>
+<p>Dans <code>pyViewFactor</code>, ces tests sont conçus pour être :</p>
+<ul>
+<li>rapides,</li>
+<li>robustes face au bruit géométrique,</li>
+<li>compatibles avec des maillages complexes.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "content.code.copy", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
