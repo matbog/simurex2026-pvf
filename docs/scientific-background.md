@@ -79,7 +79,7 @@ Ces hypothèses simplifient fortement les équations tout en restant adaptées �
 
 Le facteur de forme \(F_{i,j}\) représente la **fraction du rayonnement émis par la surface \(i\)** qui atteint directement la surface \(j\).
 
-_Dit autrememnt, \(F_{i,j}\) est la fraction du champ de vision de la facatte \(i\) occupée par la facette \(j\)_
+_Dit autremement, \(F_{i,j}\) est la fraction du champ de vision de la facatte \(i\) occupée par la facette \(j\)_
 
 
 Il dépend de :
@@ -309,7 +309,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 \end{cases}
 $$
 
-Et en décomponsant la distance \(\delta_{k,l}\) : 
+Et en décomposant la distance \(\delta_{k,l}\) : 
 
 $$
 \overrightarrow{\delta_{k,l}} =
@@ -318,7 +318,7 @@ $$
 - \lambda_P \, \overrightarrow{P_k P_{k+1}}
 $$
 
-On se retourve à devoir intégrer le \(log \) d'un polynôme de degré 2, entre 0 et 1. _Et là de nombreuses méthodes numériques existent !_
+On se retourve à devoir intégrer le \(log \) d'un polynôme de degré 2, entre 0 et 1. _Et là, de nombreuses méthodes numériques existent !_
 
 Plus de détails [ici](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort), dans la papier IBPSA 2022 !
  

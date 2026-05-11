@@ -661,10 +661,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-solaire-avec-pvlib" class="md-nav__link">
+  <a href="#35-solaire-avec-pvlib-et-masques-urbains" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 - Solaire avec pvlib
+        3.5 - Solaire avec pvlib et masques urbains
       
     </span>
   </a>
@@ -1005,10 +1005,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-solaire-avec-pvlib" class="md-nav__link">
+  <a href="#35-solaire-avec-pvlib-et-masques-urbains" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 - Solaire avec pvlib
+        3.5 - Solaire avec pvlib et masques urbains
       
     </span>
   </a>
@@ -1552,8 +1552,9 @@ C \frac{dT_s}{dt}
 <li><span class="arithmatex">\(T_{core}\)</span> est approché par la température moyenne de l'air sur la journée,</li>
 <li><span class="arithmatex">\(h_c = 8\,W.m^{-2}.K^{-1}\)</span>,</li>
 <li>pas de temps horaire,</li>
-<li>modèle solaire isotrope pour la composante diffuse,</li>
-<li>pas de masques solaires urbains dans le calcul courtwave.</li>
+<li>rayonnement solaire direct corrigé par les masques urbains,</li>
+<li>diffus ciel pondéré par le <code>SVF</code>,</li>
+<li>réflexion courte longueur d'onde du sol représentée par un terme isotrope simplifié.</li>
 </ul>
 <h3 id="34-materiaux">3.4 - Matériaux<a class="headerlink" href="#34-materiaux" title="Permanent link">&para;</a></h3>
 <p>Les propriétés sont définies dans le dictionnaire <code>MATERIALS</code> du script.</p>
@@ -1604,21 +1605,69 @@ C \frac{dT_s}{dt}
 </tbody>
 </table>
 <p>Ces valeurs sont des ordres de grandeur destinés à l'exercice. L'objectif est de produire une réponse thermique plausible, pas de représenter un bâtiment réel complet.</p>
-<h3 id="35-solaire-avec-pvlib">3.5 - Solaire avec pvlib<a class="headerlink" href="#35-solaire-avec-pvlib" title="Permanent link">&para;</a></h3>
-<p>Le script utilise <code>pvlib</code> pour calculer la position solaire et le rayonnement incident dans le plan de chaque maille :</p>
+<h3 id="35-solaire-avec-pvlib-et-masques-urbains">3.5 - Solaire avec pvlib et masques urbains<a class="headerlink" href="#35-solaire-avec-pvlib-et-masques-urbains" title="Permanent link">&para;</a></h3>
+<p>Le script utilise <code>pvlib</code> pour calculer la position solaire à chaque pas horaire.
+Le rayonnement incident est ensuite estimé avec une correction géométrique simple :</p>
+<div class="arithmatex">\[
+K_{\downarrow,i}
+= DNI \max(0, \vec{n_i}\cdot\vec{s}) V_{sun,i}
++ DHI \, SVF_i
++ \rho_g GHI \frac{1 - \cos(\beta_i)}{2}
+\]</div>
+<p>avec :</p>
+<table>
+<thead>
+<tr>
+<th>Terme</th>
+<th>Sens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\vec{n_i}\)</span></td>
+<td>normale de la maille</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\vec{s}\)</span></td>
+<td>direction solaire calculée avec <code>pvlib</code></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V_{sun,i}\)</span></td>
+<td>visibilité directe du soleil : 1 si le rayon n'est pas bloqué, 0 sinon</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(SVF_i\)</span></td>
+<td>part de ciel visible par la maille</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta_i\)</span></td>
+<td>inclinaison de la maille</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\rho_g\)</span></td>
+<td>albédo du sol</td>
+</tr>
+</tbody>
+</table>
+<p>Le terme direct est donc ombré par la géométrie : pour chaque maille orientée vers
+le soleil, un rayon est lancé depuis le centre de la maille dans la direction solaire.
+Si ce rayon intersecte une autre face de la scène, la maille est considérée à l'ombre
+pour la composante directe.</p>
 <div class="highlight"><pre><span></span><code><span class="n">solar_position</span> <span class="o">=</span> <span class="n">pv_location</span><span class="o">.</span><span class="n">get_solarposition</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
 
-<span class="n">total_irrad</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">irradiance</span><span class="o">.</span><span class="n">get_total_irradiance</span><span class="p">(</span>
-    <span class="n">surface_tilt</span><span class="o">=</span><span class="n">tilt</span><span class="p">,</span>
-    <span class="n">surface_azimuth</span><span class="o">=</span><span class="n">azimuth</span><span class="p">,</span>
-    <span class="n">solar_zenith</span><span class="o">=</span><span class="n">solar_zenith</span><span class="p">,</span>
-    <span class="n">solar_azimuth</span><span class="o">=</span><span class="n">solar_azimuth</span><span class="p">,</span>
-    <span class="n">dni</span><span class="o">=</span><span class="n">dni</span><span class="p">,</span>
-    <span class="n">ghi</span><span class="o">=</span><span class="n">ghi</span><span class="p">,</span>
-    <span class="n">dhi</span><span class="o">=</span><span class="n">dhi</span><span class="p">,</span>
-    <span class="n">albedo</span><span class="o">=</span><span class="n">GROUND_ALBEDO</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
+<span class="n">sun_vector</span> <span class="o">=</span> <span class="n">solar_vector_from_zenith_azimuth</span><span class="p">(</span>
+    <span class="n">solar_zenith</span><span class="p">,</span>
+    <span class="n">solar_azimuth</span><span class="p">,</span>
 <span class="p">)</span>
+
+<span class="n">incidence_cos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">normals</span> <span class="o">@</span> <span class="n">sun_vector</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">sun_visible</span> <span class="o">=</span> <span class="n">compute_sun_visibility</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">sun_vector</span><span class="p">,</span> <span class="n">incidence_cos</span><span class="p">)</span>
+
+<span class="n">direct</span> <span class="o">=</span> <span class="n">dni</span> <span class="o">*</span> <span class="n">incidence_cos</span> <span class="o">*</span> <span class="n">sun_visible</span>
+<span class="n">diffuse_sky</span> <span class="o">=</span> <span class="n">dhi</span> <span class="o">*</span> <span class="n">svf</span>
+<span class="n">reflected_ground</span> <span class="o">=</span> <span class="n">ghi</span> <span class="o">*</span> <span class="n">GROUND_ALBEDO</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">tilt_rad</span><span class="p">))</span>
+
+<span class="n">shortwave</span> <span class="o">=</span> <span class="n">direct</span> <span class="o">+</span> <span class="n">diffuse_sky</span> <span class="o">+</span> <span class="n">reflected_ground</span>
 </code></pre></div>
 <p>Les orientations des mailles sont déduites des normales :</p>
 <ul>
@@ -1626,10 +1675,16 @@ C \frac{dT_s}{dt}
 <li><code>surface_azimuth_deg</code> : azimut selon la convention <code>pvlib</code>,</li>
 <li><code>SCENE_AZIMUTH_OFFSET_DEG</code> : correction si l'axe <code>y</code> de la scène n'est pas le nord géographique.</li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Limite du modèle solaire</p>
+<p>Le direct solaire est masqué par la géométrie, mais le diffus reste représenté
+par une approximation isotrope pondérée par le <code>SVF</code>. Le script ne modélise pas
+un ciel anisotrope complet ni les réflexions solaires multiples entre façades.</p>
+</div>
 <p>Ressources utiles :</p>
 <ul>
 <li><a href="https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.location.Location.get_solarposition.html"><code>pvlib.location.Location.get_solarposition</code></a></li>
-<li><a href="https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.irradiance.get_total_irradiance.html"><code>pvlib.irradiance.get_total_irradiance</code></a></li>
+<li><a href="https://docs.pyvista.org/api/core/_autosummary/pyvista.PolyDataFilters.ray_trace.html"><code>pyvista.PolyDataFilters.ray_trace</code></a></li>
 </ul>
 <h3 id="36-flux-glo">3.6 - Flux GLO<a class="headerlink" href="#36-flux-glo" title="Permanent link">&para;</a></h3>
 <p>Une fois les températures de surface estimées, le flux GLO net reçu par chaque maille est calculé par :</p>
@@ -1690,7 +1745,7 @@ scene_LR_GLO_18mai_Lyon_steps/*.vtp
 </tr>
 <tr>
 <td><code>K_down_XXh_Wm2</code></td>
-<td>solaire incident calculé avec <code>pvlib</code></td>
+<td>solaire incident calculé avec <code>pvlib</code>, <code>SVF</code> et masques urbains</td>
 </tr>
 <tr>
 <td><code>T_surface_XXh_C</code></td>

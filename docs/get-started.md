@@ -335,7 +335,7 @@ Avec conda ou Miniconda :
 
 ```bash
 git clone https://github.com/matbog/simurex2026-pvf.git
-cd simurex2026-pvf/session
+cd simurex2026-pvf/
 
 conda create -n simurex-pvf python=3.11
 conda activate simurex-pvf
@@ -351,7 +351,7 @@ Avec `venv` :
 
 ```bash
 git clone https://github.com/matbog/simurex2026-pvf.git
-cd simurex2026-pvf/session
+cd simurex2026-pvf/
 
 python -m venv .venv
 source .venv/bin/activate
