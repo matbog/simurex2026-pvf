@@ -27,7 +27,7 @@
     
     
       
-        <title>Exercices & Mini-Projet - SIMUREX 2026 – pyViewFactor</title>
+        <title>Exercices & mini-projet - SIMUREX 2026 – pyViewFactor</title>
       
     
     
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Exercices & Mini-Projet
+              Exercices & mini-projet
             
           </span>
         </div>
@@ -255,7 +255,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Accueil
   
 
     
@@ -282,7 +282,7 @@
   <span class="md-ellipsis">
     
   
-    Get Started
+    Démarrer
   
 
     
@@ -309,7 +309,7 @@
   <span class="md-ellipsis">
     
   
-    Rappels Scientifiques
+    Rappels scientifiques
   
 
     
@@ -336,7 +336,7 @@
   <span class="md-ellipsis">
     
   
-    Visibilité et Obstruction
+    Visibilité et obstruction
   
 
     
@@ -372,7 +372,7 @@
   <span class="md-ellipsis">
     
   
-    Exercices & Mini-Projet
+    Exercices & mini-projet
   
 
     
@@ -390,7 +390,7 @@
   <span class="md-ellipsis">
     
   
-    Exercices & Mini-Projet
+    Exercices & mini-projet
   
 
     
@@ -672,10 +672,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36-flux-glo" class="md-nav__link">
+  <a href="#36-flux-grandes-longueurs-donde" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.6 - Flux GLO
+        3.6 - Flux grandes longueurs d'onde
       
     </span>
   </a>
@@ -720,7 +720,7 @@
   <span class="md-ellipsis">
     
   
-    A propos de pyviewfactor
+    À propos de pyviewfactor
   
 
     
@@ -1016,10 +1016,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36-flux-glo" class="md-nav__link">
+  <a href="#36-flux-grandes-longueurs-donde" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.6 - Flux GLO
+        3.6 - Flux grandes longueurs d'onde
       
     </span>
   </a>
@@ -1169,11 +1169,7 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
     <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_num</span> <span class="o">-</span> <span class="n">f_ana</span><span class="p">)</span> <span class="o">/</span> <span class="n">f_ana</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">f_ana</span><span class="p">,</span> <span class="n">f_num</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Message pédagogique</p>
-<p>Cet exemple sert à montrer qu'un calcul de facteur de forme peut être vérifié sur un cas académique. C'est un bon point d'entrée pour discuter précision, orientation des normales et cas adjacents.</p>
-</div>
-<hr />
+<p><img alt="Comparaison analytique" src="../assets/analytical_validation.png" /></p>
 <h3 id="02-influence-de-la-discretisation">0.2 - Influence de la discrétisation<a class="headerlink" href="#02-influence-de-la-discretisation" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fichier : <code>0_discretization_influence.py</code></li>
@@ -1286,7 +1282,6 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
     <span class="n">F</span> <span class="o">=</span> <span class="n">compute_viewfactor</span><span class="p">(</span><span class="n">triangle</span><span class="p">,</span> <span class="n">rectangle</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VF rectangle -&gt; triangle :&quot;</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
 </code></pre></div>
-<hr />
 <h3 id="22-visibilite-et-obstruction">2.2 - Visibilité et obstruction<a class="headerlink" href="#22-visibilite-et-obstruction" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fichier : <code>2_example_obstructions.py</code></li>
@@ -1321,7 +1316,6 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
 <span class="k">if</span> <span class="n">vis</span> <span class="ow">and</span> <span class="n">unobstructed</span><span class="p">:</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">pvf</span><span class="o">.</span><span class="n">compute_viewfactor</span><span class="p">(</span><span class="n">face2</span><span class="p">,</span> <span class="n">face1</span><span class="p">)</span>
 </code></pre></div>
-<hr />
 <h3 id="23-geometrie-fermee">2.3 - Géométrie fermée<a class="headerlink" href="#23-geometrie-fermee" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fichier : <code>2_example_closed_geometry.py</code></li>
@@ -1359,7 +1353,6 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
 <div class="highlight"><pre><span></span><code><span class="n">Fmat</span> <span class="o">=</span> <span class="n">pvf</span><span class="o">.</span><span class="n">compute_viewfactor_matrix</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">Fmat</span><span class="p">[:,</span> <span class="n">ref_id</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 </code></pre></div>
-<hr />
 <h3 id="24-scene-avec-individu">2.4 - Scène avec individu<a class="headerlink" href="#24-scene-avec-individu" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fichier : <code>2_example_doorman.py</code></li>
@@ -1394,7 +1387,7 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
     <span class="k">if</span> <span class="n">pvf</span><span class="o">.</span><span class="n">get_visibility</span><span class="p">(</span><span class="n">wall</span><span class="p">,</span> <span class="n">face</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
         <span class="n">F</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">pvf</span><span class="o">.</span><span class="n">compute_viewfactor</span><span class="p">(</span><span class="n">wall</span><span class="p">,</span> <span class="n">face</span><span class="p">)</span>
 </code></pre></div>
-<hr />
+<p><img alt="Le fameux doorman" src="../assets/doorman.png" /></p>
 <h3 id="25-environnement-urbain">2.5 - Environnement urbain<a class="headerlink" href="#25-environnement-urbain" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fichier : <code>2_example_wall_viewfactors.py</code></li>
@@ -1414,9 +1407,10 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
 <li>cohérence des sommes de facteurs de forme.</li>
 </ul>
 </li>
-<li>
-<p>Code essentiel :</p>
-</li>
+</ul>
+<p><img alt="La scène urbaine" src="../assets/urban_scene.png" /></p>
+<ul>
+<li>Code essentiel :</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">pvf</span><span class="o">.</span><span class="n">get_visibility</span><span class="p">(</span><span class="n">patch</span><span class="p">,</span> <span class="n">wall</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
     <span class="k">if</span> <span class="n">pvf</span><span class="o">.</span><span class="n">get_obstruction</span><span class="p">(</span><span class="n">patch</span><span class="p">,</span> <span class="n">wall</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
@@ -1424,7 +1418,6 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">F_wall_sky</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">F_patch</span> <span class="k">for</span> <span class="n">patch</span> <span class="ow">in</span> <span class="n">sky</span><span class="p">)</span>
 </code></pre></div>
-<hr />
 <h3 id="26-matrice-complete">2.6 - Matrice complète<a class="headerlink" href="#26-matrice-complete" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fichier : <code>2_example_double_loop_vs_matrix.py</code></li>
@@ -1467,7 +1460,7 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
 </ul>
 <p>Le mini-projet applique les facteurs de forme à une scène urbaine proche d'un cas canyon. Il est construit en deux parties :</p>
 <ol>
-<li>calculer le <strong>Sky View Factor</strong> de chaque maille ;</li>
+<li>calculer le <strong>facteur de vue du ciel</strong> (<code>SVF</code>) de chaque maille ;</li>
 <li>calculer des flux radiatifs grandes longueurs d'onde sur 24 h, le 18 mai, avec des températures de surface estimées par un modèle 1R1C simplifié.</li>
 </ol>
 <h3 id="32-partie-1-calcul-du-svf">3.2 - Partie 1 : calcul du SVF<a class="headerlink" href="#32-partie-1-calcul-du-svf" title="Permanent link">&para;</a></h3>
@@ -1479,6 +1472,11 @@ facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.</
     <span class="n">strict_obstruction</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
+<p>Comme ce calcul peut être coûteux, le script écrit la matrice dans :</p>
+<div class="highlight"><pre><span></span><code>session/output/scene_LR_viewfactor_matrix.npy
+</code></pre></div>
+<p>Si ce fichier existe déjà et que ses dimensions correspondent au nombre de mailles de
+la scène, il est rechargé directement. Sinon, la matrice est recalculée puis sauvegardée.</p>
 <p>La convention utilisée dans le script est :</p>
 <div class="highlight"><pre><span></span><code><span class="n">F</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">facteur</span> <span class="n">de</span> <span class="n">forme</span> <span class="n">de</span> <span class="n">la</span> <span class="n">maille</span> <span class="n">i</span> <span class="n">vers</span> <span class="n">la</span> <span class="n">maille</span> <span class="n">j</span>
 </code></pre></div>
@@ -1498,6 +1496,7 @@ SVF_i = 1 - \sum_j F_{i \rightarrow j}
 </ul>
 </li>
 </ul>
+<p><img alt="SVF pour une scène urbaine idéalisée" src="../assets/ex3_svf_scene.png" /></p>
 <h3 id="33-partie-2-temperatures-de-surface">3.3 - Partie 2 : températures de surface<a class="headerlink" href="#33-partie-2-temperatures-de-surface" title="Permanent link">&para;</a></h3>
 <p>Les températures de surface ne sont pas imposées arbitrairement. Elles sont estimées par un modèle thermique 1R1C explicite, appliqué à chaque maille :</p>
 <div class="arithmatex">\[
@@ -1650,9 +1649,10 @@ K_{\downarrow,i}
 </tbody>
 </table>
 <p>Le terme direct est donc ombré par la géométrie : pour chaque maille orientée vers
-le soleil, un rayon est lancé depuis le centre de la maille dans la direction solaire.
-Si ce rayon intersecte une autre face de la scène, la maille est considérée à l'ombre
-pour la composante directe.</p>
+le soleil, un segment est construit depuis le centre de la maille dans la direction
+solaire. Le test <code>is_ray_blocked(...)</code> de <code>pyViewFactor</code> vérifie si ce segment est
+intercepté par un triangle de la scène. Si c'est le cas, la maille est considérée à
+l'ombre pour la composante directe.</p>
 <div class="highlight"><pre><span></span><code><span class="n">solar_position</span> <span class="o">=</span> <span class="n">pv_location</span><span class="o">.</span><span class="n">get_solarposition</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
 
 <span class="n">sun_vector</span> <span class="o">=</span> <span class="n">solar_vector_from_zenith_azimuth</span><span class="p">(</span>
@@ -1661,13 +1661,18 @@ pour la composante directe.</p>
 <span class="p">)</span>
 
 <span class="n">incidence_cos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">normals</span> <span class="o">@</span> <span class="n">sun_vector</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="n">sun_visible</span> <span class="o">=</span> <span class="n">compute_sun_visibility</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">sun_vector</span><span class="p">,</span> <span class="n">incidence_cos</span><span class="p">)</span>
+<span class="n">sun_visible</span> <span class="o">=</span> <span class="n">compute_sun_visibility</span><span class="p">(</span>
+    <span class="n">mesh</span><span class="p">,</span>
+    <span class="n">sun_vector</span><span class="p">,</span>
+    <span class="n">incidence_cos</span><span class="p">,</span>
+    <span class="n">obstacle_triangles</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="n">direct</span> <span class="o">=</span> <span class="n">dni</span> <span class="o">*</span> <span class="n">incidence_cos</span> <span class="o">*</span> <span class="n">sun_visible</span>
 <span class="n">diffuse_sky</span> <span class="o">=</span> <span class="n">dhi</span> <span class="o">*</span> <span class="n">svf</span>
 <span class="n">reflected_ground</span> <span class="o">=</span> <span class="n">ghi</span> <span class="o">*</span> <span class="n">GROUND_ALBEDO</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">tilt_rad</span><span class="p">))</span>
 
-<span class="n">shortwave</span> <span class="o">=</span> <span class="n">direct</span> <span class="o">+</span> <span class="n">diffuse_sky</span> <span class="o">+</span> <span class="n">reflected_ground</span>
+<span class="n">solaire_incident</span> <span class="o">=</span> <span class="n">direct</span> <span class="o">+</span> <span class="n">diffuse_sky</span> <span class="o">+</span> <span class="n">reflected_ground</span>
 </code></pre></div>
 <p>Les orientations des mailles sont déduites des normales :</p>
 <ul>
@@ -1681,12 +1686,13 @@ pour la composante directe.</p>
 par une approximation isotrope pondérée par le <code>SVF</code>. Le script ne modélise pas
 un ciel anisotrope complet ni les réflexions solaires multiples entre façades.</p>
 </div>
+<p><img alt="Flux GLO à 14h" src="../assets/ex3_solaire_14h.png" /></p>
 <p>Ressources utiles :</p>
 <ul>
 <li><a href="https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.location.Location.get_solarposition.html"><code>pvlib.location.Location.get_solarposition</code></a></li>
-<li><a href="https://docs.pyvista.org/api/core/_autosummary/pyvista.PolyDataFilters.ray_trace.html"><code>pyvista.PolyDataFilters.ray_trace</code></a></li>
+<li><a href="https://arep-dev.gitlab.io/pyViewFactor/pyviewfactor/pvf_visibility_obstruction.html"><code>pyViewFactor</code> - visibilité et obstruction</a></li>
 </ul>
-<h3 id="36-flux-glo">3.6 - Flux GLO<a class="headerlink" href="#36-flux-glo" title="Permanent link">&para;</a></h3>
+<h3 id="36-flux-grandes-longueurs-donde">3.6 - Flux grandes longueurs d'onde<a class="headerlink" href="#36-flux-grandes-longueurs-donde" title="Permanent link">&para;</a></h3>
 <p>Une fois les températures de surface estimées, le flux GLO net reçu par chaque maille est calculé par :</p>
 <div class="arithmatex">\[
 q_i =
@@ -1705,14 +1711,39 @@ q_i =
 
 <span class="n">q_lw</span> <span class="o">=</span> <span class="n">emissivity</span> <span class="o">*</span> <span class="n">SIGMA</span> <span class="o">*</span> <span class="p">(</span><span class="n">scene_exchange</span> <span class="o">+</span> <span class="n">sky_exchange</span><span class="p">)</span>
 </code></pre></div>
+<p>Convention de signe utilisée dans le script :</p>
+<table>
+<thead>
+<tr>
+<th>Signe de <code>q_GLO</code></th>
+<th>Interprétation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q_GLO &gt; 0</code></td>
+<td>gain radiatif net pour la maille</td>
+</tr>
+<tr>
+<td><code>q_GLO &lt; 0</code></td>
+<td>perte radiative nette pour la maille</td>
+</tr>
+<tr>
+<td><code>q_GLO ≈ 0</code></td>
+<td>équilibre radiatif net approximatif sur la maille</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>Observer :<ul>
 <li>zones très ouvertes : influence forte du ciel froid,</li>
 <li>zones encaissées : couplage plus fort aux surfaces voisines,</li>
 <li>évolution horaire liée aux températures de surface et au solaire incident.</li>
+<li>au pas de temps affiché par défaut (<code>14h</code>), la sphère jaune indique la direction solaire utilisée pour le calcul du direct.</li>
 </ul>
 </li>
 </ul>
+<p><img alt="Flux GLO à 14h" src="../assets/ex3_flux_glo_14h.png" /></p>
 <h3 id="37-sorties">3.7 - Sorties<a class="headerlink" href="#37-sorties" title="Permanent link">&para;</a></h3>
 <p>Le script écrit les résultats dans :</p>
 <div class="highlight"><pre><span></span><code>session/output/
@@ -1733,7 +1764,7 @@ scene_LR_GLO_18mai_Lyon_steps/*.vtp
 <tbody>
 <tr>
 <td><code>SVF</code></td>
-<td>sky view factor par maille</td>
+<td>facteur de vue du ciel par maille</td>
 </tr>
 <tr>
 <td><code>surface_id</code></td>
