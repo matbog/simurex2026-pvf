@@ -1,4 +1,4 @@
-# Get started
+# Démarrer
 
 Ce document explique comment préparer un environnement Python propre pour faire tourner
 les exercices de la session.
@@ -142,8 +142,9 @@ Une fois l'environnement activé, mettez d'abord `pip` à jour :
 python -m pip install --upgrade pip
 ```
 
-Installez ensuite les dépendances de la session, avec `pyviewfactor`. A priori les bonnes versions des
-dépendances sont : 
+Installez ensuite les dépendances de la session, avec [`pyviewfactor`](https://gitlab.com/arep-dev/pyViewFactor).
+A priori les bonnes versions sont : 
+
 ```
 pandas==2.2.3
 numpy==1.26.4
@@ -234,7 +235,7 @@ print("pyvista:", pv.__version__)
 print("pyviewfactor:", pvf.__version__ if hasattr(pvf, "__version__") else "version non déclarée")
 ```
 
----
+
 
 ## 6. Problèmes fréquents
 

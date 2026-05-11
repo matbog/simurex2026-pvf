@@ -1,4 +1,4 @@
-# About pyViewFactor
+# À propos de pyViewFactor
 
 ## 1. Pourquoi parler de `pyViewFactor` dans cette formation ?
 

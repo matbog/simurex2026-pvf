@@ -33,7 +33,7 @@ Les sorties générées par les scripts sont écrites dans `session/output/`.
 
 ## 📘 Parties du support
 
-- [Get Started](docs/get-started.md) : installation, environnement Python et vérification des dépendances.
+- [Démarrer](docs/get-started.md) : installation, environnement Python et vérification des dépendances.
 - [Rappels scientifiques](docs/scientific-background.md) : contexte physique des facteurs de forme et des échanges radiatifs.
 - [Visibilité et obstruction](docs/visibility_obstruction.md) : normales, visibilité entre faces et tests d'obstruction.
 - [Exercices & mini-projet](docs/exercises.md) : progression des scripts de la session.
@@ -49,7 +49,7 @@ formation :
 - `2_...` : exemples autonomes que les participants peuvent lancer seuls ;
 - `3_...` : mini-projet réalisé pas à pas sur une scène urbaine.
 
-Le mini-projet `3_scene_LR_calcul_GLO.py` calcule le **Sky View Factor** puis
+Le mini-projet `3_scene_LR_calcul_GLO.py` calcule le **facteur de vue du ciel** (`SVF`) puis
 des flux grandes longueurs d'onde sur 24 h à partir d'une géométrie urbaine,
 d'un fichier météo EPW et d'un modèle thermique simplifié de surface.
 
@@ -73,7 +73,7 @@ exemple :
 python session/2_example_viewfactor.py
 ```
 
-Voir le guide complet : [Get Started](https://matbog.github.io/simurex2026-pvf/get-started/).
+Voir le guide complet : [Démarrer](https://matbog.github.io/simurex2026-pvf/get-started/).
 
 ## 🔗 Dépendances principales
 

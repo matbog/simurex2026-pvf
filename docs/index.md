@@ -4,20 +4,19 @@
 
 Cette session introduit le calcul des facteurs de forme pour les calculs radiatifs, dans le cadre 
 d’applications en thermique et en simulation du bâtiment, avec un accent particulier sur
-l’utilisation pratique de la bibliothèque Python `pyviewfactor`.
+l’utilisation pratique de la bibliothèque Python [`pyviewfactor`](https://gitlab.com/arep-dev/pyViewFactor).
 
 Ce cours s’inscrit dans le cadre d'une session de formation SIMUREX, associée à 
 [IBPSA France 2026](https://conference2026.ibpsa.fr/).
 
 !!! info "Objectif de la session"
-    Le contenu combine des éléments de contexte scientifique, ainsi que des exercices pratiques pour apprendre à utiliser `pyViewFactor`.
+    Le contenu combine des éléments de contexte scientifique, ainsi que des exercices pratiques pour apprendre à utiliser [`pyviewfactor`](https://gitlab.com/arep-dev/pyViewFactor).
 
 ![Facteur de forme entre un individu et une scène urbaine](assets/FF_sceneUrbaine_cyl.png)
 
 ## Contenu du site
 
-* [Get started](get-started.md) : 
-    * Prise en main,
+* [Démarrer](get-started.md) : 
     * Récupérer les sources, 
     * Préparer un environnement Python propre.
 * [Rappels scientifiques](scientific-background.md) : 
@@ -32,4 +31,4 @@ Ce cours s’inscrit dans le cadre d'une session de formation SIMUREX, associée
 
 
 ---
-© Mateusz BOGDAN & Edouard WALTHER 2026 — CC BY 4.0, with ❤︎
+© Mateusz BOGDAN & Edouard WALTHER 2026 — CC BY 4.0

@@ -91,10 +91,11 @@ for h in h_values:
     print(h, f_ana, f_num, err)
 ```
 
-!!! note "Message pédagogique"
-    Cet exemple sert à montrer qu'un calcul de facteur de forme peut être vérifié sur un cas académique. C'est un bon point d'entrée pour discuter précision, orientation des normales et cas adjacents.
 
----
+![Comparaison analytique](assets/analytical_validation.png)
+
+
+
 
 ### 0.2 - Influence de la discrétisation
 
@@ -193,7 +194,7 @@ if get_visibility(rectangle, triangle)[0]:
     print("VF rectangle -> triangle :", F)
 ```
 
----
+
 
 ### 2.2 - Visibilité et obstruction
 
@@ -223,7 +224,6 @@ if vis and unobstructed:
     F = pvf.compute_viewfactor(face2, face1)
 ```
 
----
 
 ### 2.3 - Géométrie fermée
 
@@ -258,7 +258,6 @@ Fmat = pvf.compute_viewfactor_matrix(mesh)
 print(Fmat[:, ref_id].sum())
 ```
 
----
 
 ### 2.4 - Scène avec individu
 
@@ -288,7 +287,7 @@ for idx in doorman_cells:
         F[idx] = pvf.compute_viewfactor(wall, face)
 ```
 
----
+![Le fameux doorman](assets/doorman.png)
 
 ### 2.5 - Environnement urbain
 
@@ -303,6 +302,8 @@ for idx in doorman_cells:
     * contributions par famille de surfaces,
     * cohérence des sommes de facteurs de forme.
 
+![La scène urbaine](assets/urban_scene.png)
+
 * Code essentiel :
 
 ```python
@@ -315,7 +316,6 @@ if pvf.get_visibility(patch, wall)[0]:
 F_wall_sky = sum(F_patch for patch in sky)
 ```
 
----
 
 ### 2.6 - Matrice complète
 
@@ -352,7 +352,7 @@ F = pvf.compute_viewfactor_matrix(
 
 Le mini-projet applique les facteurs de forme à une scène urbaine proche d'un cas canyon. Il est construit en deux parties :
 
-1. calculer le **Sky View Factor** de chaque maille ;
+1. calculer le **facteur de vue du ciel** (`SVF`) de chaque maille ;
 2. calculer des flux radiatifs grandes longueurs d'onde sur 24 h, le 18 mai, avec des températures de surface estimées par un modèle 1R1C simplifié.
 
 ### 3.2 - Partie 1 : calcul du SVF
@@ -367,6 +367,15 @@ F = pvf.compute_viewfactor_matrix(
     strict_obstruction=False,
 )
 ```
+
+Comme ce calcul peut être coûteux, le script écrit la matrice dans :
+
+```bash
+session/output/scene_LR_viewfactor_matrix.npy
+```
+
+Si ce fichier existe déjà et que ses dimensions correspondent au nombre de mailles de
+la scène, il est rechargé directement. Sinon, la matrice est recalculée puis sauvegardée.
 
 La convention utilisée dans le script est :
 
@@ -391,6 +400,9 @@ svf = 1.0 - sum_to_scene
     * `SVF` proche de 1 pour les surfaces très ouvertes vers le ciel,
     * `SVF` plus faible dans les zones encaissées,
     * éventuels petits dépassements numériques corrigés par `np.clip(...)`.
+
+![SVF pour une scène urbaine idéalisée](assets/ex3_svf_scene.png)
+
 
 ### 3.3 - Partie 2 : températures de surface
 
@@ -462,9 +474,10 @@ avec :
 | \(\rho_g\) | albédo du sol |
 
 Le terme direct est donc ombré par la géométrie : pour chaque maille orientée vers
-le soleil, un rayon est lancé depuis le centre de la maille dans la direction solaire.
-Si ce rayon intersecte une autre face de la scène, la maille est considérée à l'ombre
-pour la composante directe.
+le soleil, un segment est construit depuis le centre de la maille dans la direction
+solaire. Le test `is_ray_blocked(...)` de `pyViewFactor` vérifie si ce segment est
+intercepté par un triangle de la scène. Si c'est le cas, la maille est considérée à
+l'ombre pour la composante directe.
 
 ```python
 solar_position = pv_location.get_solarposition(times)
@@ -475,13 +488,18 @@ sun_vector = solar_vector_from_zenith_azimuth(
 )
 
 incidence_cos = np.maximum(normals @ sun_vector, 0.0)
-sun_visible = compute_sun_visibility(mesh, sun_vector, incidence_cos)
+sun_visible = compute_sun_visibility(
+    mesh,
+    sun_vector,
+    incidence_cos,
+    obstacle_triangles,
+)
 
 direct = dni * incidence_cos * sun_visible
 diffuse_sky = dhi * svf
 reflected_ground = ghi * GROUND_ALBEDO * 0.5 * (1.0 - np.cos(tilt_rad))
 
-shortwave = direct + diffuse_sky + reflected_ground
+solaire_incident = direct + diffuse_sky + reflected_ground
 ```
 
 Les orientations des mailles sont déduites des normales :
@@ -495,12 +513,16 @@ Les orientations des mailles sont déduites des normales :
     par une approximation isotrope pondérée par le `SVF`. Le script ne modélise pas
     un ciel anisotrope complet ni les réflexions solaires multiples entre façades.
 
+
+![Flux GLO à 14h](assets/ex3_solaire_14h.png)
+
+
 Ressources utiles :
 
 * [`pvlib.location.Location.get_solarposition`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.location.Location.get_solarposition.html)
-* [`pyvista.PolyDataFilters.ray_trace`](https://docs.pyvista.org/api/core/_autosummary/pyvista.PolyDataFilters.ray_trace.html)
+* [`pyViewFactor` - visibilité et obstruction](https://arep-dev.gitlab.io/pyViewFactor/pyviewfactor/pvf_visibility_obstruction.html)
 
-### 3.6 - Flux GLO
+### 3.6 - Flux grandes longueurs d'onde
 
 Une fois les températures de surface estimées, le flux GLO net reçu par chaque maille est calculé par :
 
@@ -525,10 +547,22 @@ sky_exchange = svf * (tsky_k**4 - t4)
 q_lw = emissivity * SIGMA * (scene_exchange + sky_exchange)
 ```
 
+Convention de signe utilisée dans le script :
+
+| Signe de `q_GLO` | Interprétation |
+|---|---|
+| `q_GLO > 0` | gain radiatif net pour la maille |
+| `q_GLO < 0` | perte radiative nette pour la maille |
+| `q_GLO ≈ 0` | équilibre radiatif net approximatif sur la maille |
+
 * Observer :
     * zones très ouvertes : influence forte du ciel froid,
     * zones encaissées : couplage plus fort aux surfaces voisines,
     * évolution horaire liée aux températures de surface et au solaire incident.
+    * au pas de temps affiché par défaut (`14h`), la sphère jaune indique la direction solaire utilisée pour le calcul du direct.
+
+![Flux GLO à 14h](assets/ex3_flux_glo_14h.png)
+
 
 ### 3.7 - Sorties
 
@@ -550,7 +584,7 @@ Champs exportés :
 
 | Champ | Description |
 |---|---|
-| `SVF` | sky view factor par maille |
+| `SVF` | facteur de vue du ciel par maille |
 | `surface_id` | type de surface : sol, façade, toiture, autre |
 | `surface_tilt_deg`, `surface_azimuth_deg` | orientation géographique des mailles |
 | `K_down_XXh_Wm2` | solaire incident calculé avec `pvlib`, `SVF` et masques urbains |

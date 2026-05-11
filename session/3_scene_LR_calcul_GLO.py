@@ -46,6 +46,7 @@ OUTPUT_DIR = SCRIPT_DIR / "output"
 OUTPUT_ALL_FIELDS_FILE = OUTPUT_DIR / "scene_LR_GLO_18mai_Lyon_all_fields.vtk"
 OUTPUT_TIMESERIES_DIR = OUTPUT_DIR / "scene_LR_GLO_18mai_Lyon_steps"
 OUTPUT_TIMESERIES_FILE = OUTPUT_DIR / "scene_LR_GLO_18mai_Lyon.pvd"
+VIEWFACTOR_MATRIX_FILE = OUTPUT_DIR / "scene_LR_viewfactor_matrix.npy"
 
 MONTH = 5
 DAY = 18
@@ -104,6 +105,10 @@ SCENE_AZIMUTH_OFFSET_DEG = 0.0
 SHOW_SVF_PLOT = True
 SHOW_FLUX_PLOT = True
 PLOT_FLUX_HOUR = 14
+SHOW_SUN_VISIBLE_PLOT = True
+SHOW_SUN_IN_FLUX_PLOT = True
+SUN_DISTANCE_FACTOR = 1.8
+SUN_RADIUS_FACTOR = 0.06
 
 
 def print_section(title):
@@ -281,6 +286,20 @@ def compute_viewfactor_matrix(mesh):
     print(f"Obstruction strict     : {STRICT_OBSTRUCTION}")
     print(f"Arrondi geometrie      : {ROUNDING_DECIMAL}")
     print(f"Epsilon integration    : {EPSILON_INTEGRATION}")
+    print(f"Cache matrice          : {VIEWFACTOR_MATRIX_FILE}")
+
+    if VIEWFACTOR_MATRIX_FILE.exists():
+        viewfactor_matrix = np.load(VIEWFACTOR_MATRIX_FILE)
+
+        if viewfactor_matrix.shape == (mesh.n_cells, mesh.n_cells):
+            print("Matrice chargee depuis le cache :", viewfactor_matrix.shape)
+            print_stats("Somme vers scene", viewfactor_matrix.sum(axis=0), "-")
+            return viewfactor_matrix
+
+        print(
+            "Cache ignore : dimensions incompatibles "
+            f"{viewfactor_matrix.shape}, attendu {(mesh.n_cells, mesh.n_cells)}"
+        )
 
     viewfactor_matrix = pvf.compute_viewfactor_matrix(
         mesh,
@@ -294,6 +313,10 @@ def compute_viewfactor_matrix(mesh):
 
     print("Matrice calculee :", viewfactor_matrix.shape)
     print_stats("Somme vers scene", viewfactor_matrix.sum(axis=0), "-")
+
+    VIEWFACTOR_MATRIX_FILE.parent.mkdir(parents=True, exist_ok=True)
+    np.save(VIEWFACTOR_MATRIX_FILE, viewfactor_matrix)
+    print(f"Matrice sauvegardee : {VIEWFACTOR_MATRIX_FILE}")
 
     return viewfactor_matrix
 
@@ -313,16 +336,71 @@ def compute_svf(viewfactor_matrix):
     return svf
 
 
-def plot_cell_scalar(mesh, scalar_name, title, cmap="viridis"):
+def scene_center_and_diagonal(mesh):
+    bounds = np.asarray(mesh.bounds, dtype=float)
+    center = np.array([
+        0.5 * (bounds[0] + bounds[1]),
+        0.5 * (bounds[2] + bounds[3]),
+        0.5 * (bounds[4] + bounds[5]),
+    ])
+    diagonal = np.linalg.norm(bounds[[1, 3, 5]] - bounds[[0, 2, 4]])
+    return center, diagonal
+
+
+def add_sun_marker(plotter, mesh, sun_vector, label=None):
+    """
+    Add a yellow sphere in the solar direction for visual context.
+
+    The sphere is not to scale. Its distance and radius are controlled by
+    SUN_DISTANCE_FACTOR and SUN_RADIUS_FACTOR.
+    """
+    if sun_vector is None or sun_vector[2] <= 0.0:
+        return
+
+    center, diagonal = scene_center_and_diagonal(mesh)
+    sun_center = center + sun_vector * diagonal * SUN_DISTANCE_FACTOR
+    sun_radius = diagonal * SUN_RADIUS_FACTOR
+
+    sun = pv.Sphere(
+        radius=sun_radius,
+        center=sun_center,
+        theta_resolution=32,
+        phi_resolution=16,
+    )
+    ray = pv.Line(center, sun_center)
+
+    plotter.add_mesh(
+        sun,
+        color="yellow",
+        smooth_shading=True,
+        show_scalar_bar=False,
+    )
+    plotter.add_mesh(ray, color="yellow", line_width=3, show_scalar_bar=False)
+
+    if label is not None:
+        plotter.add_point_labels(
+            [sun_center],
+            [label],
+            text_color="black",
+            font_size=12,
+            point_size=0,
+            shape_opacity=0.35,
+        )
+
+
+def plot_cell_scalar(mesh, scalar_name, title, cmap="viridis",
+                     sun_vector=None, sun_label=None, clim=None):
     plotter = pv.Plotter(notebook=False)
     plotter.add_mesh(
         mesh,
         scalars=scalar_name,
         cmap=cmap,
+        clim=clim,
         show_edges=True,
         show_scalar_bar=False,
     )
     plotter.add_scalar_bar(title=title)
+    add_sun_marker(plotter, mesh, sun_vector, sun_label)
     plotter.add_axes()
     plotter.add_title(title)
     plotter.show()
@@ -376,8 +454,7 @@ def compute_sun_visibility(mesh, sun_vector, incidence_cos, obstacle_triangles):
     Only cells facing the sun are tested. The ray starts just above the cell
     along the sun direction to avoid detecting the source cell itself.
 
-    This 3bis variant uses pyViewFactor's internal `is_ray_blocked` helper
-    instead of PyVista's `ray_trace`.
+    This version uses pyViewFactor's internal `is_ray_blocked` helper.
     """
     visible = np.zeros(mesh.n_cells, dtype=float)
 
@@ -486,6 +563,37 @@ def compute_cell_shortwave_poa(mesh, location, times, ghi, dni, dhi, svf):
             print_stats(f"K_down {target_hour:02d}h", poa[matches[0], :], "W/m2")
 
     return poa
+
+
+def get_sun_vector_for_hour(location, times, target_hour):
+    """Return sun vector, zenith and azimuth for the requested plot hour."""
+    matches = np.where(times.hour == target_hour)[0]
+    if len(matches) == 0:
+        return None, None, None
+
+    pv_location = pvlib.location.Location(
+        latitude=location["latitude"],
+        longitude=location["longitude"],
+        tz=location["timezone"],
+        altitude=location["altitude"],
+        name=location["name"],
+    )
+    solar_position = pv_location.get_solarposition(times)
+    zenith_column = (
+        "apparent_zenith"
+        if "apparent_zenith" in solar_position
+        else "zenith"
+    )
+
+    k = matches[0]
+    zenith = float(solar_position[zenith_column].iloc[k])
+    azimuth = float(solar_position["azimuth"].iloc[k])
+    sun_vector = solar_vector_from_zenith_azimuth(zenith, azimuth)
+
+    if sun_vector[2] <= 0.0:
+        return None, zenith, azimuth
+
+    return sun_vector, zenith, azimuth
 
 
 def compute_surface_temperatures_1r1c(mesh, tair_c, tsky_k, shortwave_w_m2):
@@ -796,10 +904,61 @@ def main():
     )
     print(f"Serie temporelle sauvegardee : {OUTPUT_TIMESERIES_FILE}")
 
+    if SHOW_SUN_VISIBLE_PLOT:
+        scalar_name = f"sun_visible_{PLOT_FLUX_HOUR:02d}h"
+        if scalar_name in mesh.cell_data:
+            sun_vector, _, _ = get_sun_vector_for_hour(
+                location,
+                times,
+                PLOT_FLUX_HOUR,
+            )
+            sun_label = (
+                f"Soleil {PLOT_FLUX_HOUR:02d}h"
+                if sun_vector is not None
+                else None
+            )
+            print(f"Affichage interactif du champ {scalar_name}")
+            plot_cell_scalar(
+                mesh,
+                scalar_name,
+                f"Visibilite solaire directe - {PLOT_FLUX_HOUR:02d}h",
+                cmap="gray",
+                sun_vector=sun_vector,
+                sun_label=sun_label,
+                clim=(0.0, 1.0),
+            )
+        else:
+            print(f"Champ absent, affichage ignore : {scalar_name}")
+
     if SHOW_FLUX_PLOT:
         scalar_name = f"q_GLO_{PLOT_FLUX_HOUR:02d}h_Wm2"
         print(f"Affichage interactif du champ {scalar_name}")
-        plot_cell_scalar(mesh, scalar_name, scalar_name, cmap="coolwarm")
+        sun_vector = None
+        sun_label = None
+
+        if SHOW_SUN_IN_FLUX_PLOT:
+            sun_vector, sun_zenith, sun_azimuth = get_sun_vector_for_hour(
+                location,
+                times,
+                PLOT_FLUX_HOUR,
+            )
+            if sun_vector is not None:
+                sun_label = f"Soleil {PLOT_FLUX_HOUR:02d}h"
+                print(
+                    f"Soleil plot {PLOT_FLUX_HOUR:02d}h : "
+                    f"zenith={sun_zenith:.1f} deg | azimut={sun_azimuth:.1f} deg"
+                )
+            else:
+                print(f"Soleil non affiche pour {PLOT_FLUX_HOUR:02d}h")
+
+        plot_cell_scalar(
+            mesh,
+            scalar_name,
+            scalar_name,
+            cmap="coolwarm",
+            sun_vector=sun_vector,
+            sun_label=sun_label,
+        )
 
     print_section("Fin du calcul")
 
