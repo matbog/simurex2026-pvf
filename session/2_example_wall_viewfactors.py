@@ -19,6 +19,7 @@ Notes
 import numpy as np
 import pyvista as pv
 import pyviewfactor as pvf
+from pathlib import Path
 
 from pyviewfactor.pvf_geometry_preprocess import (
     ProcessedGeometry,
@@ -361,6 +362,8 @@ def main():
     rounding_decimal = 5
     epsilon = 1e-3
     target_id = 182
+    output_dir = Path("output")
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     # -----------------------------------------------------------------
     # 0. Geometry
@@ -482,7 +485,7 @@ def main():
 
     meshpoly_seq = meshpoly.copy()
     meshpoly_seq[f"FFseq_col{target_id}"] = FFseq[:, target_id]
-    meshpoly_seq.save("output/results_seq.vtk")
+    meshpoly_seq.save(output_dir / "results_seq.vtk")
     print(f"Saved sequential result to results_seq.vtk (column {target_id})")
 
     # -----------------------------------------------------------------
@@ -502,7 +505,7 @@ def main():
 
     meshpoly_mat = meshpoly.copy()
     meshpoly_mat[f"FFmat_col{target_id}"] = FFmat[:, target_id]
-    meshpoly_mat.save("output/results_matrix.vtk")
+    meshpoly_mat.save(output_dir / "results_matrix.vtk")
     print(f"Saved matrix result to results_matrix.vtk (column {target_id})")
 
     # Optional comparison export
@@ -510,7 +513,7 @@ def main():
     meshpoly_cmp[f"FFseq_col{target_id}"] = FFseq[:, target_id]
     meshpoly_cmp[f"FFmat_col{target_id}"] = FFmat[:, target_id]
     meshpoly_cmp[f"FFdiff_col{target_id}"] = FFseq[:, target_id] - FFmat[:, target_id]
-    meshpoly_cmp.save("output/results_compare.vtk")
+    meshpoly_cmp.save(output_dir / "results_compare.vtk")
     print(f"Saved comparison result to results_compare.vtk (column {target_id})")
 
 

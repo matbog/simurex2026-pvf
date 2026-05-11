@@ -6,6 +6,8 @@ Created on Wed Apr 22 17:26:13 2026
 """
 
 import time
+from pathlib import Path
+
 import numpy as np
 import pyvista as pv
 import pyviewfactor as pvf
@@ -226,6 +228,7 @@ if estimated_naive_total is not None:
 # ============================================================
 # 5) Save output
 # ============================================================
+Path(output_file).parent.mkdir(parents=True, exist_ok=True)
 mesh.save(output_file)
 
 print(f"\nSaved result file: {output_file}")
