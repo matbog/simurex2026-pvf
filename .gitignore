@@ -1,0 +1,13 @@
+# vscode
+.vscode
+
+# outpurs
+session/output
+session/__pycache__
+
+# Env / venv
+venv/
+.env
+.env.*
+
+

@@ -42,7 +42,6 @@ conda create -n simurex-pvf python=3.11
 conda activate simurex-pvf
 
 pip install -r requirements.txt
-pip install pyviewfactor
 ```
 Ensuite, lancez un script dans le dossier `session/.`
     
