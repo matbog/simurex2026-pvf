@@ -21,12 +21,14 @@ Ce cours s’inscrit dans le cadre d'une session de formation SIMUREX, associée
     * Récupérer les sources, 
     * Préparer un environnement Python propre.
 * [Rappels scientifiques](scientific-background.md) : 
-    * comprendre l’importance des facteurs de vue en thermique,
+    * Comprendre l’importance des facteurs de vue en thermique,
+* [Visibilité et Obstruction](visibility_obstruction.md) : 
+    * Comprendre les calculs de ***visibilité*** et ***obstruction*** entre cellules,
 * [Exercices & mini-projet](exercises.md) : 
     * Travailler sur des problèmes guidés pour comprendre la logique de la librairie, 
     * Cas d'étude,
 * [A propos de `pyviewfactor`](about-pyviewfactor.md) : 
-    * en savoir plus sur la bibliothèque utilisée durant la session.
+    * En savoir plus sur la bibliothèque utilisée durant la session.
 
 
 ---

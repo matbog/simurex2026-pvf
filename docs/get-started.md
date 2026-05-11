@@ -142,24 +142,22 @@ Une fois l'environnement activé, mettez d'abord `pip` à jour :
 python -m pip install --upgrade pip
 ```
 
-Installez ensuite les dépendances de la session. A priori les bonnes versions des
+Installez ensuite les dépendances de la session, avec `pyviewfactor`. A priori les bonnes versions des
 dépendances sont : 
 ```
+pandas==2.2.3
 numpy==1.26.4
 pyvista==0.45
-scipy==1.11.4
-numba==0.61.2
+matplotlib
 tqdm==4.65.0
+pvlib==0.15.1
+pyviewfactor==1.0.3
 ```
 
-Mais vous pouvez utiliser directement :
+Vous pouvez installer ces dépendances directement avec :
+
 ```bash
 python -m pip install -r requirements.txt
-```
-
-Puis installez la librairie `pyViewFactor` avec : 
-```bash
-pip install pyviewfactor
 ```
 
 ## 4. Utilisation de Jupyter

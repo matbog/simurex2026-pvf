@@ -1,5 +1,7 @@
+pandas==2.2.3
 numpy==1.26.4
 pyvista==0.45
-scipy==1.11.4
-numba==0.61.2
+matplotlib
 tqdm==4.65.0
+pvlib==0.15.1
+pyviewfactor
