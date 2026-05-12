@@ -1,5 +1,11 @@
 # À propos de pyViewFactor
 
+
+[![GitLab](https://img.shields.io/badge/GitLab-source-FC6D26?logo=gitlab&logoColor=white)](https://gitlab.com/arep-dev/pyViewFactor)
+[![Docs](https://img.shields.io/badge/docs-available-brightgreen?logo=gitbook&logoColor=white)](https://arep-dev.gitlab.io/pyViewFactor/pyviewfactor.html)
+[![Article](https://img.shields.io/badge/Article-IBPSA%202022-purple?logo=googlescholar&logoColor=white)](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort)
+[![JOSS](https://img.shields.io/badge/JOSS-submitted-blue)](https://joss.theoj.org/papers/cc7d3aebf5e8ed25b343c6dd822f70b4)
+
 ## 1. Pourquoi parler de `pyViewFactor` dans cette formation ?
 
 **`pyViewFactor`** est une bibliothèque Python dédiée au calcul des
@@ -237,8 +243,6 @@ if visible:
     print(F_21)
 ```
 
-
-
 ## 7. Performance et compromis
 
 Le design de `pyViewFactor` repose sur :
@@ -265,19 +269,3 @@ Les principaux compromis sont :
 - comparer des méthodes numériques de calcul de facteurs de forme,
 - servir de support pédagogique pour relier théorie, géométrie et simulation.
 
-
-
-## 9. Ressources
-
-- [Dépôt GitLab `pyViewFactor`](https://gitlab.com/arep-dev/pyViewFactor)
-- [Documentation en ligne](https://arep-dev.gitlab.io/pyViewFactor/pyviewfactor.html)
-- [Article IBPSA France 2022](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort)
-
-
-
-## 10. À retenir
-
-`pyViewFactor` propose une implémentation Python du calcul de facteurs de forme entre facettes planes, pensée pour les géométries maillées et les workflows de recherche.
-
-!!! success "Message clé"
-    La bibliothèque combine tests géométriques, gestion des obstructions et intégration numérique pour rendre le calcul des facteurs de forme plus accessible dans des scènes réalistes.

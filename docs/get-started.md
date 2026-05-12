@@ -6,6 +6,8 @@ les exercices de la session.
 L'objectif est d'éviter les conflits avec les packages déjà installés sur votre machine,
 et de garantir que tout le monde utilise une configuration proche.
 
+[![Sources](https://img.shields.io/badge/-%20Sources-2ea44f?logo=github&labelColor=6e6e6e&logoColor=white)](https://github.com/matbog/simurex2026-pvf)
+
 
 ## 1. Récupérer les fichiers sources
 

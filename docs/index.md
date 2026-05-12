@@ -1,6 +1,6 @@
 # SIMUREX 2026 – Calcul de facteur de forme et échanges radiatifs
 
-## Ecole thématique SIMUREX, IBPSA 2026
+## École thématique SIMUREX, IBPSA 2026
 
 Cette session introduit le calcul des facteurs de forme pour les calculs radiatifs, dans le cadre 
 d’applications en thermique et en simulation du bâtiment, avec un accent particulier sur
@@ -10,25 +10,25 @@ Ce cours s’inscrit dans le cadre d'une session de formation SIMUREX, associée
 [IBPSA France 2026](https://conference2026.ibpsa.fr/).
 
 !!! info "Objectif de la session"
-    Le contenu combine des éléments de contexte scientifique, ainsi que des exercices pratiques pour apprendre à utiliser [`pyviewfactor`](https://gitlab.com/arep-dev/pyViewFactor).
+    Apprendre à utiliser [`pyviewfactor`](https://gitlab.com/arep-dev/pyViewFactor) !
 
 ![Facteur de forme entre un individu et une scène urbaine](assets/FF_sceneUrbaine_cyl.png)
 
 ## Contenu du site
 
-* [Démarrer](get-started.md) : 
+* [Démarrer](get-started.md)
     * Récupérer les sources, 
     * Préparer un environnement Python propre.
-* [Rappels scientifiques](scientific-background.md) : 
-    * Comprendre l’importance des facteurs de vue en thermique,
-* [Visibilité et Obstruction](visibility_obstruction.md) : 
-    * Comprendre les calculs de ***visibilité*** et ***obstruction*** entre cellules,
-* [Exercices & mini-projet](exercises.md) : 
-    * Travailler sur des problèmes guidés pour comprendre la logique de la librairie, 
+* [Rappels scientifiques](scientific-background.md)
+    * Comprendre l’importance des facteurs de forme en thermique,
+* [Visibilité et Obstruction](visibility_obstruction.md)
+    * Comprendre les logiques de ***visibilité*** et ***obstruction*** entre cellules,
+* [Exercices & mini-projet](exercises.md)
+    * Problèmes guidés pour comprendre la logique de la librairie, 
     * Cas d'étude,
-* [A propos de `pyviewfactor`](about-pyviewfactor.md) : 
-    * En savoir plus sur la bibliothèque utilisée durant la session.
+* [A propos de `pyviewfactor`](about-pyviewfactor.md)
+    * En savoir plus sur la librairie.
 
 
 ---
-© Mateusz BOGDAN & Edouard WALTHER 2026 — CC BY 4.0
+© Mateusz BOGDAN & Edouard WALTHER 2026, with ❤︎ — CC BY 4.0
