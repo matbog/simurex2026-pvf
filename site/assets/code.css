@@ -1,0 +1,378 @@
+/* =========================================================
+   IMPORT POLICE
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+
+/* =========================================================
+   BLOCS DE CODE GENERAUX
+========================================================= */
+
+.highlight {
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+.highlight pre {
+
+    margin: 0 !important;
+
+    background: transparent !important;
+
+    font-family: 'JetBrains Mono', monospace !important;
+
+    font-size: 0.92rem;
+
+    font-weight: 500;
+
+    line-height: 1.55;
+}
+
+.highlight .md-code__content {
+
+    border-radius: 12px !important;
+
+    padding: 1.1em 1.3em !important;
+
+    overflow: auto;
+
+    transition: all 0.25s ease;
+}
+
+
+/* =========================================================
+   MODE CLAIR
+========================================================= */
+
+[data-md-color-scheme="default"] .highlight .md-code__content {
+
+    background-color: #f4f6f8 !important;
+
+    color: #1f2937;
+
+    border: 1px solid #d8dee4;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.04);
+}
+
+
+/* Hover */
+
+[data-md-color-scheme="default"] .highlight .md-code__content:hover {
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,0.08);
+}
+
+
+/* =========================================================
+   PYTHON DETAIL - MODE CLAIR
+========================================================= */
+
+
+/* Keywords: def, class, return, for, if... */
+
+[data-md-color-scheme="default"] .highlight .k,
+[data-md-color-scheme="default"] .highlight .kn,
+[data-md-color-scheme="default"] .highlight .kd {
+
+    color: #cf222e;
+
+    font-weight: 700;
+}
+
+
+/* Function names */
+
+[data-md-color-scheme="default"] .highlight .nf {
+
+    color: #8250df;
+
+    font-weight: 700;
+}
+
+
+/* Class names */
+
+[data-md-color-scheme="default"] .highlight .nc {
+
+    color: #953800;
+
+    font-weight: 700;
+}
+
+
+/* Builtins: print, len, range... */
+
+[data-md-color-scheme="default"] .highlight .nb {
+
+    color: #0550ae;
+
+    font-weight: 600;
+}
+
+
+/* Decorators */
+
+[data-md-color-scheme="default"] .highlight .nd {
+
+    color: #8250df;
+
+    font-weight: 700;
+}
+
+
+/* Strings */
+
+[data-md-color-scheme="default"] .highlight .s,
+[data-md-color-scheme="default"] .highlight .s1,
+[data-md-color-scheme="default"] .highlight .s2,
+[data-md-color-scheme="default"] .highlight .sa {
+
+    color: #0a3069;
+}
+
+
+/* Numbers */
+
+[data-md-color-scheme="default"] .highlight .mi,
+[data-md-color-scheme="default"] .highlight .mf {
+
+    color: #0550ae;
+}
+
+
+/* Comments */
+
+[data-md-color-scheme="default"] .highlight .c,
+[data-md-color-scheme="default"] .highlight .c1 {
+
+    color: #6e7781;
+
+    font-style: italic;
+}
+
+
+/* Operators */
+
+[data-md-color-scheme="default"] .highlight .o {
+
+    color: #57606a;
+
+    font-weight: 600;
+}
+
+
+/* self / cls */
+
+[data-md-color-scheme="default"] .highlight .bp {
+
+    color: #0969da;
+
+    font-style: italic;
+
+    font-weight: 600;
+}
+
+
+
+/* =========================================================
+   MODE SOMBRE
+========================================================= */
+
+[data-md-color-scheme="slate"] .highlight .md-code__content {
+
+    background-color: #252b33 !important;
+
+    color: #e6edf3;
+
+    border: 1px solid #313842;
+
+    box-shadow:
+        0 6px 20px rgba(0,0,0,0.25);
+}
+
+
+/* Hover */
+
+[data-md-color-scheme="slate"] .highlight .md-code__content:hover {
+
+    border-color: #58a6ff;
+
+    box-shadow:
+        0 0 0 1px rgba(88,166,255,0.15),
+        0 10px 25px rgba(0,0,0,0.35);
+}
+
+
+/* =========================================================
+   PYTHON DETAIL - MODE SOMBRE
+========================================================= */
+
+
+/* Keywords */
+
+[data-md-color-scheme="slate"] .highlight .k,
+[data-md-color-scheme="slate"] .highlight .kn,
+[data-md-color-scheme="slate"] .highlight .kd {
+
+    color: #ff7b72;
+
+    font-weight: 700;
+}
+
+
+/* Function names */
+
+[data-md-color-scheme="slate"] .highlight .nf {
+
+    color: #d2a8ff;
+
+    font-weight: 700;
+}
+
+
+/* Class names */
+
+[data-md-color-scheme="slate"] .highlight .nc {
+
+    color: #ffa657;
+
+    font-weight: 700;
+}
+
+
+/* Builtins */
+
+[data-md-color-scheme="slate"] .highlight .nb {
+
+    color: #79c0ff;
+
+    font-weight: 600;
+}
+
+
+/* Decorators */
+
+[data-md-color-scheme="slate"] .highlight .nd {
+
+    color: #f0883e;
+
+    font-weight: 700;
+}
+
+
+/* Strings */
+
+[data-md-color-scheme="slate"] .highlight .s,
+[data-md-color-scheme="slate"] .highlight .s1,
+[data-md-color-scheme="slate"] .highlight .s2,
+[data-md-color-scheme="slate"] .highlight .sa {
+
+    color: #a5d6ff;
+}
+
+
+/* Numbers */
+
+[data-md-color-scheme="slate"] .highlight .mi,
+[data-md-color-scheme="slate"] .highlight .mf {
+
+    color: #79c0ff;
+}
+
+
+/* Comments */
+
+[data-md-color-scheme="slate"] .highlight .c,
+[data-md-color-scheme="slate"] .highlight .c1 {
+
+    color: #8b949e;
+
+    font-style: italic;
+}
+
+
+/* Operators */
+
+[data-md-color-scheme="slate"] .highlight .o {
+
+    color: #ff7b72;
+
+    font-weight: 600;
+}
+
+
+/* self / cls */
+
+[data-md-color-scheme="slate"] .highlight .bp {
+
+    color: #79c0ff;
+
+    font-style: italic;
+
+    font-weight: 600;
+}
+
+
+
+/* =========================================================
+   INLINE CODE
+========================================================= */
+
+code {
+
+    font-family: 'JetBrains Mono', monospace !important;
+
+    font-size: 0.85em;
+
+    font-weight: 500;
+
+    padding: 0.15em 0.45em;
+
+    border-radius: 6px;
+}
+
+
+/* Inline code clair */
+
+[data-md-color-scheme="default"] code {
+
+    background: rgba(175,184,193,0.2);
+
+    color: #cf222e;
+}
+
+
+/* Inline code sombre */
+
+[data-md-color-scheme="slate"] code {
+
+    background: rgba(110,118,129,0.22);
+
+    color: #79c0ff;
+}
+
+
+/* =========================================================
+   COPY BUTTON
+========================================================= */
+
+.md-clipboard {
+
+    border-radius: 8px !important;
+
+    opacity: 0.7;
+
+    transition: opacity 0.2s ease;
+}
+
+
+.md-clipboard:hover {
+
+    opacity: 1;
+}
