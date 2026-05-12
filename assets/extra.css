@@ -1,11 +1,58 @@
-::selection {
-  background: #ff5000;
-  color: white;
-  text-shadow: none;
+/* Footer */
+
+.footer-love {
+
+    text-align: center;
+
+    margin-top: 3rem;
+
+    opacity: 0.85;
+
+    font-size: 0.7rem;
 }
 
-::-moz-selection {
-  background: #ff5000;
-  color: white;
-  text-shadow: none;
+
+/* Heart */
+
+.footer-love .heart {
+
+    display: inline-block;
+
+    animation:
+        heartbeat 1.5s infinite,
+        rainbow 4s linear infinite;
+}
+
+
+/* Pulse animation */
+
+@keyframes heartbeat {
+
+    0%   { transform: scale(1); }
+
+    15%  { transform: scale(1.15); }
+
+    30%  { transform: scale(1); }
+
+    45%  { transform: scale(1.12); }
+
+    60%  { transform: scale(1); }
+}
+
+
+/* Color cycle */
+
+@keyframes rainbow {
+
+    0%   { color: #ff4d6d; }
+
+    20%  { color: #ff7b72; }
+
+    40%  { color: #ffd166; }
+
+    60%  { color: #06d6a0; }
+
+    80%  { color: #4cc9f0; }
+
+    100% { color: #c77dff; }
 }

@@ -55,6 +55,8 @@
     
       <link rel="stylesheet" href="../assets/extra.css">
     
+      <link rel="stylesheet" href="../assets/code.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -71,7 +73,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="lime">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -128,7 +130,21 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label=""  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
     
   
 </form>
@@ -1042,7 +1058,7 @@
 
 <h1 id="rappels-scientifiques-rayonnement-et-facteurs-de-forme">Rappels scientifiques — Rayonnement et facteurs de forme<a class="headerlink" href="#rappels-scientifiques-rayonnement-et-facteurs-de-forme" title="Permanent link">&para;</a></h1>
 <h2 id="0-stl-vtk-pourquoi-travailler-sur-des-maillages">0. STL / VTK : pourquoi travailler sur des maillages ?<a class="headerlink" href="#0-stl-vtk-pourquoi-travailler-sur-des-maillages" title="Permanent link">&para;</a></h2>
-<p>Dans les applications de thermique du bâtiment ou d’environnement urbain, les géométries utilisées proviennent généralement d’outils de modélisation (BIM, CAD, SIG). Ces géométries sont riches mais rarement adaptées directement à des calculs physiques précis.</p>
+<p>Dans les applications de thermique du bâtiment ou d'environnement urbain, les géométries utilisées proviennent généralement d'outils de modélisation (BIM, CAD, SIG). Ces géométries sont riches mais rarement adaptées directement à des calculs physiques précis.</p>
 <p>En pratique, plusieurs difficultés apparaissent :</p>
 <ul>
 <li>les surfaces ne sont pas parfaitement planes,</li>
@@ -1054,13 +1070,13 @@
 <p>Cette représentation présente plusieurs avantages :</p>
 <ul>
 <li>elle permet de traiter des géométries arbitraires,</li>
-<li>elle est compatible avec les méthodes numériques d’intégration,</li>
+<li>elle est compatible avec les méthodes numériques d'intégration,</li>
 <li>elle facilite les calculs massivement parallèles.</li>
 </ul>
 <p>Cependant, cette étape introduit de nouveaux enjeux :</p>
 <div class="admonition warning">
 <p class="admonition-title">Impact du maillage</p>
-<p>Le bruit géométrique, les erreurs d’orientation ou les surfaces quasi coïncidentes ont un impact direct sur les calculs de visibilité, d’obstruction et d’intégration.</p>
+<p>Le bruit géométrique, les erreurs d'orientation ou les surfaces quasi coïncidentes ont un impact direct sur les calculs de visibilité, d'obstruction et d'intégration.</p>
 </div>
 <p>Ces aspects doivent donc être explicitement pris en compte dans les algorithmes.</p>
 <h2 id="1-rayonnement-thermique-bases-physiques">1. Rayonnement thermique : bases physiques<a class="headerlink" href="#1-rayonnement-thermique-bases-physiques" title="Permanent link">&para;</a></h2>
@@ -1100,7 +1116,7 @@ E = \varepsilon \sigma T^4
 <h2 id="2-facteurs-de-forme-geometrie-des-echanges-radiatifs">2. Facteurs de forme : géométrie des échanges radiatifs<a class="headerlink" href="#2-facteurs-de-forme-geometrie-des-echanges-radiatifs" title="Permanent link">&para;</a></h2>
 <h3 id="21-definition-physique">2.1 Définition physique<a class="headerlink" href="#21-definition-physique" title="Permanent link">&para;</a></h3>
 <p>Le facteur de forme <span class="arithmatex">\(F_{i,j}\)</span> représente la <strong>fraction du rayonnement émis par la surface <span class="arithmatex">\(i\)</span></strong> qui atteint directement la surface <span class="arithmatex">\(j\)</span>.</p>
-<p><em>Dit autremement, <span class="arithmatex">\(F_{i,j}\)</span> est la fraction du champ de vision de la facatte <span class="arithmatex">\(i\)</span> occupée par la facette <span class="arithmatex">\(j\)</span></em></p>
+<p><em>Dit autrement, <span class="arithmatex">\(F_{i,j}\)</span> est la fraction du champ de vision de la facette <span class="arithmatex">\(i\)</span> occupée par la facette <span class="arithmatex">\(j\)</span></em></p>
 <p>Il dépend de :</p>
 <ul>
 <li>la distance entre les deux surfaces,</li>
@@ -1275,14 +1291,14 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 + \lambda_Q \, \overrightarrow{Q_l Q_{l+1}}
 - \lambda_P \, \overrightarrow{P_k P_{k+1}}
 \]</div>
-<p>On se retourve à devoir intégrer le <span class="arithmatex">\(log \)</span> d'un polynôme de degré 2, entre 0 et 1. <em>Et là, de nombreuses méthodes numériques existent !</em></p>
-<p>Plus de détails <a href="https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort">ici</a>, dans la papier IBPSA 2022 !</p>
+<p>On se retrouve à devoir intégrer le <span class="arithmatex">\(\log \)</span> d'un polynôme de degré 2, entre 0 et 1. <em>Et là, de nombreuses méthodes numériques existent !</em></p>
+<p>Plus de détails <a href="https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort">ici</a>, dans le papier IBPSA 2022 !</p>
 <h1 id="7-integration-numerique-dblquad-vs-gausslegendre">7. Intégration numérique : dblquad vs Gauss–Legendre<a class="headerlink" href="#7-integration-numerique-dblquad-vs-gausslegendre" title="Permanent link">&para;</a></h1>
 <p>Une fois l'intégrale transformée en intégrale de contour, le problème ne disparaît pas : il change de nature.</p>
 <p>On se retrouve à devoir évaluer une intégrale de la forme :</p>
 <ul>
 <li>double intégrale sur les paramètres <span class="arithmatex">\(\lambda_P\)</span> et <span class="arithmatex">\(\lambda_Q\)</span>,</li>
-<li>d’une fonction contenant un <span class="arithmatex">\(\log(\delta_{k,l})\)</span>,</li>
+<li>d'une fonction contenant un <span class="arithmatex">\(\log(\delta_{k,l})\)</span>,</li>
 <li>où <span class="arithmatex">\(\delta_{k,l}\)</span> est une fonction polynomiale du second degré.</li>
 </ul>
 <p>Autrement dit, même après réduction surface → contour, il reste une <strong>intégration numérique non triviale</strong>.</p>
@@ -1326,7 +1342,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <ul>
 <li>la double intégrale devient une double somme,</li>
 <li>le coût est fixe pour un ordre donné,</li>
-<li>l’implémentation est très efficace avec des boucles compilées (Numba).</li>
+<li>l'implémentation est très efficace avec des boucles compilées (Numba).</li>
 </ul>
 <p>Avantages :</p>
 <ul>
@@ -1434,6 +1450,8 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../javascripts/open_external_links.js"></script>
       
     
   </body>

@@ -55,6 +55,8 @@
     
       <link rel="stylesheet" href="../assets/extra.css">
     
+      <link rel="stylesheet" href="../assets/code.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -71,7 +73,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="lime">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -128,7 +130,21 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label=""  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
     
   
 </form>
@@ -422,7 +438,7 @@
   <a href="#installer-jupyter-dans-lenvironnement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installer Jupyter dans l’environnement
+        Installer Jupyter dans l'environnement
       
     </span>
   </a>
@@ -433,7 +449,7 @@
   <a href="#ajouter-lenvironnement-comme-noyau" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ajouter l’environnement comme noyau
+        Ajouter l'environnement comme noyau
       
     </span>
   </a>
@@ -741,7 +757,7 @@
   <a href="#installer-jupyter-dans-lenvironnement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installer Jupyter dans l’environnement
+        Installer Jupyter dans l'environnement
       
     </span>
   </a>
@@ -752,7 +768,7 @@
   <a href="#ajouter-lenvironnement-comme-noyau" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ajouter l’environnement comme noyau
+        Ajouter l'environnement comme noyau
       
     </span>
   </a>
@@ -860,19 +876,19 @@ et de garantir que tout le monde utilise une configuration proche.</p>
 <ul>
 <li>
 <p>Commencez par récupérer les scripts et données nécessaires à la session.</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
-<span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/
+</span></code></pre></div>
 </li>
 <li>
 <p>Les scripts avec les exercices se trouvent dans :
-    <div class="highlight"><pre><span></span><code>session/
-</code></pre></div></p>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>session/
+</span></code></pre></div></p>
 </li>
 <li>
 <p>Les géométries et jeux de données utilisés pendant la session se trouvent dans :</p>
-<div class="highlight"><pre><span></span><code>session/src_data/
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>session/src_data/
+</span></code></pre></div>
 </li>
 </ul>
 <h2 id="2-creer-un-environnement-python-propre">2. Créer un environnement Python propre<a class="headerlink" href="#2-creer-un-environnement-python-propre" title="Permanent link">&para;</a></h2>
@@ -886,95 +902,95 @@ et de garantir que tout le monde utilise une configuration proche.</p>
 <p>Python <code>3.11</code> est recommandé.</p>
 <h3 id="option-a-avec-conda">Option A — Avec conda<a class="headerlink" href="#option-a-avec-conda" title="Permanent link">&para;</a></h3>
 <p>Si <code>conda</code> est déjà installé sur votre machine :</p>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
-conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
+</span></code></pre></div>
 <p>Pour vérifier que le bon environnement est actif :</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>--version
-which<span class="w"> </span>python
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>--version
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>which<span class="w"> </span>python
+</span></code></pre></div>
 <p>Sous Windows, utilisez plutôt :</p>
-<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="p">-</span><span class="n">-version</span>
-<span class="nb">where </span><span class="n">python</span>
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">python</span> <span class="p">-</span><span class="n">-version</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">where </span><span class="n">python</span>
+</span></code></pre></div>
 <h3 id="option-b-avec-miniconda">Option B — Avec Miniconda<a class="headerlink" href="#option-b-avec-miniconda" title="Permanent link">&para;</a></h3>
 <p><code>Miniconda</code> est une version légère d'<code>Anaconda</code>. Elle installe uniquement <code>conda</code>, Python
 et les outils de base.</p>
 <p>Après installation de <code>Miniconda</code>, ouvrez un nouveau terminal puis vérifiez que <code>conda</code>
 est disponible :</p>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>--version
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>conda<span class="w"> </span>--version
+</span></code></pre></div>
 <p>Créez ensuite l'environnement de travail :</p>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
-conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
+</span></code></pre></div>
 <p>Si la commande <code>conda</code> n'est pas reconnue, fermez puis rouvrez le terminal. Sur Windows,
 vous pouvez aussi utiliser le terminal <strong>Anaconda Prompt</strong> ou <strong>Miniconda Prompt</strong>.</p>
 <h3 id="option-c-avec-venv">Option C — Avec venv<a class="headerlink" href="#option-c-avec-venv" title="Permanent link">&para;</a></h3>
 <p><code>venv</code> est inclus avec Python. Cette option est utile si vous ne souhaitez pas utiliser
 <code>conda</code>.</p>
 <p>Depuis le dossier de la session :</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</span></code></pre></div>
 <p>Activez ensuite l'environnement.</p>
 <p>Sur Linux ou macOS :</p>
-<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</span></code></pre></div>
 <p>Sur Windows avec PowerShell :</p>
-<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</span></code></pre></div>
 <p>Sur Windows avec <code>cmd.exe</code> :</p>
-<div class="highlight"><pre><span></span><code>.venv\Scripts\activate.bat
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>.venv\Scripts\activate.bat
+</span></code></pre></div>
 <p>Vérifiez ensuite que l'environnement est actif :</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>--version
-pip<span class="w"> </span>--version
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>python<span class="w"> </span>--version
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>pip<span class="w"> </span>--version
+</span></code></pre></div>
 <p>Si l'activation a fonctionné, le nom de l'environnement apparaît généralement au début
 de la ligne de commande, par exemple :</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>.venv<span class="o">)</span><span class="w"> </span>user@machine:~/simurex2026-pvf/session$
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">(</span>.venv<span class="o">)</span><span class="w"> </span>user@machine:~/simurex2026-pvf/session$
+</span></code></pre></div>
 <h2 id="3-installer-les-packages-necessaires">3. Installer les packages nécessaires<a class="headerlink" href="#3-installer-les-packages-necessaires" title="Permanent link">&para;</a></h2>
 <p>Une fois l'environnement activé, mettez d'abord <code>pip</code> à jour :</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-</code></pre></div>
-<p>Installez ensuite les dépendances de la session, avec <a href="https://gitlab.com/arep-dev/pyViewFactor"><code>pyviewfactor</code></a>.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span></code></pre></div>
+<p>Installez ensuite les dépendances de la session, avec <a href="https://gitlab.com/arep-dev/pyViewFactor"><code>pyViewFactor</code></a>.
 A priori les bonnes versions sont : </p>
-<div class="highlight"><pre><span></span><code>pandas==2.2.3
-numpy==1.26.4
-pyvista==0.45
-matplotlib
-tqdm==4.65.0
-pvlib==0.15.1
-pyviewfactor==1.0.3
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pandas==2.2.3
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>numpy==1.26.4
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>pyvista==0.45
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>matplotlib
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>tqdm==4.65.0
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>pvlib==0.15.1
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>pyviewfactor==1.0.3
+</span></code></pre></div>
 <p>Vous pouvez installer ces dépendances directement avec :</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
 <h2 id="4-utilisation-de-jupyter">4. Utilisation de Jupyter<a class="headerlink" href="#4-utilisation-de-jupyter" title="Permanent link">&para;</a></h2>
 <p>Les exercices sont fournis sous forme de scripts Python.
 Cependant, si vous préférez travailler avec Jupyter Notebook ou JupyterLab, vous pouvez
 utiliser votre environnement comme noyau.</p>
-<h3 id="installer-jupyter-dans-lenvironnement">Installer Jupyter dans l’environnement<a class="headerlink" href="#installer-jupyter-dans-lenvironnement" title="Permanent link">&para;</a></h3>
+<h3 id="installer-jupyter-dans-lenvironnement">Installer Jupyter dans l'environnement<a class="headerlink" href="#installer-jupyter-dans-lenvironnement" title="Permanent link">&para;</a></h3>
 <p>Assurez-vous que votre environnement est activé, puis installez :</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
-</code></pre></div>
-<h3 id="ajouter-lenvironnement-comme-noyau">Ajouter l’environnement comme noyau<a class="headerlink" href="#ajouter-lenvironnement-comme-noyau" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
+</span></code></pre></div>
+<h3 id="ajouter-lenvironnement-comme-noyau">Ajouter l'environnement comme noyau<a class="headerlink" href="#ajouter-lenvironnement-comme-noyau" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
+</span></code></pre></div>
 <h3 id="lancer-jupyter">Lancer Jupyter<a class="headerlink" href="#lancer-jupyter" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>notebook
-</code></pre></div>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>jupyter<span class="w"> </span>notebook
+</span></code></pre></div>
 ou :
-<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>lab
-</code></pre></div></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>jupyter<span class="w"> </span>lab
+</span></code></pre></div></p>
 <h3 id="selectionner-le-bon-noyau">Sélectionner le bon noyau<a class="headerlink" href="#selectionner-le-bon-noyau" title="Permanent link">&para;</a></h3>
-<p>Dans l’interface Jupyter :</p>
+<p>Dans l'interface Jupyter :</p>
 <ul>
 <li>Ouvrez un notebook</li>
 <li>Sélectionnez le noyau :
-<div class="highlight"><pre><span></span><code>Python<span class="w"> </span><span class="o">(</span>simurex-pvf<span class="o">)</span>
-</code></pre></div></li>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Python<span class="w"> </span><span class="o">(</span>simurex-pvf<span class="o">)</span>
+</span></code></pre></div></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title"> </p>
@@ -982,37 +998,37 @@ ou :
 </div>
 <h2 id="5-verifier-linstallation">5. Vérifier l'installation<a class="headerlink" href="#5-verifier-linstallation" title="Permanent link">&para;</a></h2>
 <p>Dans un terminal où l'environnement est activé, lancez Python :</p>
-<div class="highlight"><pre><span></span><code>python
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>python
+</span></code></pre></div>
 <p>Puis testez les imports principaux :</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Environment OK&quot;</span><span class="p">)</span>
-</code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Environment OK&quot;</span><span class="p">)</span>
+</span></code></pre></div>
 <p>Vous pouvez aussi vérifier les versions installées :</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;numpy:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pyvista:&quot;</span><span class="p">,</span> <span class="n">pv</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pyviewfactor:&quot;</span><span class="p">,</span> <span class="n">pvf</span><span class="o">.</span><span class="n">__version__</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pvf</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;version non déclarée&quot;</span><span class="p">)</span>
-</code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyviewfactor</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pvf</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;numpy:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pyvista:&quot;</span><span class="p">,</span> <span class="n">pv</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pyviewfactor:&quot;</span><span class="p">,</span> <span class="n">pvf</span><span class="o">.</span><span class="n">__version__</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pvf</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;version non déclarée&quot;</span><span class="p">)</span>
+</span></code></pre></div>
 <h2 id="6-problemes-frequents">6. Problèmes fréquents<a class="headerlink" href="#6-problemes-frequents" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
 <p><code>pip install -r requirements.txt</code> ne trouve pas le fichier</p>
 <ul>
 <li>Vérifiez que vous êtes dans le bon dossier :
-<div class="highlight"><pre><span></span><code><span class="nb">pwd</span>
-ls
-</code></pre></div></li>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nb">pwd</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>ls
+</span></code></pre></div></li>
 <li>Sous Windows :
-<div class="highlight"><pre><span></span><code>cd
-dir
-</code></pre></div></li>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>cd
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>dir
+</span></code></pre></div></li>
 </ul>
 <p>Le fichier <code>requirements.txt</code> doit apparaître dans la liste.</p>
 </li>
@@ -1021,8 +1037,8 @@ dir
 <ul>
 <li>Essayez d'initialiser conda :</li>
 </ul>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>init
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>conda<span class="w"> </span>init
+</span></code></pre></div>
 <ul>
 <li>Fermez puis rouvrez le terminal.</li>
 </ul>
@@ -1033,13 +1049,13 @@ dir
 <ul>
 <li>Vérifiez que le noyau Jupyter a bien été installé :</li>
 </ul>
-<div class="highlight"><pre><span></span><code>jupyter<span class="w"> </span>kernelspec<span class="w"> </span>list
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>jupyter<span class="w"> </span>kernelspec<span class="w"> </span>list
+</span></code></pre></div>
 <ul>
 <li>Si nécessaire, réinstallez le noyau depuis l'environnement actif :</li>
 </ul>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
+</span></code></pre></div>
 </li>
 <li>
 <p><code>pyvista</code> ne s'affiche pas correctement</p>
@@ -1047,61 +1063,61 @@ dir
 <li>Sur certaines machines ou connexions distantes, l'affichage 3D peut nécessiter une configuration supplémentaire.</li>
 <li>Pour tester rapidement PyVista :</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
-
-<span class="n">sphere</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()</span>
-<span class="n">sphere</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-</code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">sphere</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="n">sphere</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</span></code></pre></div>
 <p>Si une fenêtre 3D ne s'ouvre pas, le problème vient probablement de l'affichage graphique, pas forcément de l'installation Python.</p>
 </li>
 </ul>
 <h2 id="7-desactiver-ou-supprimer-lenvironnement">7. Désactiver ou supprimer l'environnement<a class="headerlink" href="#7-desactiver-ou-supprimer-lenvironnement" title="Permanent link">&para;</a></h2>
 <p>Pour désactiver l'environnement courant :</p>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>deactivate
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>conda<span class="w"> </span>deactivate
+</span></code></pre></div>
 <p>ou, si vous utilisez <code>venv</code> :</p>
-<div class="highlight"><pre><span></span><code>deactivate
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>deactivate
+</span></code></pre></div>
 <p>Pour supprimer l'environnement conda :</p>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>remove<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span>--all
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>conda<span class="w"> </span>remove<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span>--all
+</span></code></pre></div>
 <p>Pour supprimer un environnement <code>venv</code>, supprimez simplement le dossier <code>.venv</code> :</p>
-<div class="highlight"><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>.venv
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>.venv
+</span></code></pre></div>
 <p>Sous Windows PowerShell :</p>
-<div class="highlight"><pre><span></span><code><span class="nb">Remove-Item</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="p">.</span><span class="n">venv</span>
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nb">Remove-Item</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="p">.</span><span class="n">venv</span>
+</span></code></pre></div>
 <hr />
 <h2 id="resume-rapide">Résumé rapide<a class="headerlink" href="#resume-rapide" title="Permanent link">&para;</a></h2>
 <p>Avec conda ou Miniconda :</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
-<span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/
-
-conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
-conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
-
-python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-
-python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
-python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>simurex-pvf<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>conda<span class="w"> </span>activate<span class="w"> </span>simurex-pvf
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
+</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>
+</span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
+</span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
+</span></code></pre></div>
 <p>Avec <code>venv</code> :</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
-<span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/
-
-python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
-<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
-
-python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-
-python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
-python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/matbog/simurex2026-pvf.git
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nb">cd</span><span class="w"> </span>simurex2026-pvf/
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>
+</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>notebook<span class="w"> </span>ipykernel
+</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>simurex-pvf<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (simurex-pvf)&quot;</span>
+</span></code></pre></div>
 <p>Sur Windows, remplacez l'activation de <code>venv</code> par :</p>
-<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
-</code></pre></div>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+</span></code></pre></div>
 
 
 
@@ -1165,6 +1181,8 @@ python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../javascripts/open_external_links.js"></script>
       
     
   </body>
