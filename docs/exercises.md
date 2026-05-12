@@ -7,7 +7,7 @@ comme **Spyder**, **VS Code** ou **PyCharm**, ou dans un **notebook**.
 !!! info "Objectif de la séance"
     Passer progressivement d'un cas académique simple à des scènes plus réalistes :
     visibilité, obstruction, validation analytique, discrétisation, matrice complète de
-    facteurs de forme, calcul de SVF, flux grandes longueurs d'onde et export VTK.
+    facteurs de forme, calcul de SVF, flux grande longueur d'onde et export VTK.
 
 ## Organisation des scripts
 
@@ -43,7 +43,7 @@ session/output/
 ### Lancer un exercice dans un IDE
 
 1. Ouvrir le dossier du dépôt `simurex2026-pvf` dans l'IDE.
-2. Vérifier que l'interpréteur Python sélectionné est bien celui où `pyviewfactor` est installé.
+2. Vérifier que l'interpréteur Python sélectionné est bien celui où `pyViewFactor` est installé.
 3. Ouvrir un fichier d'exemple dans le dossier `session/`.
 4. Vérifier les chemins vers les fichiers de données, par exemple `./session/src_data/...`.
 5. Lancer le script avec le bouton **Run** de l'IDE.
@@ -64,7 +64,7 @@ Ces scripts servent surtout de support pour introduire les notions et discuter l
 
 * Fichier : `0_analytical_comparison.py`
 * Description / point clé :
-    * comparaison entre une solution analytique et le calcul numérique `pyviewfactor`,
+    * comparaison entre une solution analytique et le calcul numérique `pyViewFactor`,
     * cas de deux surfaces adjacentes à 90 degrés,
     * lecture de l'erreur relative selon la géométrie.
 
@@ -125,7 +125,7 @@ for i in range(sphere.n_cells):
 ```
 
 !!! note "Message pédagogique"
-    `pyviewfactor` calcule entre facettes planes. Une surface courbe n'est donc jamais "continue" dans le calcul : elle est représentée par un ensemble de petits polygones.
+    `pyViewFactor` calcule entre facettes planes. Une surface courbe n'est donc jamais "continue" dans le calcul : elle est représentée par un ensemble de petits polygones.
 
 ## 1 - Visibilité et obstruction
 
@@ -253,6 +253,7 @@ for i in range(mesh.n_cells):
 print("Sum:", F.sum())
 ```
 
+
 ```python
 Fmat = pvf.compute_viewfactor_matrix(mesh)
 print(Fmat[:, ref_id].sum())
@@ -353,7 +354,7 @@ F = pvf.compute_viewfactor_matrix(
 Le mini-projet applique les facteurs de forme à une scène urbaine proche d'un cas canyon. Il est construit en deux parties :
 
 1. calculer le **facteur de vue du ciel** (`SVF`) de chaque maille ;
-2. calculer des flux radiatifs grandes longueurs d'onde sur 24 h, le 18 mai, avec des températures de surface estimées par un modèle 1R1C simplifié.
+2. calculer des flux radiatifs grande longueur d'onde sur 24 h, le 18 mai, avec des températures de surface estimées par un modèle 1R1C simplifié.
 
 ### 3.2 - Partie 1 : calcul du SVF
 
@@ -424,7 +425,7 @@ Avec :
 | \(h_c\) | coefficient d'échange convectif surface-air |
 | \(\alpha\) | absorptivité solaire |
 | \(K_{\downarrow}\) | rayonnement solaire incident sur la maille |
-| \(\varepsilon\) | émissivité longue longueur d'onde |
+| \(\varepsilon\) | émissivité grande longueur d'onde |
 | \(T_{sky}\) | température radiative simplifiée du ciel |
 | \(k/e\) | couplage conductif vers une couche profonde |
 
@@ -522,7 +523,7 @@ Ressources utiles :
 * [`pvlib.location.Location.get_solarposition`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.location.Location.get_solarposition.html)
 * [`pyViewFactor` - visibilité et obstruction](https://arep-dev.gitlab.io/pyViewFactor/pyviewfactor/pvf_visibility_obstruction.html)
 
-### 3.6 - Flux grandes longueurs d'onde
+### 3.6 - Flux grande longueur d'onde
 
 Une fois les températures de surface estimées, le flux GLO net reçu par chaque maille est calculé par :
 

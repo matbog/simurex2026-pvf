@@ -54,9 +54,12 @@ Liste non exhaustive :
   Très complet pour la simulation numérique, mais plus lourd à mettre en place lorsqu'on
   veut seulement explorer ou enseigner le calcul de facteurs de forme.
   
-- Code ASTER, 
+- **Code_Aster**
+  Très puissant pour la simulation multiphysique, mais moins orienté vers
+  l'exploration interactive des facteurs de forme.
 
-- ...
+- D'autres outils existent également, mais ils ne sont pas toujours adaptés à une
+exploration légère et / ou scriptable.
 
 ### 2.2 Besoin ciblé
 

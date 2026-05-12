@@ -144,7 +144,7 @@ Une fois l'environnement activé, mettez d'abord `pip` à jour :
 python -m pip install --upgrade pip
 ```
 
-Installez ensuite les dépendances de la session, avec [`pyviewfactor`](https://gitlab.com/arep-dev/pyViewFactor).
+Installez ensuite les dépendances de la session, avec [`pyViewFactor`](https://gitlab.com/arep-dev/pyViewFactor).
 A priori les bonnes versions sont : 
 
 ```
@@ -169,7 +169,7 @@ Les exercices sont fournis sous forme de scripts Python.
 Cependant, si vous préférez travailler avec Jupyter Notebook ou JupyterLab, vous pouvez
 utiliser votre environnement comme noyau.
 
-### Installer Jupyter dans l’environnement
+### Installer Jupyter dans l'environnement
 
 Assurez-vous que votre environnement est activé, puis installez :
 
@@ -177,7 +177,7 @@ Assurez-vous que votre environnement est activé, puis installez :
 python -m pip install notebook ipykernel
 ```
 
-### Ajouter l’environnement comme noyau
+### Ajouter l'environnement comme noyau
 
 ```bash
 python -m ipykernel install --user --name simurex-pvf --display-name "Python (simurex-pvf)"
@@ -194,7 +194,7 @@ jupyter lab
 
 ### Sélectionner le bon noyau
 
-Dans l’interface Jupyter :
+Dans l'interface Jupyter :
 
 - Ouvrez un notebook
 - Sélectionnez le noyau :

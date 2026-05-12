@@ -2,7 +2,7 @@
 
 ## 0. STL / VTK : pourquoi travailler sur des maillages ?
 
-Dans les applications de thermique du bâtiment ou d’environnement urbain, les géométries utilisées proviennent généralement d’outils de modélisation (BIM, CAD, SIG). Ces géométries sont riches mais rarement adaptées directement à des calculs physiques précis.
+Dans les applications de thermique du bâtiment ou d'environnement urbain, les géométries utilisées proviennent généralement d'outils de modélisation (BIM, CAD, SIG). Ces géométries sont riches mais rarement adaptées directement à des calculs physiques précis.
 
 En pratique, plusieurs difficultés apparaissent :
 
@@ -16,13 +16,13 @@ Pour rendre ces géométries exploitables, on les convertit en **maillages surfa
 Cette représentation présente plusieurs avantages :
 
 - elle permet de traiter des géométries arbitraires,
-- elle est compatible avec les méthodes numériques d’intégration,
+- elle est compatible avec les méthodes numériques d'intégration,
 - elle facilite les calculs massivement parallèles.
 
 Cependant, cette étape introduit de nouveaux enjeux :
 
 !!! warning "Impact du maillage"
-    Le bruit géométrique, les erreurs d’orientation ou les surfaces quasi coïncidentes ont un impact direct sur les calculs de visibilité, d’obstruction et d’intégration.
+    Le bruit géométrique, les erreurs d'orientation ou les surfaces quasi coïncidentes ont un impact direct sur les calculs de visibilité, d'obstruction et d'intégration.
 
 Ces aspects doivent donc être explicitement pris en compte dans les algorithmes.
 
@@ -79,7 +79,7 @@ Ces hypothèses simplifient fortement les équations tout en restant adaptées �
 
 Le facteur de forme \(F_{i,j}\) représente la **fraction du rayonnement émis par la surface \(i\)** qui atteint directement la surface \(j\).
 
-_Dit autremement, \(F_{i,j}\) est la fraction du champ de vision de la facatte \(i\) occupée par la facette \(j\)_
+_Dit autrement, \(F_{i,j}\) est la fraction du champ de vision de la facette \(i\) occupée par la facette \(j\)_
 
 
 Il dépend de :
@@ -318,9 +318,9 @@ $$
 - \lambda_P \, \overrightarrow{P_k P_{k+1}}
 $$
 
-On se retourve à devoir intégrer le \(log \) d'un polynôme de degré 2, entre 0 et 1. _Et là, de nombreuses méthodes numériques existent !_
+On se retrouve à devoir intégrer le \(\log \) d'un polynôme de degré 2, entre 0 et 1. _Et là, de nombreuses méthodes numériques existent !_
 
-Plus de détails [ici](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort), dans la papier IBPSA 2022 !
+Plus de détails [ici](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort), dans le papier IBPSA 2022 !
  
 [^1]: Mazumder and Ravishankar, 2012, __General procedure for calculation of diffuse view factors between arbitrary planar polygons__ [DOI](https://www.sciencedirect.com/science/article/pii/S0017931012006023)
 
@@ -334,7 +334,7 @@ Une fois l'intégrale transformée en intégrale de contour, le problème ne dis
 On se retrouve à devoir évaluer une intégrale de la forme :
 
 - double intégrale sur les paramètres \(\lambda_P\) et \(\lambda_Q\),
-- d’une fonction contenant un \(\log(\delta_{k,l})\),
+- d'une fonction contenant un \(\log(\delta_{k,l})\),
 - où \(\delta_{k,l}\) est une fonction polynomiale du second degré.
 
 Autrement dit, même après réduction surface → contour, il reste une **intégration numérique non triviale**.
@@ -384,7 +384,7 @@ Dans notre cas :
 
 - la double intégrale devient une double somme,
 - le coût est fixe pour un ordre donné,
-- l’implémentation est très efficace avec des boucles compilées (Numba).
+- l'implémentation est très efficace avec des boucles compilées (Numba).
 
 Avantages :
 

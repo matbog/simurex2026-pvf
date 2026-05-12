@@ -1,4 +1,4 @@
-# Tests de visibilité et d’obstruction
+# Tests de visibilité et d'obstruction
 
 
 
@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 Le calcul des facteurs de forme ne repose pas uniquement sur une intégration numérique.  
-Avant même d’évaluer une intégrale, il est nécessaire de déterminer si deux surfaces :
+Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux surfaces :
 
 - peuvent **géométriquement se voir** (visibilité),
 - sont **effectivement visibles sans obstacle** (obstruction).
@@ -18,7 +18,7 @@ Avant même d’évaluer une intégrale, il est nécessaire de déterminer si de
 Ces deux étapes sont fondamentales car elles permettent :
 
 - de réduire fortement le nombre de calculs,
-- d’éviter des intégrations inutiles,
+- d'éviter des intégrations inutiles,
 - de garantir la cohérence physique des résultats.
 
 !!! info "Pipeline"
@@ -31,14 +31,13 @@ Ces deux étapes sont fondamentales car elles permettent :
 
 ### 2.1 Principe
 
-Le test de visibilité consiste à vérifier si deux facettes sont **orientées l’une vers l’autre**.
+Le test de visibilité consiste à vérifier si deux facettes sont **orientées l'une vers l'autre**.
 
-Autrement dit, même en l’absence d’obstacles, deux surfaces ne peuvent échanger du rayonnement que si :
+Autrement dit, même en l'absence d'obstacles, deux surfaces ne peuvent échanger du rayonnement que si :
 
 - leurs normales sont orientées de manière compatible,
 - leurs centres sont mutuellement visibles.
 
----
 
 ### 2.2 Formulation géométrique
 
@@ -50,7 +49,7 @@ $$
 \vec{v}_{ij} = C_i - C_j
 $$
 
-Les conditions de visibilité s’écrivent :
+Les conditions de visibilité s'écrivent :
 
 $$
 \vec{v}_{ij} \cdot \vec{n}_j > 0
@@ -63,16 +62,15 @@ Ces deux conditions garantissent que :
 - \(S_j\) est orientée vers \(S_i\),
 - \(S_i\) est orientée vers \(S_j\).
 
----
 
 ### 2.3 Interprétation
 
 Ce test revient à vérifier que :
 
-- chaque surface "regarde" l’autre,
+- chaque surface "regarde" l'autre,
 - les normales ne sont pas divergentes.
 
----
+
 
 ### 2.4 Modes strict et non strict
 
@@ -91,21 +89,18 @@ Dans la pratique, deux stratégies existent :
 - plus conservatif.
 
 !!! warning "Cas limites"
-    Dans les géométries réelles, une facette peut être partiellement visible. Le choix du mode strict dépend de l’application.
+    Dans les géométries réelles, une facette peut être partiellement visible. Le choix du mode strict dépend de l'application.
 
----
 
-## 3. Test d’obstruction
+
+## 3. Test d'obstruction
 
 ### 3.1 Principe
 
 Même si deux surfaces sont orientées correctement, elles peuvent être **masquées par une troisième surface**.
 
-Le test d’obstruction consiste à vérifier que le segment reliant les deux surfaces :
+Le test d'obstruction consiste à vérifier que le segment reliant les deux surfaces ne coupe aucun obstacle.
 
-- ne coupe aucun obstacle.
-
----
 
 ### 3.2 Formulation
 
@@ -120,30 +115,29 @@ Le problème devient :
 
 > Existe-t-il une intersection entre ce segment et une autre facette ?
 
----
 
 ### 3.3 Algorithme utilisé
 
-Une méthode classique est l’algorithme de **Möller–Trumbore** :
+Une méthode classique est l'algorithme de [**Möller–Trumbore**](https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm) :
 
-- test rapide d’intersection rayon-triangle,
+- test rapide d'intersection rayon-triangle,
 - robuste numériquement,
 - adapté aux maillages triangulés.
 
----
+
 
 ### 3.4 Filtrage spatial
 
 Pour éviter de tester toutes les facettes, un filtrage est appliqué :
 
-- construction d’une **boîte englobante (AABB)**,
+- construction d'une **boîte englobante** (AABB - _Axis Aligned Bounding Box_),
 - sélection des triangles candidats,
 - exclusion des faces testées.
 
 !!! success "Optimisation clé"
-    Le filtrage spatial réduit fortement le coût du test d’obstruction.
+    Le filtrage spatial réduit fortement le coût du test d'obstruction.
 
----
+
 
 ### 3.5 Modes strict et non strict
 
@@ -159,7 +153,7 @@ Pour éviter de tester toutes les facettes, un filtrage est appliqué :
 - plus précis,
 - plus coûteux.
 
----
+
 
 ## 4. Difficultés pratiques
 
@@ -173,10 +167,10 @@ Les données issues de CAD contiennent souvent :
 
 Ces défauts peuvent conduire à :
 
-- des faux positifs d’obstruction,
+- des faux positifs d'obstruction,
 - des incohérences de visibilité.
 
----
+
 
 ### 4.2 Cas dégénérés
 
@@ -194,7 +188,7 @@ Certains cas sont particulièrement sensibles :
 Plusieurs solutions sont utilisées :
 
 - arrondi des coordonnées,
-- introduction d’un seuil \(\varepsilon\),
+- introduction d'un seuil \(\varepsilon\),
 - exclusion des intersections aux extrémités,
 - filtrage des triangles identiques.
 
@@ -210,20 +204,22 @@ Le test de visibilité repose sur :
 - les normales,
 - des produits scalaires.
 
- Implémentation : `get_visibility`
+!!! abstract "Implémentation"
+    `get_visibility(cell_1, cell_2, ...)`
 
 
 
-### 5.2 Test d’obstruction
+### 5.2 Test d'obstruction
 
-Le test d’obstruction repose sur :
+Le test d'obstruction repose sur :
 
 - ray tracing,
 - intersection segment-triangle,
 - filtrage AABB.
 
- Implémentation : `get_obstruction`
 
+!!! abstract "Implémentation"
+    `get_obstruction(cell1, cell2, obstacle, ...)`
 
 
 ### 5.3 Prétraitement géométrique
@@ -236,22 +232,21 @@ Pour accélérer les calculs :
 Voir les structures de prétraitement dans le code.
 
 
-
 ## 6. Impact sur les facteurs de forme
 
-Les tests de visibilité et d’obstruction conditionnent directement :
+Les tests de visibilité et d'obstruction conditionnent directement :
 
 - quelles paires de surfaces sont intégrées,
 - la sparsité de la matrice des facteurs de forme,
 - la cohérence physique du modèle.
 
 !!! important "À retenir"
-    Une erreur de visibilité ou d’obstruction peut avoir un impact plus important que l’erreur d’intégration elle-même.
+    Une erreur de visibilité ou d'obstruction peut avoir un impact plus important que l'erreur d'intégration elle-même.
 
 
 ## 7. Conclusion
 
-Les tests de visibilité et d’obstruction sont :
+Les tests de visibilité et d'obstruction sont :
 
 - indispensables pour le calcul des facteurs de forme,
 - fortement dépendants de la qualité géométrique,
