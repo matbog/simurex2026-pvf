@@ -11,7 +11,7 @@ En pratique, plusieurs difficultés apparaissent :
 - les faces peuvent être mal orientées,
 - des incohérences topologiques peuvent exister (trous, recouvrements, intersections).
 
-Pour rendre ces géométries exploitables, on les convertit en **maillages surfaciques** (formats STL, VTK), composés de facettes planes (triangles ou polygones).
+Pour rendre ces géométries exploitables, on les convertit en **maillages surfaciques** (formats STL, VTK, ...), composés de facettes planes (triangles ou polygones).
 
 Cette représentation présente plusieurs avantages :
 
@@ -39,7 +39,7 @@ Contrairement à la conduction ou à la convection, le rayonnement :
 - devient très sensible aux masques, aux orientations et aux températures de surface.
 
 !!! info "Idée clé"
-    Pour modéliser correctement les échanges radiatifs, il ne suffit pas de connaître les températures : il faut aussi savoir quelles surfaces se voient, et dans quelles proportions.
+    Pour modéliser correctement les échanges radiatifs, il ne suffit pas de connaître les températures : il faut aussi savoir quelles surfaces se voient et dans quelles proportions.
 
 C'est le rôle des **facteurs de forme** (*view factors*).
 
@@ -47,15 +47,15 @@ C'est le rôle des **facteurs de forme** (*view factors*).
 
 ### 1.1 Loi de Stefan–Boltzmann
 
-Une surface à température absolue \(T\) émet un flux radiatif. Pour un corps noir, l'émittance totale est donnée par la loi de Stefan–Boltzmann :
+Une surface à température absolue \(T\) émet un flux radiatif. Pour un corps noir, l'émittance totale est donnée par la loi de [Stefan–Boltzmann](https://fr.wikipedia.org/wiki/Loi_de_Stefan-Boltzmann) :
 
 $$
 E = \sigma T^4
 $$
 
-où \(\sigma\) est la constante de Stefan–Boltzmann.
+où \(\sigma\) est la [constante de Stefan–Boltzmann](https://fr.wikipedia.org/wiki/Constante_de_Stefan-Boltzmann).
 
-Pour une surface réelle, on introduit généralement une émissivité \(\varepsilon\) :
+Pour une surface réelle, on introduit généralement une [émissivité](https://fr.wikipedia.org/wiki/%C3%89missivit%C3%A9) \(\varepsilon\) :
 
 $$
 E = \varepsilon \sigma T^4
@@ -77,7 +77,7 @@ Ces hypothèses simplifient fortement les équations tout en restant adaptées �
 
 ### 2.1 Définition physique
 
-Le facteur de forme \(F_{i,j}\) représente la **fraction du rayonnement émis par la surface \(i\)** qui atteint directement la surface \(j\).
+Le [facteur de forme](https://fr.wikipedia.org/wiki/Facteur_de_forme_(rayonnement_thermique)) \(F_{i,j}\) représente la **fraction du rayonnement émis par la surface \(i\)** qui atteint directement la surface \(j\).
 
 _Dit autrement, \(F_{i,j}\) est la fraction du champ de vision de la facette \(i\) occupée par la facette \(j\)_
 
@@ -227,6 +227,8 @@ Pour un maillage de \(N\) faces, une matrice complète peut contenir \(N^2\) int
 
 Elles donnent des résultats exacts ou quasi exacts pour des configurations simples : plaques parallèles, rectangles perpendiculaires, cylindres, sphères, etc.
 
+Quelques sources de cas analytiques : [thermalradiation.net](https://thermalradiation.net/tablecon.html) ou [Fchart.com](https://fchart.com/ees/heat_transfer_library/shape_factors/hs22.htm). 
+
 Elles sont très utiles pour :
 
 - comprendre les tendances,
@@ -300,7 +302,7 @@ F_{i,j} = \frac{1}{S_i} \iint_{S_i} \iint_{S_j}  \frac{\cos(\theta_i)\cos(\theta
 F_{i,j} = \frac{1}{2\pi S_i} \oint_{\Gamma_i} \oint_{\Gamma_j}  \ln(\delta_{k,l}) \,d\gamma_l \,d\gamma_k
 \end{equation}
 
-Dans cette seconde intégrale, en opérant un changement de variable : 
+Et surout, dans cette seconde intégrale, d'opérer un changement de variable : 
 
 $$
 \begin{cases}
@@ -309,7 +311,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 \end{cases}
 $$
 
-Et en décomposant la distance \(\delta_{k,l}\) : 
+Puis en décomposant la distance \(\delta_{k,l}\) : 
 
 $$
 \overrightarrow{\delta_{k,l}} =
@@ -318,7 +320,7 @@ $$
 - \lambda_P \, \overrightarrow{P_k P_{k+1}}
 $$
 
-On se retrouve à devoir intégrer le \(\log \) d'un polynôme de degré 2, entre 0 et 1. _Et là, de nombreuses méthodes numériques existent !_
+On se retrouve à intégrer le \(\log \) d'un polynôme de degré 2, entre 0 et 1. _Et là, de nombreuses méthodes numériques existent !_
 
 Plus de détails [ici](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort), dans le papier IBPSA 2022 !
  
@@ -339,11 +341,11 @@ On se retrouve à devoir évaluer une intégrale de la forme :
 
 Autrement dit, même après réduction surface → contour, il reste une **intégration numérique non triviale**.
 
----
+
 
 ### 7.1 Intégration adaptative (type `dblquad`)
 
-Une première approche consiste à utiliser un intégrateur adaptatif, comme `scipy.integrate.dblquad`.
+Une première approche consiste à utiliser un intégrateur adaptatif, comme [`scipy.integrate.dblquad`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.dblquad.html).
 
 Principe :
 
@@ -366,11 +368,11 @@ Limites :
 !!! info "Interprétation"
     Cette approche peut être vue comme une "référence numérique" : lente mais fiable.
 
----
+
 
 ### 7.2 Quadrature de Gauss–Legendre
 
-Une alternative consiste à utiliser une quadrature de Gauss–Legendre sur \([0,1]\).
+Une alternative consiste à utiliser une quadrature de [Gauss–Legendre](https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_quadrature) sur \([0,1]\).
 
 Principe :
 
@@ -405,7 +407,7 @@ Dans la pratique, aucune des deux méthodes ne suffit seule.
 Une stratégie efficace consiste à :
 
 - utiliser **Gauss–Legendre** pour les surfaces disjointes (cas majoritaires),
-- basculer vers **dblquad** pour les cas difficiles :
+- basculer vers **`dblquad`** pour les cas difficiles :
   - surfaces adjacentes,
   - partage de sommet,
   - proximité géométrique.

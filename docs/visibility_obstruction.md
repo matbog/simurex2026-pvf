@@ -25,8 +25,6 @@ Ces deux étapes sont fondamentales car elles permettent :
     Dans `pyViewFactor`, ces tests sont effectués **avant toute intégration**, et conditionnent directement le calcul des facteurs de forme.
 
 
-
-
 ## 2. Test de visibilité
 
 ### 2.1 Principe
