@@ -676,7 +676,7 @@
 <li>les faces peuvent être mal orientées,</li>
 <li>des incohérences topologiques peuvent exister (trous, recouvrements, intersections).</li>
 </ul>
-<p>Pour rendre ces géométries exploitables, on les convertit en <strong>maillages surfaciques</strong> (formats STL, VTK), composés de facettes planes (triangles ou polygones).</p>
+<p>Pour rendre ces géométries exploitables, on les convertit en <strong>maillages surfaciques</strong> (formats STL, VTK, ...), composés de facettes planes (triangles ou polygones).</p>
 <p>Cette représentation présente plusieurs avantages :</p>
 <ul>
 <li>elle permet de traiter des géométries arbitraires,</li>
@@ -701,16 +701,16 @@ thermique, le <strong>rayonnement thermique</strong> joue un rôle central.</p>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Idée clé</p>
-<p>Pour modéliser correctement les échanges radiatifs, il ne suffit pas de connaître les températures : il faut aussi savoir quelles surfaces se voient, et dans quelles proportions.</p>
+<p>Pour modéliser correctement les échanges radiatifs, il ne suffit pas de connaître les températures : il faut aussi savoir quelles surfaces se voient et dans quelles proportions.</p>
 </div>
 <p>C'est le rôle des <strong>facteurs de forme</strong> (<em>view factors</em>).</p>
 <h3 id="11-loi-de-stefanboltzmann">1.1 Loi de Stefan–Boltzmann<a class="headerlink" href="#11-loi-de-stefanboltzmann" title="Permanent link">&para;</a></h3>
-<p>Une surface à température absolue <span class="arithmatex">\(T\)</span> émet un flux radiatif. Pour un corps noir, l'émittance totale est donnée par la loi de Stefan–Boltzmann :</p>
+<p>Une surface à température absolue <span class="arithmatex">\(T\)</span> émet un flux radiatif. Pour un corps noir, l'émittance totale est donnée par la loi de <a href="https://fr.wikipedia.org/wiki/Loi_de_Stefan-Boltzmann">Stefan–Boltzmann</a> :</p>
 <div class="arithmatex">\[
 E = \sigma T^4
 \]</div>
-<p>où <span class="arithmatex">\(\sigma\)</span> est la constante de Stefan–Boltzmann.</p>
-<p>Pour une surface réelle, on introduit généralement une émissivité <span class="arithmatex">\(\varepsilon\)</span> :</p>
+<p>où <span class="arithmatex">\(\sigma\)</span> est la <a href="https://fr.wikipedia.org/wiki/Constante_de_Stefan-Boltzmann">constante de Stefan–Boltzmann</a>.</p>
+<p>Pour une surface réelle, on introduit généralement une <a href="https://fr.wikipedia.org/wiki/%C3%89missivit%C3%A9">émissivité</a> <span class="arithmatex">\(\varepsilon\)</span> :</p>
 <div class="arithmatex">\[
 E = \varepsilon \sigma T^4
 \]</div>
@@ -725,7 +725,7 @@ E = \varepsilon \sigma T^4
 <p>Ces hypothèses simplifient fortement les équations tout en restant adaptées à de nombreux cas d'étude.</p>
 <h2 id="2-facteurs-de-forme-geometrie-des-echanges-radiatifs">2. Facteurs de forme : géométrie des échanges radiatifs<a class="headerlink" href="#2-facteurs-de-forme-geometrie-des-echanges-radiatifs" title="Permanent link">&para;</a></h2>
 <h3 id="21-definition-physique">2.1 Définition physique<a class="headerlink" href="#21-definition-physique" title="Permanent link">&para;</a></h3>
-<p>Le facteur de forme <span class="arithmatex">\(F_{i,j}\)</span> représente la <strong>fraction du rayonnement émis par la surface <span class="arithmatex">\(i\)</span></strong> qui atteint directement la surface <span class="arithmatex">\(j\)</span>.</p>
+<p>Le <a href="https://fr.wikipedia.org/wiki/Facteur_de_forme_(rayonnement_thermique)">facteur de forme</a> <span class="arithmatex">\(F_{i,j}\)</span> représente la <strong>fraction du rayonnement émis par la surface <span class="arithmatex">\(i\)</span></strong> qui atteint directement la surface <span class="arithmatex">\(j\)</span>.</p>
 <p><em>Dit autrement, <span class="arithmatex">\(F_{i,j}\)</span> est la fraction du champ de vision de la facette <span class="arithmatex">\(i\)</span> occupée par la facette <span class="arithmatex">\(j\)</span></em></p>
 <p>Il dépend de :</p>
 <ul>
@@ -831,6 +831,7 @@ T_r = \left( \sum_i F_i T_i^4 \right)^{1/4}
 <h2 id="6-methodes-de-calcul-des-facteurs-de-forme">6. Méthodes de calcul des facteurs de forme<a class="headerlink" href="#6-methodes-de-calcul-des-facteurs-de-forme" title="Permanent link">&para;</a></h2>
 <h3 id="61-methodes-analytiques">6.1 Méthodes analytiques<a class="headerlink" href="#61-methodes-analytiques" title="Permanent link">&para;</a></h3>
 <p>Elles donnent des résultats exacts ou quasi exacts pour des configurations simples : plaques parallèles, rectangles perpendiculaires, cylindres, sphères, etc.</p>
+<p>Quelques sources de cas analytiques : <a href="https://thermalradiation.net/tablecon.html">thermalradiation.net</a> ou <a href="https://fchart.com/ees/heat_transfer_library/shape_factors/hs22.htm">Fchart.com</a>. </p>
 <p>Elles sont très utiles pour :</p>
 <ul>
 <li>comprendre les tendances,</li>
@@ -887,21 +888,21 @@ F_{i,j} = \frac{1}{S_i} \iint_{S_i} \iint_{S_j}  \frac{\cos(\theta_i)\cos(\theta
 <div class="arithmatex">\[\begin{equation}\label{eq:cont_integral}
 F_{i,j} = \frac{1}{2\pi S_i} \oint_{\Gamma_i} \oint_{\Gamma_j}  \ln(\delta_{k,l}) \,d\gamma_l \,d\gamma_k
 \end{equation}\]</div>
-<p>Dans cette seconde intégrale, en opérant un changement de variable : </p>
+<p>Et surout, dans cette seconde intégrale, d'opérer un changement de variable : </p>
 <div class="arithmatex">\[
 \begin{cases}
 d\overrightarrow{\gamma_{k,k+1}} = \overrightarrow{P_k P_{k+1}} \, d\lambda_P \\
 d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 \end{cases}
 \]</div>
-<p>Et en décomposant la distance <span class="arithmatex">\(\delta_{k,l}\)</span> : </p>
+<p>Puis en décomposant la distance <span class="arithmatex">\(\delta_{k,l}\)</span> : </p>
 <div class="arithmatex">\[
 \overrightarrow{\delta_{k,l}} =
 \overrightarrow{P_k Q_l}
 + \lambda_Q \, \overrightarrow{Q_l Q_{l+1}}
 - \lambda_P \, \overrightarrow{P_k P_{k+1}}
 \]</div>
-<p>On se retrouve à devoir intégrer le <span class="arithmatex">\(\log \)</span> d'un polynôme de degré 2, entre 0 et 1. <em>Et là, de nombreuses méthodes numériques existent !</em></p>
+<p>On se retrouve à intégrer le <span class="arithmatex">\(\log \)</span> d'un polynôme de degré 2, entre 0 et 1. <em>Et là, de nombreuses méthodes numériques existent !</em></p>
 <p>Plus de détails <a href="https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort">ici</a>, dans le papier IBPSA 2022 !</p>
 <h1 id="7-integration-numerique-dblquad-vs-gausslegendre">7. Intégration numérique : dblquad vs Gauss–Legendre<a class="headerlink" href="#7-integration-numerique-dblquad-vs-gausslegendre" title="Permanent link">&para;</a></h1>
 <p>Une fois l'intégrale transformée en intégrale de contour, le problème ne disparaît pas : il change de nature.</p>
@@ -912,9 +913,8 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <li>où <span class="arithmatex">\(\delta_{k,l}\)</span> est une fonction polynomiale du second degré.</li>
 </ul>
 <p>Autrement dit, même après réduction surface → contour, il reste une <strong>intégration numérique non triviale</strong>.</p>
-<hr />
 <h3 id="71-integration-adaptative-type-dblquad">7.1 Intégration adaptative (type <code>dblquad</code>)<a class="headerlink" href="#71-integration-adaptative-type-dblquad" title="Permanent link">&para;</a></h3>
-<p>Une première approche consiste à utiliser un intégrateur adaptatif, comme <code>scipy.integrate.dblquad</code>.</p>
+<p>Une première approche consiste à utiliser un intégrateur adaptatif, comme <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.dblquad.html"><code>scipy.integrate.dblquad</code></a>.</p>
 <p>Principe :</p>
 <ul>
 <li>l'intégrale est évaluée de manière récursive,</li>
@@ -937,9 +937,8 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <p class="admonition-title">Interprétation</p>
 <p>Cette approche peut être vue comme une "référence numérique" : lente mais fiable.</p>
 </div>
-<hr />
 <h3 id="72-quadrature-de-gausslegendre">7.2 Quadrature de Gauss–Legendre<a class="headerlink" href="#72-quadrature-de-gausslegendre" title="Permanent link">&para;</a></h3>
-<p>Une alternative consiste à utiliser une quadrature de Gauss–Legendre sur <span class="arithmatex">\([0,1]\)</span>.</p>
+<p>Une alternative consiste à utiliser une quadrature de <a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_quadrature">Gauss–Legendre</a> sur <span class="arithmatex">\([0,1]\)</span>.</p>
 <p>Principe :</p>
 <ul>
 <li>l'intégrale est approximée par une somme pondérée :
@@ -971,7 +970,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <p>Une stratégie efficace consiste à :</p>
 <ul>
 <li>utiliser <strong>Gauss–Legendre</strong> pour les surfaces disjointes (cas majoritaires),</li>
-<li>basculer vers <strong>dblquad</strong> pour les cas difficiles :</li>
+<li>basculer vers <strong><code>dblquad</code></strong> pour les cas difficiles :</li>
 <li>surfaces adjacentes,</li>
 <li>partage de sommet,</li>
 <li>proximité géométrique.</li>

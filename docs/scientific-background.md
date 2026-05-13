@@ -290,7 +290,14 @@ L'idée est de remplacer l'intégration sur les surfaces par une somme d'intégr
 !!! success "Lien avec la formation"
     C'est cette famille de méthodes qui est utilisée dans `pyViewFactor` : elle est bien adaptée aux facettes planes issues de maillages.
 
-![Geometric properties of elemental surfaces](./assets/schema_elem_faces.png){width="100%"}
+<figure>
+  <img src="../assets/schema_elem_faces.png"
+       alt="Caractéristiques géométriques des surfaces élémentaires">
+
+  <figcaption>
+    Caractéristiques géométriques des surfaces élémentaires
+  </figcaption>
+</figure>
 
 L'idée clé provient de **Mazumder _et al._, 2012**[^1] qui permettent de passer de la première intégrale ci-dessous à la seconde : 
 
@@ -302,7 +309,7 @@ F_{i,j} = \frac{1}{S_i} \iint_{S_i} \iint_{S_j}  \frac{\cos(\theta_i)\cos(\theta
 F_{i,j} = \frac{1}{2\pi S_i} \oint_{\Gamma_i} \oint_{\Gamma_j}  \ln(\delta_{k,l}) \,d\gamma_l \,d\gamma_k
 \end{equation}
 
-Et surout, dans cette seconde intégrale, d'opérer un changement de variable : 
+Et surtout, dans cette seconde intégrale, d'opérer un changement de variable : 
 
 $$
 \begin{cases}
@@ -311,7 +318,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 \end{cases}
 $$
 
-Puis en décomposant la distance \(\delta_{k,l}\) : 
+Puis de décomposer la distance \(\delta_{k,l}\) suivant : 
 
 $$
 \overrightarrow{\delta_{k,l}} =
@@ -322,7 +329,7 @@ $$
 
 On se retrouve à intégrer le \(\log \) d'un polynôme de degré 2, entre 0 et 1. _Et là, de nombreuses méthodes numériques existent !_
 
-Plus de détails [ici](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort), dans le papier IBPSA 2022 !
+Plus de détails [dans le papier IBPSA 2022](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort).
  
 [^1]: Mazumder and Ravishankar, 2012, __General procedure for calculation of diffuse view factors between arbitrary planar polygons__ [DOI](https://www.sciencedirect.com/science/article/pii/S0017931012006023)
 
@@ -363,7 +370,7 @@ Limites :
 
 - coût computationnel élevé,
 - difficile à utiliser pour des matrices complètes de grande taille,
-- dépendance à SciPy.
+- dépendance à [SciPy](https://scipy.org/).
 
 !!! info "Interprétation"
     Cette approche peut être vue comme une "référence numérique" : lente mais fiable.

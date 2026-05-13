@@ -17,7 +17,14 @@ Ce cours s'inscrit dans le cadre d'une session de formation SIMUREX, associée �
 !!! info "Objectif de la session"
     Découvrir [`pyViewFactor`](https://gitlab.com/arep-dev/pyViewFactor), comprendre les principes fondamentaux de la librairie et apprendre à l'intégrer dans vos propres projets !
 
-![Facteur de forme entre un individu et une scène urbaine](assets/FF_sceneUrbaine_cyl.png)
+<figure>
+  <img src="assets/FF_sceneUrbaine_cyl.png"
+       alt="Facteur de forme entre un individu et une scène urbaine">
+
+  <figcaption>
+    Facteur de forme entre un individu et une scène urbaine.
+  </figcaption>
+</figure>
 
 ## Contenu du site
 

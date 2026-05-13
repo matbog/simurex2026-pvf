@@ -31,10 +31,22 @@ Ces deux étapes sont fondamentales car elles permettent :
 
 Le test de visibilité consiste à vérifier si deux facettes sont **orientées l'une vers l'autre**.
 
+<figure>
+  <img src="../assets/facette_orientation.png"
+       alt="Orientation relative de surfaces"
+       width="600">
+        
+  <figcaption>
+    Orientation relative entre facettes
+  </figcaption>
+</figure>
+
+
 Autrement dit, même en l'absence d'obstacles, deux surfaces ne peuvent échanger du rayonnement que si :
 
 - leurs normales sont orientées de manière compatible,
 - leurs centres sont mutuellement visibles.
+
 
 
 ### 2.2 Formulation géométrique
@@ -86,6 +98,17 @@ Dans la pratique, deux stratégies existent :
 - rejette les cas partiellement visibles,
 - plus conservatif.
 
+
+<figure>
+  <img src="../assets/vis_strict_non_strict.png"
+       alt="modes visibilité"
+       width="600">
+        
+  <figcaption>
+    Strict = True, facettes non visibles ; Strict = False, facettes visibles
+  </figcaption>
+</figure>
+
 !!! warning "Cas limites"
     Dans les géométries réelles, une facette peut être partiellement visible. Le choix du mode strict dépend de l'application.
 
@@ -132,6 +155,16 @@ Pour éviter de tester toutes les facettes, un filtrage est appliqué :
 - sélection des triangles candidats,
 - exclusion des faces testées.
 
+<figure>
+  <img src="../assets/aabb.png"
+       alt="modes aabb"
+       width="600">
+        
+  <figcaption>
+    Le calcul d'obstruction entre les deux facettes rouges ne parcourt que les facettes vertes, contenues dans la AABB.
+  </figcaption>
+</figure>
+
 !!! success "Optimisation clé"
     Le filtrage spatial réduit fortement le coût du test d'obstruction.
 
@@ -151,7 +184,15 @@ Pour éviter de tester toutes les facettes, un filtrage est appliqué :
 - plus précis,
 - plus coûteux.
 
-
+<figure>
+  <img src="../assets/obs_strict_non_strict.png"
+       alt="modes visibilité"
+       width="600">
+        
+  <figcaption>
+    Strict = True, obstruction présente ; Strict = False, pas d'obstruction
+  </figcaption>
+</figure>
 
 ## 4. Difficultés pratiques
 
