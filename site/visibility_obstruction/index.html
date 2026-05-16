@@ -691,6 +691,16 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
 <h2 id="2-test-de-visibilite">2. Test de visibilité<a class="headerlink" href="#2-test-de-visibilite" title="Permanent link">&para;</a></h2>
 <h3 id="21-principe">2.1 Principe<a class="headerlink" href="#21-principe" title="Permanent link">&para;</a></h3>
 <p>Le test de visibilité consiste à vérifier si deux facettes sont <strong>orientées l'une vers l'autre</strong>.</p>
+<figure>
+  <img src="../assets/facette_orientation.png"
+       alt="Orientation relative de surfaces"
+       width="600">
+
+  <figcaption>
+    Orientation relative entre facettes
+  </figcaption>
+</figure>
+
 <p>Autrement dit, même en l'absence d'obstacles, deux surfaces ne peuvent échanger du rayonnement que si :</p>
 <ul>
 <li>leurs normales sont orientées de manière compatible,</li>
@@ -733,6 +743,16 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
 <li>rejette les cas partiellement visibles,</li>
 <li>plus conservatif.</li>
 </ul>
+<figure>
+  <img src="../assets/vis_strict_non_strict.png"
+       alt="modes visibilité"
+       width="600">
+
+  <figcaption>
+    Strict = True, facettes non visibles ; Strict = False, facettes visibles
+  </figcaption>
+</figure>
+
 <div class="admonition warning">
 <p class="admonition-title">Cas limites</p>
 <p>Dans les géométries réelles, une facette peut être partiellement visible. Le choix du mode strict dépend de l'application.</p>
@@ -765,6 +785,16 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
 <li>sélection des triangles candidats,</li>
 <li>exclusion des faces testées.</li>
 </ul>
+<figure>
+  <img src="../assets/aabb.png"
+       alt="modes aabb"
+       width="600">
+
+  <figcaption>
+    Le calcul d'obstruction entre les deux facettes rouges ne parcourt que les facettes vertes, contenues dans la AABB.
+  </figcaption>
+</figure>
+
 <div class="admonition success">
 <p class="admonition-title">Optimisation clé</p>
 <p>Le filtrage spatial réduit fortement le coût du test d'obstruction.</p>
@@ -782,6 +812,16 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
 <li>plus précis,</li>
 <li>plus coûteux.</li>
 </ul>
+<figure>
+  <img src="../assets/obs_strict_non_strict.png"
+       alt="modes visibilité"
+       width="600">
+
+  <figcaption>
+    Strict = True, obstruction présente ; Strict = False, pas d'obstruction
+  </figcaption>
+</figure>
+
 <h2 id="4-difficultes-pratiques">4. Difficultés pratiques<a class="headerlink" href="#4-difficultes-pratiques" title="Permanent link">&para;</a></h2>
 <h3 id="41-bruit-geometrique">4.1 Bruit géométrique<a class="headerlink" href="#41-bruit-geometrique" title="Permanent link">&para;</a></h3>
 <p>Les données issues de CAD contiennent souvent :</p>

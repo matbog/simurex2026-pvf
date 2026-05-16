@@ -334,7 +334,7 @@ Remove-Item -Recurse -Force .venv
 
 ## Résumé rapide
 
-Avec conda ou Miniconda :
+Avec `conda` ou `Miniconda` :
 
 ```bash
 git clone https://github.com/matbog/simurex2026-pvf.git

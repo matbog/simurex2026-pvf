@@ -880,7 +880,15 @@ F_{i,j} = \frac{1}{S_i} \iint_{S_i} \iint_{S_j}
 <p class="admonition-title">Lien avec la formation</p>
 <p>C'est cette famille de méthodes qui est utilisée dans <code>pyViewFactor</code> : elle est bien adaptée aux facettes planes issues de maillages.</p>
 </div>
-<p><img alt="Geometric properties of elemental surfaces" src="../assets/schema_elem_faces.png" width="100%" /></p>
+<figure>
+  <img src="../assets/schema_elem_faces.png"
+       alt="Caractéristiques géométriques des surfaces élémentaires">
+
+  <figcaption>
+    Caractéristiques géométriques des surfaces élémentaires
+  </figcaption>
+</figure>
+
 <p>L'idée clé provient de <strong>Mazumder <em>et al.</em>, 2012</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> qui permettent de passer de la première intégrale ci-dessous à la seconde : </p>
 <div class="arithmatex">\[\begin{equation}\label{eq:dbl_integral}
 F_{i,j} = \frac{1}{S_i} \iint_{S_i} \iint_{S_j}  \frac{\cos(\theta_i)\cos(\theta_j)}{\delta^2} \,dS_j \,dS_j
@@ -888,14 +896,14 @@ F_{i,j} = \frac{1}{S_i} \iint_{S_i} \iint_{S_j}  \frac{\cos(\theta_i)\cos(\theta
 <div class="arithmatex">\[\begin{equation}\label{eq:cont_integral}
 F_{i,j} = \frac{1}{2\pi S_i} \oint_{\Gamma_i} \oint_{\Gamma_j}  \ln(\delta_{k,l}) \,d\gamma_l \,d\gamma_k
 \end{equation}\]</div>
-<p>Et surout, dans cette seconde intégrale, d'opérer un changement de variable : </p>
+<p>Et surtout, dans cette seconde intégrale, d'opérer un changement de variable : </p>
 <div class="arithmatex">\[
 \begin{cases}
 d\overrightarrow{\gamma_{k,k+1}} = \overrightarrow{P_k P_{k+1}} \, d\lambda_P \\
 d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 \end{cases}
 \]</div>
-<p>Puis en décomposant la distance <span class="arithmatex">\(\delta_{k,l}\)</span> : </p>
+<p>Puis de décomposer la distance <span class="arithmatex">\(\delta_{k,l}\)</span> suivant : </p>
 <div class="arithmatex">\[
 \overrightarrow{\delta_{k,l}} =
 \overrightarrow{P_k Q_l}
@@ -903,7 +911,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 - \lambda_P \, \overrightarrow{P_k P_{k+1}}
 \]</div>
 <p>On se retrouve à intégrer le <span class="arithmatex">\(\log \)</span> d'un polynôme de degré 2, entre 0 et 1. <em>Et là, de nombreuses méthodes numériques existent !</em></p>
-<p>Plus de détails <a href="https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort">ici</a>, dans le papier IBPSA 2022 !</p>
+<p>Plus de détails <a href="https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort">dans le papier IBPSA 2022</a>.</p>
 <h1 id="7-integration-numerique-dblquad-vs-gausslegendre">7. Intégration numérique : dblquad vs Gauss–Legendre<a class="headerlink" href="#7-integration-numerique-dblquad-vs-gausslegendre" title="Permanent link">&para;</a></h1>
 <p>Une fois l'intégrale transformée en intégrale de contour, le problème ne disparaît pas : il change de nature.</p>
 <p>On se retrouve à devoir évaluer une intégrale de la forme :</p>
@@ -931,7 +939,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <ul>
 <li>coût computationnel élevé,</li>
 <li>difficile à utiliser pour des matrices complètes de grande taille,</li>
-<li>dépendance à SciPy.</li>
+<li>dépendance à <a href="https://scipy.org/">SciPy</a>.</li>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Interprétation</p>

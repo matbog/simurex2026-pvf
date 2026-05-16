@@ -8,9 +8,6 @@ Cette session introduit le calcul des facteurs de forme pour les calculs radiati
 d'applications en thermique et en simulation du bâtiment, avec un accent particulier sur
 l'utilisation pratique de la bibliothèque Python [`pyViewFactor`](https://gitlab.com/arep-dev/pyViewFactor).
 
-
-
-
 Ce cours s'inscrit dans le cadre d'une session de formation SIMUREX, associée à 
 [IBPSA France 2026](https://conference2026.ibpsa.fr/).
 

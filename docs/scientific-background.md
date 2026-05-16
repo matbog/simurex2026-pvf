@@ -19,10 +19,11 @@ Cette représentation présente plusieurs avantages :
 - elle est compatible avec les méthodes numériques d'intégration,
 - elle facilite les calculs massivement parallèles.
 
-Cependant, cette étape introduit de nouveaux enjeux :
+En contrepartie, cette discrétisation introduit également de nouveaux enjeux numériques :
 
 !!! warning "Impact du maillage"
-    Le bruit géométrique, les erreurs d'orientation ou les surfaces quasi coïncidentes ont un impact direct sur les calculs de visibilité, d'obstruction et d'intégration.
+    Le bruit géométrique, les erreurs d'orientation ou les surfaces quasi coïncidentes
+    ont un impact direct sur les calculs de visibilité, d'obstruction et d'intégration.
 
 Ces aspects doivent donc être explicitement pris en compte dans les algorithmes.
 
@@ -36,18 +37,20 @@ Contrairement à la conduction ou à la convection, le rayonnement :
 - ne nécessite pas de contact matériel direct,
 - dépend fortement de la géométrie,
 - couple potentiellement toutes les surfaces visibles entre elles,
-- devient très sensible aux masques, aux orientations et aux températures de surface.
+- est très sensible aux masques, aux orientations et aux températures de surface.
 
 !!! info "Idée clé"
-    Pour modéliser correctement les échanges radiatifs, il ne suffit pas de connaître les températures : il faut aussi savoir quelles surfaces se voient et dans quelles proportions.
+    Pour modéliser correctement les échanges radiatifs, il ne suffit pas de connaître
+    les températures : il faut aussi savoir quelles surfaces se voient et dans quelles
+    proportions.
 
 C'est le rôle des **facteurs de forme** (*view factors*).
 
-
-
 ### 1.1 Loi de Stefan–Boltzmann
 
-Une surface à température absolue \(T\) émet un flux radiatif. Pour un corps noir, l'émittance totale est donnée par la loi de [Stefan–Boltzmann](https://fr.wikipedia.org/wiki/Loi_de_Stefan-Boltzmann) :
+Une surface à température absolue \(T\) émet un flux radiatif. Pour un corps noir,
+l'émittance totale est donnée par la loi de 
+[Stefan–Boltzmann](https://fr.wikipedia.org/wiki/Loi_de_Stefan-Boltzmann) :
 
 $$
 E = \sigma T^4
@@ -55,7 +58,8 @@ $$
 
 où \(\sigma\) est la [constante de Stefan–Boltzmann](https://fr.wikipedia.org/wiki/Constante_de_Stefan-Boltzmann).
 
-Pour une surface réelle, on introduit généralement une [émissivité](https://fr.wikipedia.org/wiki/%C3%89missivit%C3%A9) \(\varepsilon\) :
+Pour une surface réelle, on introduit généralement une
+[émissivité](https://fr.wikipedia.org/wiki/%C3%89missivit%C3%A9) \(\varepsilon\) :
 
 $$
 E = \varepsilon \sigma T^4
@@ -346,7 +350,7 @@ On se retrouve à devoir évaluer une intégrale de la forme :
 - d'une fonction contenant un \(\log(\delta_{k,l})\),
 - où \(\delta_{k,l}\) est une fonction polynomiale du second degré.
 
-Autrement dit, même après réduction surface → contour, il reste une **intégration numérique non triviale**.
+Autrement dit, même après la réduction _surface_ → _contour_, il reste une **intégration numérique non triviale**.
 
 
 
