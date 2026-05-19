@@ -27,6 +27,11 @@ Ces deux étapes sont fondamentales car elles permettent :
 
 ## 2. Test de visibilité
 
+
+!!! abstract "Implémentation"
+    `get_visibility(cell_1, cell_2, ...)`
+    
+
 ### 2.1 Principe
 
 Le test de visibilité consiste à vérifier si deux facettes sont **orientées l'une vers l'autre**.
@@ -115,6 +120,10 @@ Dans la pratique, deux stratégies existent :
 
 
 ## 3. Test d'obstruction
+
+!!! abstract "Implémentation"
+    `get_obstruction(cell1, cell2, obstacle, ...)`
+
 
 ### 3.1 Principe
 
@@ -230,75 +239,3 @@ Plusieurs solutions sont utilisées :
 - introduction d'un seuil \(\varepsilon\),
 - exclusion des intersections aux extrémités,
 - filtrage des triangles identiques.
-
-
-
-## 5. Lien avec `pyViewFactor`
-
-### 5.1 Test de visibilité
-
-Le test de visibilité repose sur :
-
-- les centroïdes,
-- les normales,
-- des produits scalaires.
-
-!!! abstract "Implémentation"
-    `get_visibility(cell_1, cell_2, ...)`
-
-
-
-### 5.2 Test d'obstruction
-
-Le test d'obstruction repose sur :
-
-- ray tracing,
-- intersection segment-triangle,
-- filtrage AABB.
-
-
-!!! abstract "Implémentation"
-    `get_obstruction(cell1, cell2, obstacle, ...)`
-
-
-### 5.3 Prétraitement géométrique
-
-Pour accélérer les calculs :
-
-- stockage des normales, centres, aires,
-- mise en cache des triangles.
-
-Voir les structures de prétraitement dans le code.
-
-
-## 6. Impact sur les facteurs de forme
-
-Les tests de visibilité et d'obstruction conditionnent directement :
-
-- quelles paires de surfaces sont intégrées,
-- la sparsité de la matrice des facteurs de forme,
-- la cohérence physique du modèle.
-
-!!! important "À retenir"
-    Une erreur de visibilité ou d'obstruction peut avoir un impact plus important que l'erreur d'intégration elle-même.
-
-
-## 7. Conclusion
-
-Les tests de visibilité et d'obstruction sont :
-
-- indispensables pour le calcul des facteurs de forme,
-- fortement dépendants de la qualité géométrique,
-- souvent la partie la plus délicate du calcul.
-
-Ils constituent un compromis entre :
-
-- précision,
-- robustesse,
-- performance.
-
-Dans `pyViewFactor`, ces tests sont conçus pour être :
-
-- rapides,
-- robustes face au bruit géométrique,
-- compatibles avec des maillages complexes.

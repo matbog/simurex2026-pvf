@@ -683,10 +683,11 @@
 <li>elle est compatible avec les méthodes numériques d'intégration,</li>
 <li>elle facilite les calculs massivement parallèles.</li>
 </ul>
-<p>Cependant, cette étape introduit de nouveaux enjeux :</p>
+<p>En contrepartie, cette discrétisation introduit également de nouveaux enjeux numériques :</p>
 <div class="admonition warning">
 <p class="admonition-title">Impact du maillage</p>
-<p>Le bruit géométrique, les erreurs d'orientation ou les surfaces quasi coïncidentes ont un impact direct sur les calculs de visibilité, d'obstruction et d'intégration.</p>
+<p>Le bruit géométrique, les erreurs d'orientation ou les surfaces quasi coïncidentes
+ont un impact direct sur les calculs de visibilité, d'obstruction et d'intégration.</p>
 </div>
 <p>Ces aspects doivent donc être explicitement pris en compte dans les algorithmes.</p>
 <h2 id="1-rayonnement-thermique-bases-physiques">1. Rayonnement thermique : bases physiques<a class="headerlink" href="#1-rayonnement-thermique-bases-physiques" title="Permanent link">&para;</a></h2>
@@ -697,20 +698,25 @@ thermique, le <strong>rayonnement thermique</strong> joue un rôle central.</p>
 <li>ne nécessite pas de contact matériel direct,</li>
 <li>dépend fortement de la géométrie,</li>
 <li>couple potentiellement toutes les surfaces visibles entre elles,</li>
-<li>devient très sensible aux masques, aux orientations et aux températures de surface.</li>
+<li>est très sensible aux masques, aux orientations et aux températures de surface.</li>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Idée clé</p>
-<p>Pour modéliser correctement les échanges radiatifs, il ne suffit pas de connaître les températures : il faut aussi savoir quelles surfaces se voient et dans quelles proportions.</p>
+<p>Pour modéliser correctement les échanges radiatifs, il ne suffit pas de connaître
+les températures : il faut aussi savoir quelles surfaces se voient et dans quelles
+proportions.</p>
 </div>
 <p>C'est le rôle des <strong>facteurs de forme</strong> (<em>view factors</em>).</p>
 <h3 id="11-loi-de-stefanboltzmann">1.1 Loi de Stefan–Boltzmann<a class="headerlink" href="#11-loi-de-stefanboltzmann" title="Permanent link">&para;</a></h3>
-<p>Une surface à température absolue <span class="arithmatex">\(T\)</span> émet un flux radiatif. Pour un corps noir, l'émittance totale est donnée par la loi de <a href="https://fr.wikipedia.org/wiki/Loi_de_Stefan-Boltzmann">Stefan–Boltzmann</a> :</p>
+<p>Une surface à température absolue <span class="arithmatex">\(T\)</span> émet un flux radiatif. Pour un corps noir,
+l'émittance totale est donnée par la loi de 
+<a href="https://fr.wikipedia.org/wiki/Loi_de_Stefan-Boltzmann">Stefan–Boltzmann</a> :</p>
 <div class="arithmatex">\[
 E = \sigma T^4
 \]</div>
 <p>où <span class="arithmatex">\(\sigma\)</span> est la <a href="https://fr.wikipedia.org/wiki/Constante_de_Stefan-Boltzmann">constante de Stefan–Boltzmann</a>.</p>
-<p>Pour une surface réelle, on introduit généralement une <a href="https://fr.wikipedia.org/wiki/%C3%89missivit%C3%A9">émissivité</a> <span class="arithmatex">\(\varepsilon\)</span> :</p>
+<p>Pour une surface réelle, on introduit généralement une
+<a href="https://fr.wikipedia.org/wiki/%C3%89missivit%C3%A9">émissivité</a> <span class="arithmatex">\(\varepsilon\)</span> :</p>
 <div class="arithmatex">\[
 E = \varepsilon \sigma T^4
 \]</div>
@@ -920,7 +926,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <li>d'une fonction contenant un <span class="arithmatex">\(\log(\delta_{k,l})\)</span>,</li>
 <li>où <span class="arithmatex">\(\delta_{k,l}\)</span> est une fonction polynomiale du second degré.</li>
 </ul>
-<p>Autrement dit, même après réduction surface → contour, il reste une <strong>intégration numérique non triviale</strong>.</p>
+<p>Autrement dit, même après la réduction <em>surface</em> → <em>contour</em>, il reste une <strong>intégration numérique non triviale</strong>.</p>
 <h3 id="71-integration-adaptative-type-dblquad">7.1 Intégration adaptative (type <code>dblquad</code>)<a class="headerlink" href="#71-integration-adaptative-type-dblquad" title="Permanent link">&para;</a></h3>
 <p>Une première approche consiste à utiliser un intégrateur adaptatif, comme <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.dblquad.html"><code>scipy.integrate.dblquad</code></a>.</p>
 <p>Principe :</p>
@@ -1041,7 +1047,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      © Mateusz BOGDAN & Edouard WALTHER 2026 avec <span class="heart">❤</span> —
+      © Mateusz BOGDAN & Edouard WALTHER — 2026 — avec <span class="heart">❤</span> —
 <a href="https://github.com/matbog/simurex2026-pvf?tab=License-1-ov-file">
     CC BY 4.0
 </a>
