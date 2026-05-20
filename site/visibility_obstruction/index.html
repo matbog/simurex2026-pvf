@@ -448,39 +448,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#5-lien-avec-pyviewfactor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Lien avec pyViewFactor
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-impact-sur-les-facteurs-de-forme" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Impact sur les facteurs de forme
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Conclusion
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -613,39 +580,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#5-lien-avec-pyviewfactor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Lien avec pyViewFactor
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-impact-sur-les-facteurs-de-forme" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Impact sur les facteurs de forme
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Conclusion
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -689,6 +623,10 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
 <p>Dans <code>pyViewFactor</code>, ces tests sont effectués <strong>avant toute intégration</strong>, et conditionnent directement le calcul des facteurs de forme.</p>
 </div>
 <h2 id="2-test-de-visibilite">2. Test de visibilité<a class="headerlink" href="#2-test-de-visibilite" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Implémentation</p>
+<p><code>get_visibility(cell_1, cell_2, ...)</code></p>
+</div>
 <h3 id="21-principe">2.1 Principe<a class="headerlink" href="#21-principe" title="Permanent link">&para;</a></h3>
 <p>Le test de visibilité consiste à vérifier si deux facettes sont <strong>orientées l'une vers l'autre</strong>.</p>
 <figure>
@@ -758,6 +696,10 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
 <p>Dans les géométries réelles, une facette peut être partiellement visible. Le choix du mode strict dépend de l'application.</p>
 </div>
 <h2 id="3-test-dobstruction">3. Test d'obstruction<a class="headerlink" href="#3-test-dobstruction" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Implémentation</p>
+<p><code>get_obstruction(cell1, cell2, obstacle, ...)</code></p>
+</div>
 <h3 id="31-principe">3.1 Principe<a class="headerlink" href="#31-principe" title="Permanent link">&para;</a></h3>
 <p>Même si deux surfaces sont orientées correctement, elles peuvent être <strong>masquées par une troisième surface</strong>.</p>
 <p>Le test d'obstruction consiste à vérifier que le segment reliant les deux surfaces ne coupe aucun obstacle.</p>
@@ -850,66 +792,6 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
 <li>introduction d'un seuil <span class="arithmatex">\(\varepsilon\)</span>,</li>
 <li>exclusion des intersections aux extrémités,</li>
 <li>filtrage des triangles identiques.</li>
-</ul>
-<h2 id="5-lien-avec-pyviewfactor">5. Lien avec <code>pyViewFactor</code><a class="headerlink" href="#5-lien-avec-pyviewfactor" title="Permanent link">&para;</a></h2>
-<h3 id="51-test-de-visibilite">5.1 Test de visibilité<a class="headerlink" href="#51-test-de-visibilite" title="Permanent link">&para;</a></h3>
-<p>Le test de visibilité repose sur :</p>
-<ul>
-<li>les centroïdes,</li>
-<li>les normales,</li>
-<li>des produits scalaires.</li>
-</ul>
-<div class="admonition abstract">
-<p class="admonition-title">Implémentation</p>
-<p><code>get_visibility(cell_1, cell_2, ...)</code></p>
-</div>
-<h3 id="52-test-dobstruction">5.2 Test d'obstruction<a class="headerlink" href="#52-test-dobstruction" title="Permanent link">&para;</a></h3>
-<p>Le test d'obstruction repose sur :</p>
-<ul>
-<li>ray tracing,</li>
-<li>intersection segment-triangle,</li>
-<li>filtrage AABB.</li>
-</ul>
-<div class="admonition abstract">
-<p class="admonition-title">Implémentation</p>
-<p><code>get_obstruction(cell1, cell2, obstacle, ...)</code></p>
-</div>
-<h3 id="53-pretraitement-geometrique">5.3 Prétraitement géométrique<a class="headerlink" href="#53-pretraitement-geometrique" title="Permanent link">&para;</a></h3>
-<p>Pour accélérer les calculs :</p>
-<ul>
-<li>stockage des normales, centres, aires,</li>
-<li>mise en cache des triangles.</li>
-</ul>
-<p>Voir les structures de prétraitement dans le code.</p>
-<h2 id="6-impact-sur-les-facteurs-de-forme">6. Impact sur les facteurs de forme<a class="headerlink" href="#6-impact-sur-les-facteurs-de-forme" title="Permanent link">&para;</a></h2>
-<p>Les tests de visibilité et d'obstruction conditionnent directement :</p>
-<ul>
-<li>quelles paires de surfaces sont intégrées,</li>
-<li>la sparsité de la matrice des facteurs de forme,</li>
-<li>la cohérence physique du modèle.</li>
-</ul>
-<div class="admonition important">
-<p class="admonition-title">À retenir</p>
-<p>Une erreur de visibilité ou d'obstruction peut avoir un impact plus important que l'erreur d'intégration elle-même.</p>
-</div>
-<h2 id="7-conclusion">7. Conclusion<a class="headerlink" href="#7-conclusion" title="Permanent link">&para;</a></h2>
-<p>Les tests de visibilité et d'obstruction sont :</p>
-<ul>
-<li>indispensables pour le calcul des facteurs de forme,</li>
-<li>fortement dépendants de la qualité géométrique,</li>
-<li>souvent la partie la plus délicate du calcul.</li>
-</ul>
-<p>Ils constituent un compromis entre :</p>
-<ul>
-<li>précision,</li>
-<li>robustesse,</li>
-<li>performance.</li>
-</ul>
-<p>Dans <code>pyViewFactor</code>, ces tests sont conçus pour être :</p>
-<ul>
-<li>rapides,</li>
-<li>robustes face au bruit géométrique,</li>
-<li>compatibles avec des maillages complexes.</li>
 </ul>
 
 

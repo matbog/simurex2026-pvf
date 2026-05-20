@@ -174,7 +174,7 @@ La **température radiante moyenne** (*Mean Radiant Temperature*, MRT) est la te
 Une écriture simplifiée est :
 
 $$
-T_r = \left( \sum_i F_i T_i^4 \right)^{1/4}
+T_{\text{r}} = \sqrt[4] { \frac{ \sum_{i=1}^{n} S_i F_i T_i^4 }{\sum_{i=1}^{n} S_i F_{i} } }
 $$
 
 avec :
@@ -182,52 +182,16 @@ avec :
 - \(F_i\) : facteur de forme entre l'individu et la surface \(i\) ;
 - \(T_i\) : température radiative de la surface \(i\).
 
-Cette expression montre que :
 
-- chaque surface contribue proportionnellement à son facteur de forme,
-- la géométrie joue un rôle déterminant,
-- les effets de masque sont essentiels.
 
 Dans les situations extérieures, un terme lié au rayonnement solaire peut être ajouté selon les conventions du modèle.
 
-### 4.2 Pourquoi c'est important ?
-
-La MRT est souvent l'une des variables les plus influentes dans les indices de confort thermique.
-
-Elle dépend fortement :
-
-- des températures de surface,
-- du ciel visible,
-- de l'ombrage,
-- de la géométrie urbaine,
-- de la position de l'individu.
-
 🔗 Ressource complémentaire : [Calcul de MRT](https://lhypercube.arep.fr/thematiques/confort/calcul_mrt/)
 
-!!! info "Lien avec `pyViewFactor`"
-    Pour calculer une MRT de manière géométriquement cohérente, il faut connaître les facteurs de forme entre le point ou le corps étudié et les surfaces environnantes.
 
+## 5. Méthodes de calcul des facteurs de forme
 
-## 5. Difficultés numériques
-
-Dans des cas simples, il existe des solutions analytiques. Mais dans des géométries réelles, plusieurs difficultés apparaissent :
-
-- surfaces polygonales quelconques,
-- orientations variées,
-- surfaces adjacentes ou quasi adjacentes,
-- masques et obstructions,
-- scènes ouvertes,
-- grand nombre de paires de surfaces.
-
-Pour un maillage de \(N\) faces, une matrice complète peut contenir \(N^2\) interactions potentielles.
-
-!!! warning "Point numérique"
-    Le coût ne vient pas seulement du calcul de l'intégrale. Il vient aussi des tests géométriques : visibilité, obstruction, gestion des cas limites et remplissage de la matrice.
-
-
-## 6. Méthodes de calcul des facteurs de forme
-
-### 6.1 Méthodes analytiques
+### 5.1 Méthodes analytiques
 
 Elles donnent des résultats exacts ou quasi exacts pour des configurations simples : plaques parallèles, rectangles perpendiculaires, cylindres, sphères, etc.
 
@@ -241,7 +205,7 @@ Elles sont très utiles pour :
 
 Limite : elles ne couvrent pas les géométries complexes.
 
-### 6.2 Méthodes Monte Carlo
+### 5.2 Méthodes Monte Carlo
 
 Le principe est de lancer un grand nombre de rayons depuis une surface et de compter les intersections avec les autres surfaces.
 
@@ -257,7 +221,7 @@ Limites :
 - convergence parfois lente,
 - besoin d'un grand nombre de rayons pour les faibles facteurs de forme.
 
-### 6.3 Méthodes hémicube ou raster
+### 5.3 Méthodes hémicube ou raster
 
 Ces méthodes projettent la scène sur un hémicube ou une discrétisation angulaire autour d'une surface.
 
@@ -272,7 +236,7 @@ Limites :
 - artefacts de discrétisation,
 - moins adaptées lorsque l'on cherche une formulation numérique contrôlée.
 
-### 6.4 Intégration numérique directe
+### 5.4 Intégration numérique directe
 
 On peut calculer directement l'intégrale surfacique :
 
@@ -285,7 +249,7 @@ Cette approche est générale, mais coûteuse : elle nécessite une intégration
 
 
 
-### 6.5 Transformation en intégrale de contour
+### 5.5 Transformation en intégrale de contour
 
 Pour des polygones plans, il est possible de transformer l'intégrale de surface en intégrale de contour.
 
@@ -340,7 +304,7 @@ Plus de détails [dans le papier IBPSA 2022](https://www.researchgate.net/public
 
 
 
-# 7. Intégration numérique : dblquad vs Gauss–Legendre
+# 6. Intégration numérique : dblquad vs Gauss–Legendre
 
 Une fois l'intégrale transformée en intégrale de contour, le problème ne disparaît pas : il change de nature.
 
@@ -354,7 +318,7 @@ Autrement dit, même après la réduction _surface_ → _contour_, il reste une 
 
 
 
-### 7.1 Intégration adaptative (type `dblquad`)
+### 6.1 Intégration adaptative (type `dblquad`)
 
 Une première approche consiste à utiliser un intégrateur adaptatif, comme [`scipy.integrate.dblquad`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.dblquad.html).
 
@@ -381,7 +345,7 @@ Limites :
 
 
 
-### 7.2 Quadrature de Gauss–Legendre
+### 6.2 Quadrature de Gauss–Legendre
 
 Une alternative consiste à utiliser une quadrature de [Gauss–Legendre](https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_quadrature) sur \([0,1]\).
 
@@ -411,7 +375,7 @@ Limites :
 - moins robuste lorsque les surfaces sont très proches ou adjacentes,
 - nécessite une bonne gestion des cas limites.
 
-### 7.3 Stratégie hybride
+### 6.3 Stratégie hybride
 
 Dans la pratique, aucune des deux méthodes ne suffit seule.
 
@@ -425,14 +389,3 @@ Une stratégie efficace consiste à :
 
 !!! success "Idée clé"
     Cette approche permet de conserver la performance globale tout en garantissant la robustesse dans les cas critiques.
-
-
-## 8. Ce qu'il faut retenir avant la pratique
-
-À ce stade, les messages importants sont :
-
-1. Le rayonnement thermique dépend fortement de la géométrie.
-2. Les facteurs de forme décrivent cette dépendance géométrique.
-3. Ils sont essentiels pour les échanges radiatifs et la MRT.
-4. Leur calcul devient difficile dans les scènes maillées avec obstructions.
-5. `pyViewFactor` propose une approche numérique dédiée aux facettes planes.
