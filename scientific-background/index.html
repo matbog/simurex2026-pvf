@@ -433,21 +433,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-difficultes-numeriques" class="md-nav__link">
+  <a href="#5-methodes-de-calcul-des-facteurs-de-forme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Difficultés numériques
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-methodes-de-calcul-des-facteurs-de-forme" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Méthodes de calcul des facteurs de forme
+        5. Méthodes de calcul des facteurs de forme
       
     </span>
   </a>
@@ -625,21 +614,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-difficultes-numeriques" class="md-nav__link">
+  <a href="#5-methodes-de-calcul-des-facteurs-de-forme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Difficultés numériques
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-methodes-de-calcul-des-facteurs-de-forme" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Méthodes de calcul des facteurs de forme
+        5. Méthodes de calcul des facteurs de forme
       
     </span>
   </a>
@@ -790,52 +768,17 @@ q_i \propto \sigma \sum_j F_{i,j} \left(T_i^4 - T_j^4\right)
 <p>La <strong>température radiante moyenne</strong> (<em>Mean Radiant Temperature</em>, MRT) est la température uniforme d'un environnement fictif qui produirait le même échange radiatif avec un individu que l'environnement réel.</p>
 <p>Une écriture simplifiée est :</p>
 <div class="arithmatex">\[
-T_r = \left( \sum_i F_i T_i^4 \right)^{1/4}
+T_{\text{r}} = \sqrt[4] { \frac{ \sum_{i=1}^{n} S_i F_i T_i^4 }{\sum_{i=1}^{n} S_i F_{i} } }
 \]</div>
 <p>avec :</p>
 <ul>
 <li><span class="arithmatex">\(F_i\)</span> : facteur de forme entre l'individu et la surface <span class="arithmatex">\(i\)</span> ;</li>
 <li><span class="arithmatex">\(T_i\)</span> : température radiative de la surface <span class="arithmatex">\(i\)</span>.</li>
 </ul>
-<p>Cette expression montre que :</p>
-<ul>
-<li>chaque surface contribue proportionnellement à son facteur de forme,</li>
-<li>la géométrie joue un rôle déterminant,</li>
-<li>les effets de masque sont essentiels.</li>
-</ul>
 <p>Dans les situations extérieures, un terme lié au rayonnement solaire peut être ajouté selon les conventions du modèle.</p>
-<h3 id="42-pourquoi-cest-important">4.2 Pourquoi c'est important ?<a class="headerlink" href="#42-pourquoi-cest-important" title="Permanent link">&para;</a></h3>
-<p>La MRT est souvent l'une des variables les plus influentes dans les indices de confort thermique.</p>
-<p>Elle dépend fortement :</p>
-<ul>
-<li>des températures de surface,</li>
-<li>du ciel visible,</li>
-<li>de l'ombrage,</li>
-<li>de la géométrie urbaine,</li>
-<li>de la position de l'individu.</li>
-</ul>
 <p>🔗 Ressource complémentaire : <a href="https://lhypercube.arep.fr/thematiques/confort/calcul_mrt/">Calcul de MRT</a></p>
-<div class="admonition info">
-<p class="admonition-title">Lien avec <code>pyViewFactor</code></p>
-<p>Pour calculer une MRT de manière géométriquement cohérente, il faut connaître les facteurs de forme entre le point ou le corps étudié et les surfaces environnantes.</p>
-</div>
-<h2 id="5-difficultes-numeriques">5. Difficultés numériques<a class="headerlink" href="#5-difficultes-numeriques" title="Permanent link">&para;</a></h2>
-<p>Dans des cas simples, il existe des solutions analytiques. Mais dans des géométries réelles, plusieurs difficultés apparaissent :</p>
-<ul>
-<li>surfaces polygonales quelconques,</li>
-<li>orientations variées,</li>
-<li>surfaces adjacentes ou quasi adjacentes,</li>
-<li>masques et obstructions,</li>
-<li>scènes ouvertes,</li>
-<li>grand nombre de paires de surfaces.</li>
-</ul>
-<p>Pour un maillage de <span class="arithmatex">\(N\)</span> faces, une matrice complète peut contenir <span class="arithmatex">\(N^2\)</span> interactions potentielles.</p>
-<div class="admonition warning">
-<p class="admonition-title">Point numérique</p>
-<p>Le coût ne vient pas seulement du calcul de l'intégrale. Il vient aussi des tests géométriques : visibilité, obstruction, gestion des cas limites et remplissage de la matrice.</p>
-</div>
-<h2 id="6-methodes-de-calcul-des-facteurs-de-forme">6. Méthodes de calcul des facteurs de forme<a class="headerlink" href="#6-methodes-de-calcul-des-facteurs-de-forme" title="Permanent link">&para;</a></h2>
-<h3 id="61-methodes-analytiques">6.1 Méthodes analytiques<a class="headerlink" href="#61-methodes-analytiques" title="Permanent link">&para;</a></h3>
+<h2 id="5-methodes-de-calcul-des-facteurs-de-forme">5. Méthodes de calcul des facteurs de forme<a class="headerlink" href="#5-methodes-de-calcul-des-facteurs-de-forme" title="Permanent link">&para;</a></h2>
+<h3 id="51-methodes-analytiques">5.1 Méthodes analytiques<a class="headerlink" href="#51-methodes-analytiques" title="Permanent link">&para;</a></h3>
 <p>Elles donnent des résultats exacts ou quasi exacts pour des configurations simples : plaques parallèles, rectangles perpendiculaires, cylindres, sphères, etc.</p>
 <p>Quelques sources de cas analytiques : <a href="https://thermalradiation.net/tablecon.html">thermalradiation.net</a> ou <a href="https://fchart.com/ees/heat_transfer_library/shape_factors/hs22.htm">Fchart.com</a>. </p>
 <p>Elles sont très utiles pour :</p>
@@ -845,7 +788,7 @@ T_r = \left( \sum_i F_i T_i^4 \right)^{1/4}
 <li>construire des cas tests.</li>
 </ul>
 <p>Limite : elles ne couvrent pas les géométries complexes.</p>
-<h3 id="62-methodes-monte-carlo">6.2 Méthodes Monte Carlo<a class="headerlink" href="#62-methodes-monte-carlo" title="Permanent link">&para;</a></h3>
+<h3 id="52-methodes-monte-carlo">5.2 Méthodes Monte Carlo<a class="headerlink" href="#52-methodes-monte-carlo" title="Permanent link">&para;</a></h3>
 <p>Le principe est de lancer un grand nombre de rayons depuis une surface et de compter les intersections avec les autres surfaces.</p>
 <p>Avantages :</p>
 <ul>
@@ -859,7 +802,7 @@ T_r = \left( \sum_i F_i T_i^4 \right)^{1/4}
 <li>convergence parfois lente,</li>
 <li>besoin d'un grand nombre de rayons pour les faibles facteurs de forme.</li>
 </ul>
-<h3 id="63-methodes-hemicube-ou-raster">6.3 Méthodes hémicube ou raster<a class="headerlink" href="#63-methodes-hemicube-ou-raster" title="Permanent link">&para;</a></h3>
+<h3 id="53-methodes-hemicube-ou-raster">5.3 Méthodes hémicube ou raster<a class="headerlink" href="#53-methodes-hemicube-ou-raster" title="Permanent link">&para;</a></h3>
 <p>Ces méthodes projettent la scène sur un hémicube ou une discrétisation angulaire autour d'une surface.</p>
 <p>Avantages :</p>
 <ul>
@@ -872,14 +815,14 @@ T_r = \left( \sum_i F_i T_i^4 \right)^{1/4}
 <li>artefacts de discrétisation,</li>
 <li>moins adaptées lorsque l'on cherche une formulation numérique contrôlée.</li>
 </ul>
-<h3 id="64-integration-numerique-directe">6.4 Intégration numérique directe<a class="headerlink" href="#64-integration-numerique-directe" title="Permanent link">&para;</a></h3>
+<h3 id="54-integration-numerique-directe">5.4 Intégration numérique directe<a class="headerlink" href="#54-integration-numerique-directe" title="Permanent link">&para;</a></h3>
 <p>On peut calculer directement l'intégrale surfacique :</p>
 <div class="arithmatex">\[
 F_{i,j} = \frac{1}{S_i} \iint_{S_i} \iint_{S_j}
 \frac{\cos\theta_i \cos\theta_j}{\pi r^2} \, dS_j \, dS_i
 \]</div>
 <p>Cette approche est générale, mais coûteuse : elle nécessite une intégration sur deux surfaces.</p>
-<h3 id="65-transformation-en-integrale-de-contour">6.5 Transformation en intégrale de contour<a class="headerlink" href="#65-transformation-en-integrale-de-contour" title="Permanent link">&para;</a></h3>
+<h3 id="55-transformation-en-integrale-de-contour">5.5 Transformation en intégrale de contour<a class="headerlink" href="#55-transformation-en-integrale-de-contour" title="Permanent link">&para;</a></h3>
 <p>Pour des polygones plans, il est possible de transformer l'intégrale de surface en intégrale de contour.</p>
 <p>L'idée est de remplacer l'intégration sur les surfaces par une somme d'intégrales associées aux paires d'arêtes. </p>
 <div class="admonition success">
@@ -918,7 +861,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 \]</div>
 <p>On se retrouve à intégrer le <span class="arithmatex">\(\log \)</span> d'un polynôme de degré 2, entre 0 et 1. <em>Et là, de nombreuses méthodes numériques existent !</em></p>
 <p>Plus de détails <a href="https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort">dans le papier IBPSA 2022</a>.</p>
-<h1 id="7-integration-numerique-dblquad-vs-gausslegendre">7. Intégration numérique : dblquad vs Gauss–Legendre<a class="headerlink" href="#7-integration-numerique-dblquad-vs-gausslegendre" title="Permanent link">&para;</a></h1>
+<h1 id="6-integration-numerique-dblquad-vs-gausslegendre">6. Intégration numérique : dblquad vs Gauss–Legendre<a class="headerlink" href="#6-integration-numerique-dblquad-vs-gausslegendre" title="Permanent link">&para;</a></h1>
 <p>Une fois l'intégrale transformée en intégrale de contour, le problème ne disparaît pas : il change de nature.</p>
 <p>On se retrouve à devoir évaluer une intégrale de la forme :</p>
 <ul>
@@ -927,7 +870,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <li>où <span class="arithmatex">\(\delta_{k,l}\)</span> est une fonction polynomiale du second degré.</li>
 </ul>
 <p>Autrement dit, même après la réduction <em>surface</em> → <em>contour</em>, il reste une <strong>intégration numérique non triviale</strong>.</p>
-<h3 id="71-integration-adaptative-type-dblquad">7.1 Intégration adaptative (type <code>dblquad</code>)<a class="headerlink" href="#71-integration-adaptative-type-dblquad" title="Permanent link">&para;</a></h3>
+<h3 id="61-integration-adaptative-type-dblquad">6.1 Intégration adaptative (type <code>dblquad</code>)<a class="headerlink" href="#61-integration-adaptative-type-dblquad" title="Permanent link">&para;</a></h3>
 <p>Une première approche consiste à utiliser un intégrateur adaptatif, comme <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.dblquad.html"><code>scipy.integrate.dblquad</code></a>.</p>
 <p>Principe :</p>
 <ul>
@@ -951,7 +894,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <p class="admonition-title">Interprétation</p>
 <p>Cette approche peut être vue comme une "référence numérique" : lente mais fiable.</p>
 </div>
-<h3 id="72-quadrature-de-gausslegendre">7.2 Quadrature de Gauss–Legendre<a class="headerlink" href="#72-quadrature-de-gausslegendre" title="Permanent link">&para;</a></h3>
+<h3 id="62-quadrature-de-gausslegendre">6.2 Quadrature de Gauss–Legendre<a class="headerlink" href="#62-quadrature-de-gausslegendre" title="Permanent link">&para;</a></h3>
 <p>Une alternative consiste à utiliser une quadrature de <a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_quadrature">Gauss–Legendre</a> sur <span class="arithmatex">\([0,1]\)</span>.</p>
 <p>Principe :</p>
 <ul>
@@ -979,7 +922,7 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <li>moins robuste lorsque les surfaces sont très proches ou adjacentes,</li>
 <li>nécessite une bonne gestion des cas limites.</li>
 </ul>
-<h3 id="73-strategie-hybride">7.3 Stratégie hybride<a class="headerlink" href="#73-strategie-hybride" title="Permanent link">&para;</a></h3>
+<h3 id="63-strategie-hybride">6.3 Stratégie hybride<a class="headerlink" href="#63-strategie-hybride" title="Permanent link">&para;</a></h3>
 <p>Dans la pratique, aucune des deux méthodes ne suffit seule.</p>
 <p>Une stratégie efficace consiste à :</p>
 <ul>
@@ -993,15 +936,6 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 <p class="admonition-title">Idée clé</p>
 <p>Cette approche permet de conserver la performance globale tout en garantissant la robustesse dans les cas critiques.</p>
 </div>
-<h2 id="8-ce-quil-faut-retenir-avant-la-pratique">8. Ce qu'il faut retenir avant la pratique<a class="headerlink" href="#8-ce-quil-faut-retenir-avant-la-pratique" title="Permanent link">&para;</a></h2>
-<p>À ce stade, les messages importants sont :</p>
-<ol>
-<li>Le rayonnement thermique dépend fortement de la géométrie.</li>
-<li>Les facteurs de forme décrivent cette dépendance géométrique.</li>
-<li>Ils sont essentiels pour les échanges radiatifs et la MRT.</li>
-<li>Leur calcul devient difficile dans les scènes maillées avec obstructions.</li>
-<li><code>pyViewFactor</code> propose une approche numérique dédiée aux facettes planes.</li>
-</ol>
 <div class="footnote">
 <hr />
 <ol>
