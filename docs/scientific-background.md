@@ -304,88 +304,38 @@ Plus de détails [dans le papier IBPSA 2022](https://www.researchgate.net/public
 
 
 
-# 6. Intégration numérique : dblquad vs Gauss–Legendre
+# 6. Intégration numérique : le noyau SA-30
 
-Une fois l'intégrale transformée en intégrale de contour, le problème ne disparaît pas : il change de nature.
+Une fois l'intégrale transformée en intégrale de contour, il reste à évaluer numériquement une expression de la forme :
 
-On se retrouve à devoir évaluer une intégrale de la forme :
+$$
+I = \int_0^1 \int_0^1 \ln\!\left(A\,s^2 + B\,s\,t + C\,t^2 + \cdots\right) ds\, dt
+$$
 
-- double intégrale sur les paramètres \(\lambda_P\) et \(\lambda_Q\),
-- d'une fonction contenant un \(\log(\delta_{k,l})\),
-- où \(\delta_{k,l}\) est une fonction polynomiale du second degré.
+où les coefficients dépendent de la paire d'arêtes considérée.
 
-Autrement dit, même après la réduction _surface_ → _contour_, il reste une **intégration numérique non triviale**.
+Depuis la **v1.1.0**, `pyViewFactor` utilise le noyau **SA-30** (*semi-analytique, 30 points*) : l'intégrale intérieure est évaluée **en forme fermée**, pour chaque point de quadrature de Gauss–Legendre sur l'intégrale extérieure.
 
+### 6.1 Idée centrale
 
+Le discriminant \(\Delta = 4AC - B^2\) détermine la branche analytique :
 
-### 6.1 Intégration adaptative (type `dblquad`)
+| Cas | Condition | Traitement |
+|---|---|---|
+| Faces disjointes | \(\Delta > 0\) | Formule arc-tangente |
+| Faces adjacentes / coplanaires | \(\Delta \leq 0\) | Décomposition en racines réelles |
 
-Une première approche consiste à utiliser un intégrateur adaptatif, comme [`scipy.integrate.dblquad`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.dblquad.html).
+Les faces adjacentes (sommet ou arête en commun) — cas les plus délicats — sont ainsi traitées **exactement**, sans décalage `epsilon` ni biais structurel.
 
-Principe :
+### 6.2 Avantages par rapport à l'ancienne stratégie hybride
 
-- l'intégrale est évaluée de manière récursive,
-- la précision est contrôlée automatiquement,
-- les zones "difficiles" sont raffinées.
+Les versions antérieures à v1.1.0 utilisaient Gauss–Legendre pour les faces disjointes et `scipy.dblquad` avec un décalage `epsilon` pour les faces adjacentes. Cette approche induisait un biais systématique d'environ 0,16 % sur les maillages fermés.
 
-Avantages :
+Le noyau SA-30 :
 
-- très robuste,
-- gère naturellement les cas dégénérés (arêtes communes, sommets partagés),
-- peu sensible aux singularités locales.
+- **supprime ce biais** en traitant les cas adjacents de manière exacte,
+- est **compilé avec Numba** (`prange`) pour une parallélisation automatique,
+- atteint un **gain de ×33** sur un cas urbain de 382 faces.
 
-Limites :
-
-- coût computationnel élevé,
-- difficile à utiliser pour des matrices complètes de grande taille,
-- dépendance à [SciPy](https://scipy.org/).
-
-!!! info "Interprétation"
-    Cette approche peut être vue comme une "référence numérique" : lente mais fiable.
-
-
-
-### 6.2 Quadrature de Gauss–Legendre
-
-Une alternative consiste à utiliser une quadrature de [Gauss–Legendre](https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_quadrature) sur \([0,1]\).
-
-Principe :
-
-- l'intégrale est approximée par une somme pondérée :
-  $$
-  \int_0^1 f(\lambda) d\lambda \approx \sum_i w_i f(x_i)
-  $$
-- les points \(x_i\) et poids \(w_i\) sont optimisés pour maximiser la précision.
-
-Dans notre cas :
-
-- la double intégrale devient une double somme,
-- le coût est fixe pour un ordre donné,
-- l'implémentation est très efficace avec des boucles compilées (Numba).
-
-Avantages :
-
-- très rapide,
-- parfaitement déterministe,
-- bien adaptée aux calculs massifs (matrices complètes).
-
-Limites :
-
-- précision dépend du nombre de points,
-- moins robuste lorsque les surfaces sont très proches ou adjacentes,
-- nécessite une bonne gestion des cas limites.
-
-### 6.3 Stratégie hybride
-
-Dans la pratique, aucune des deux méthodes ne suffit seule.
-
-Une stratégie efficace consiste à :
-
-- utiliser **Gauss–Legendre** pour les surfaces disjointes (cas majoritaires),
-- basculer vers **`dblquad`** pour les cas difficiles :
-  - surfaces adjacentes,
-  - partage de sommet,
-  - proximité géométrique.
-
-!!! success "Idée clé"
-    Cette approche permet de conserver la performance globale tout en garantissant la robustesse dans les cas critiques.
+!!! success "Pour aller plus loin"
+    Le détail mathématique complet (dérivation de la forme fermée, mesures de performance, diagramme de Pareto précision/vitesse) est présenté dans [l'article de blog dédié à la v1.1.0](https://lhypercube.arep.fr/blog/pyviewfactor_v110/).

@@ -2,7 +2,7 @@
 
 
 [![GitLab](https://img.shields.io/badge/GitLab-source-FC6D26?logo=gitlab&logoColor=white)](https://gitlab.com/arep-dev/pyViewFactor)
-[![Docs](https://img.shields.io/badge/docs-available-brightgreen?logo=gitbook&logoColor=white)](https://arep-dev.gitlab.io/pyViewFactor/pyviewfactor.html)
+[![Docs](https://img.shields.io/badge/docs-available-brightgreen?logo=gitbook&logoColor=white)](https://arep-dev.gitlab.io/pyViewFactor/)
 [![Article](https://img.shields.io/badge/Article-IBPSA%202022-purple?logo=googlescholar&logoColor=white)](https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort)
 [![JOSS](https://img.shields.io/badge/JOSS-submitted-blue)](https://joss.theoj.org/papers/cc7d3aebf5e8ed25b343c6dd822f70b4)
 
@@ -107,15 +107,11 @@ contributions associées aux paires d'arêtes des deux polygones.
 
 ### 4.2 Stratégie numérique
 
-`pyViewFactor` utilise deux intégrateurs complémentaires :
+`pyViewFactor` (v1.1.0) utilise le noyau **SA-30** : l'intégrale intérieure est évaluée en **forme fermée** (semi-analytique), ce qui élimine le biais numérique sur les faces adjacentes ou coplanaires sans recourir à un décalage epsilon.
+Les paires sont ensuite traitées en parallèle grâce à Numba (`prange`), pour un gain de ×33 sur un cas urbain de référence.
 
-- **Gauss–Legendre** : rapide, utilisé pour la majorité des paires de faces disjointes,
-- **`SciPy` `dblquad`** : plus robuste, utilisé pour les cas plus délicats, notamment les
-faces partageant un sommet ou une arête.
-
-!!! info "Compromis numérique"
-    La stratégie hybride vise à conserver une bonne performance sur de grands maillages,
-    tout en gardant une méthode plus robuste pour les configurations géométriques sensibles.
+!!! info "Historique"
+    Les versions antérieures à v1.1.0 utilisaient une stratégie hybride Gauss–Legendre / `dblquad`. Le noyau SA-30 remplace cette approche en gérant tous les cas de manière unifiée et plus précise.
 
 
 ## 5. Architecture du code
@@ -186,24 +182,30 @@ Modes d'obstruction :
 - `strict=False` : un rayon centroïde-centroïde est testé,
 - `strict=True` : plusieurs rayons sommet-sommet sont testés, ce qui rend le critère plus conservatif.
 
+#### Accélération BVH (v1.1.0)
+
+Pour chaque paire de faces, tester séquentiellement tous les triangles de l'obstacle coûte **O(N)** par rayon. Depuis la v1.1.0, `FaceMeshPreprocessor` construit une **BVH** (*Bounding Volume Hierarchy*) : un arbre binaire de boîtes englobantes alignées sur les axes (AABB).
+
+La traversée de l'arbre élimine à chaque niveau environ la moitié des triangles candidats, ramenant le coût à **O(log N)** par rayon. L'arbre est stocké sous forme de tableaux NumPy plats pour une traversée compatible Numba.
+
+!!! info "Pour aller plus loin"
+    Le fonctionnement détaillé de la BVH (construction, traversée, stockage) est présenté dans [l'article de blog dédié à la v1.1.0](https://lhypercube.arep.fr/blog/pyviewfactor_v110/).
+
 ### 5.4 Intégration numérique du facteur de forme
 
 Objectif : évaluer l'intégrale de contour entre les deux polygones.
 
-Fonctions associées :
+Depuis la v1.1.0, un noyau unique **SA-30** gère tous les cas :
 
 | Élément | Rôle |
 |---|---|
-| `integrand_gauss_legendre()` | Noyau numérique utilisé pour l'intégration de Gauss–Legendre. |
-| `compute_viewfactor_gauss_legendre()` | Calcule rapidement un facteur de forme par quadrature de Gauss–Legendre. |
-| `set_quadrature_order()` | Permet de modifier l'ordre de quadrature de Gauss–Legendre. |
-| `integrand_dblquad()` | Intégrande utilisée par l'intégrateur robuste `SciPy`. |
-| `compute_viewfactor_dblquad()` | Calcule un facteur de forme avec `scipy.integrate.dblquad`. |
+| `compute_viewfactor()` | Calcule le facteur de forme entre deux faces via le noyau SA-30. |
+| `compute_viewfactor_matrix()` | Calcule la matrice complète avec tests de visibilité, obstruction (BVH) et parallélisation Numba. |
 
-En pratique :
+Le noyau SA-30 évalue l'intégrale intérieure en forme fermée (formule arc-tangente ou décomposition en racines réelles selon le signe du discriminant), ce qui élimine le biais des faces adjacentes sans recourir à un décalage `epsilon`.
 
-- les faces disjointes sont traitées par Gauss–Legendre,
-- les faces qui partagent au moins un sommet sont légèrement décalées avec `epsilon`, puis traitées par `dblquad`.
+!!! info "Pour aller plus loin"
+    Le détail mathématique du noyau SA-30 et des mesures de performance sont présentés dans [l'article de blog dédié à la v1.1.0](https://lhypercube.arep.fr/blog/pyviewfactor_v110/).
 
 ### 5.5 Fonctions haut niveau
 
@@ -217,7 +219,7 @@ Ces fonctions orchestrent les étapes précédentes.
 | `plot_viewfactor()` | Visualise sur le maillage la distribution des facteurs de forme associés à une cellule source. |
 
 !!! example "Lecture du pipeline"
-    `compute_viewfactor_matrix()` commence par prétraiter le maillage, sépare les paires de faces adjacentes et disjointes, applique les tests de visibilité et d'obstruction, choisit l'intégrateur adapté, puis remplit la matrice en utilisant la relation de réciprocité.
+    `compute_viewfactor_matrix()` commence par prétraiter le maillage, applique les tests de visibilité et d'obstruction (accélérés par BVH depuis la v1.1.0), puis calcule tous les facteurs de forme via le noyau SA-30 en parallèle (Numba `prange`).
 
 
 ## 6. Exemple minimal
@@ -257,7 +259,7 @@ Le design de `pyViewFactor` repose sur :
 
 Les principaux compromis sont :
 
-- **rapidité vs robustesse** : Gauss–Legendre est rapide, `dblquad` est plus robuste,
+- **précision vs coût** : le noyau SA-30 est à la fois plus précis et plus rapide que l'ancienne stratégie hybride, grâce à la forme fermée et à la parallélisation Numba,
 - **mode strict vs mode permissif** : le mode strict évite certains faux positifs, mais peut rejeter des cas partiels,
 - **maillage grossier vs maillage raffiné** : un maillage plus fin représente mieux les visibilités partielles, mais augmente le nombre de paires à calculer.
 

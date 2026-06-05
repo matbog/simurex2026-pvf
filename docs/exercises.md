@@ -408,7 +408,7 @@ svf = 1.0 - sum_to_scene
 ### 3.3 - Partie 2 : températures de surface
 
 **Pour cet exercice, où nous allons calculer les flux émis par les surfaces, les températures
-seront imposées sans calculer les "vrais" échanges radiatifs aevc la méthode des radiosités**
+seront imposées sans calculer les "vrais" échanges radiatifs aevc la méthode des radiosités.**
 
 
 Les températures de surface ne sont pas imposées arbitrairement.

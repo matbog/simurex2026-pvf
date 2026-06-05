@@ -307,7 +307,6 @@ def compute_viewfactor_matrix(mesh):
         strict_visibility=STRICT_VISIBILITY,
         strict_obstruction=STRICT_OBSTRUCTION,
         rounding_decimal=ROUNDING_DECIMAL,
-        epsilon=EPSILON_INTEGRATION,
         verbose=True,
     )
 

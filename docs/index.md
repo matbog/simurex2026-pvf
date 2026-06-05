@@ -1,6 +1,10 @@
 # SIMUREX 2026 – Calcul de facteur de forme et échanges radiatifs
 
-<img src="./assets/logo.png" width="10%" style="margin-left: 45%;">
+<img src="./assets/logo_full.png" width="80%" style="margin-left: 10%;">
+
+!!! success "Mise à jour juin 2026"
+    Suite à une mise à jour importante de la librairie (v1.0.3 ➜ v1.1.0), le contenu du site a été mis à jour !
+
 
 ## École thématique SIMUREX, IBPSA 2026
 

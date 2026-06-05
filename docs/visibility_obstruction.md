@@ -156,13 +156,13 @@ Une méthode classique est l'algorithme de [**Möller–Trumbore**](https://en.w
 
 
 
-### 3.4 Filtrage spatial
+### 3.4 Filtrage spatial et accélération BVH
 
-Pour éviter de tester toutes les facettes, un filtrage est appliqué :
+Pour éviter de tester toutes les facettes, un filtrage spatial est appliqué avant le test de Möller–Trumbore.
 
-- construction d'une **boîte englobante** (AABB - _Axis Aligned Bounding Box_),
-- sélection des triangles candidats,
-- exclusion des faces testées.
+#### Boîte englobante AABB (principe de base)
+
+Une première approche consiste à construire une **boîte englobante commune** aux deux faces testées (AABB — *Axis Aligned Bounding Box*), et à ne retenir que les triangles obstacles qui la recoupent.
 
 <figure>
   <img src="../assets/aabb.png"
@@ -174,8 +174,23 @@ Pour éviter de tester toutes les facettes, un filtrage est appliqué :
   </figcaption>
 </figure>
 
+Ce filtre est efficace mais ne résout qu'un seul niveau de découpage : les triangles restants sont ensuite testés **séquentiellement**, un par un — coût **O(N)** par rayon.
+
+#### BVH : hiérarchie de boîtes englobantes (v1.1.0)
+
+Depuis la v1.1.0, `pyViewFactor` construit une **BVH** (*Bounding Volume Hierarchy*) sur le maillage obstacle : un **arbre binaire de boîtes AABB**, où chaque nœud contient exactement les triangles de son sous-arbre.
+
+Principe de la traversée pour un rayon donné :
+
+1. Tester le rayon contre la boîte du nœud racine (*slab test* : 6 comparaisons),
+2. **Raté** → tout le sous-arbre est éliminé, zéro triangle testé,
+3. **Touché** → descendre dans les deux fils,
+4. À la feuille → test de Möller–Trumbore sur le triangle.
+
+Chaque niveau élimine environ la moitié des candidats restants : le coût passe de **O(N)** à **O(log N)** par rayon. L'arbre est stocké sous forme de tableaux NumPy plats (sans objets Python) pour rester compatible avec la compilation Numba.
+
 !!! success "Optimisation clé"
-    Le filtrage spatial réduit fortement le coût du test d'obstruction.
+    Sur un maillage urbain de 382 faces, la combinaison BVH + Numba `prange` contribue à un gain global de **×33** par rapport à la v1.0.
 
 
 
