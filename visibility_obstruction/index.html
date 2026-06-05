@@ -720,13 +720,10 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
 <li>robuste numériquement,</li>
 <li>adapté aux maillages triangulés.</li>
 </ul>
-<h3 id="34-filtrage-spatial">3.4 Filtrage spatial<a class="headerlink" href="#34-filtrage-spatial" title="Permanent link">&para;</a></h3>
-<p>Pour éviter de tester toutes les facettes, un filtrage est appliqué :</p>
-<ul>
-<li>construction d'une <strong>boîte englobante</strong> (AABB - <em>Axis Aligned Bounding Box</em>),</li>
-<li>sélection des triangles candidats,</li>
-<li>exclusion des faces testées.</li>
-</ul>
+<h3 id="34-filtrage-spatial-et-acceleration-bvh">3.4 Filtrage spatial et accélération BVH<a class="headerlink" href="#34-filtrage-spatial-et-acceleration-bvh" title="Permanent link">&para;</a></h3>
+<p>Pour éviter de tester toutes les facettes, un filtrage spatial est appliqué avant le test de Möller–Trumbore.</p>
+<h4 id="boite-englobante-aabb-principe-de-base">Boîte englobante AABB (principe de base)<a class="headerlink" href="#boite-englobante-aabb-principe-de-base" title="Permanent link">&para;</a></h4>
+<p>Une première approche consiste à construire une <strong>boîte englobante commune</strong> aux deux faces testées (AABB — <em>Axis Aligned Bounding Box</em>), et à ne retenir que les triangles obstacles qui la recoupent.</p>
 <figure>
   <img src="../assets/aabb.png"
        alt="modes aabb"
@@ -737,9 +734,20 @@ Avant même d'évaluer une intégrale, il est nécessaire de déterminer si deux
   </figcaption>
 </figure>
 
+<p>Ce filtre est efficace mais ne résout qu'un seul niveau de découpage : les triangles restants sont ensuite testés <strong>séquentiellement</strong>, un par un — coût <strong>O(N)</strong> par rayon.</p>
+<h4 id="bvh-hierarchie-de-boites-englobantes-v110">BVH : hiérarchie de boîtes englobantes (v1.1.0)<a class="headerlink" href="#bvh-hierarchie-de-boites-englobantes-v110" title="Permanent link">&para;</a></h4>
+<p>Depuis la v1.1.0, <code>pyViewFactor</code> construit une <strong>BVH</strong> (<em>Bounding Volume Hierarchy</em>) sur le maillage obstacle : un <strong>arbre binaire de boîtes AABB</strong>, où chaque nœud contient exactement les triangles de son sous-arbre.</p>
+<p>Principe de la traversée pour un rayon donné :</p>
+<ol>
+<li>Tester le rayon contre la boîte du nœud racine (<em>slab test</em> : 6 comparaisons),</li>
+<li><strong>Raté</strong> → tout le sous-arbre est éliminé, zéro triangle testé,</li>
+<li><strong>Touché</strong> → descendre dans les deux fils,</li>
+<li>À la feuille → test de Möller–Trumbore sur le triangle.</li>
+</ol>
+<p>Chaque niveau élimine environ la moitié des candidats restants : le coût passe de <strong>O(N)</strong> à <strong>O(log N)</strong> par rayon. L'arbre est stocké sous forme de tableaux NumPy plats (sans objets Python) pour rester compatible avec la compilation Numba.</p>
 <div class="admonition success">
 <p class="admonition-title">Optimisation clé</p>
-<p>Le filtrage spatial réduit fortement le coût du test d'obstruction.</p>
+<p>Sur un maillage urbain de 382 faces, la combinaison BVH + Numba <code>prange</code> contribue à un gain global de <strong>×33</strong> par rapport à la v1.0.</p>
 </div>
 <h3 id="35-modes-strict-et-non-strict">3.5 Modes strict et non strict<a class="headerlink" href="#35-modes-strict-et-non-strict" title="Permanent link">&para;</a></h3>
 <h4 id="mode-non-strict_1">Mode non strict<a class="headerlink" href="#mode-non-strict_1" title="Permanent link">&para;</a></h4>

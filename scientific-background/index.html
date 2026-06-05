@@ -861,80 +861,48 @@ d\overrightarrow{\gamma_{l,l+1}} = \overrightarrow{Q_l Q_{l+1}} \, d\lambda_Q
 \]</div>
 <p>On se retrouve à intégrer le <span class="arithmatex">\(\log \)</span> d'un polynôme de degré 2, entre 0 et 1. <em>Et là, de nombreuses méthodes numériques existent !</em></p>
 <p>Plus de détails <a href="https://www.researchgate.net/publication/360835982_Calcul_des_facteurs_de_forme_entre_polygones_-Application_a_la_thermique_urbaine_et_aux_etudes_de_confort">dans le papier IBPSA 2022</a>.</p>
-<h1 id="6-integration-numerique-dblquad-vs-gausslegendre">6. Intégration numérique : dblquad vs Gauss–Legendre<a class="headerlink" href="#6-integration-numerique-dblquad-vs-gausslegendre" title="Permanent link">&para;</a></h1>
-<p>Une fois l'intégrale transformée en intégrale de contour, le problème ne disparaît pas : il change de nature.</p>
-<p>On se retrouve à devoir évaluer une intégrale de la forme :</p>
+<h1 id="6-integration-numerique-le-noyau-sa-30">6. Intégration numérique : le noyau SA-30<a class="headerlink" href="#6-integration-numerique-le-noyau-sa-30" title="Permanent link">&para;</a></h1>
+<p>Une fois l'intégrale transformée en intégrale de contour, il reste à évaluer numériquement une expression de la forme :</p>
+<div class="arithmatex">\[
+I = \int_0^1 \int_0^1 \ln\!\left(A\,s^2 + B\,s\,t + C\,t^2 + \cdots\right) ds\, dt
+\]</div>
+<p>où les coefficients dépendent de la paire d'arêtes considérée.</p>
+<p>Depuis la <strong>v1.1.0</strong>, <code>pyViewFactor</code> utilise le noyau <strong>SA-30</strong> (<em>semi-analytique, 30 points</em>) : l'intégrale intérieure est évaluée <strong>en forme fermée</strong>, pour chaque point de quadrature de Gauss–Legendre sur l'intégrale extérieure.</p>
+<h3 id="61-idee-centrale">6.1 Idée centrale<a class="headerlink" href="#61-idee-centrale" title="Permanent link">&para;</a></h3>
+<p>Le discriminant <span class="arithmatex">\(\Delta = 4AC - B^2\)</span> détermine la branche analytique :</p>
+<table>
+<thead>
+<tr>
+<th>Cas</th>
+<th>Condition</th>
+<th>Traitement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Faces disjointes</td>
+<td><span class="arithmatex">\(\Delta &gt; 0\)</span></td>
+<td>Formule arc-tangente</td>
+</tr>
+<tr>
+<td>Faces adjacentes / coplanaires</td>
+<td><span class="arithmatex">\(\Delta \leq 0\)</span></td>
+<td>Décomposition en racines réelles</td>
+</tr>
+</tbody>
+</table>
+<p>Les faces adjacentes (sommet ou arête en commun) — cas les plus délicats — sont ainsi traitées <strong>exactement</strong>, sans décalage <code>epsilon</code> ni biais structurel.</p>
+<h3 id="62-avantages-par-rapport-a-lancienne-strategie-hybride">6.2 Avantages par rapport à l'ancienne stratégie hybride<a class="headerlink" href="#62-avantages-par-rapport-a-lancienne-strategie-hybride" title="Permanent link">&para;</a></h3>
+<p>Les versions antérieures à v1.1.0 utilisaient Gauss–Legendre pour les faces disjointes et <code>scipy.dblquad</code> avec un décalage <code>epsilon</code> pour les faces adjacentes. Cette approche induisait un biais systématique d'environ 0,16 % sur les maillages fermés.</p>
+<p>Le noyau SA-30 :</p>
 <ul>
-<li>double intégrale sur les paramètres <span class="arithmatex">\(\lambda_P\)</span> et <span class="arithmatex">\(\lambda_Q\)</span>,</li>
-<li>d'une fonction contenant un <span class="arithmatex">\(\log(\delta_{k,l})\)</span>,</li>
-<li>où <span class="arithmatex">\(\delta_{k,l}\)</span> est une fonction polynomiale du second degré.</li>
-</ul>
-<p>Autrement dit, même après la réduction <em>surface</em> → <em>contour</em>, il reste une <strong>intégration numérique non triviale</strong>.</p>
-<h3 id="61-integration-adaptative-type-dblquad">6.1 Intégration adaptative (type <code>dblquad</code>)<a class="headerlink" href="#61-integration-adaptative-type-dblquad" title="Permanent link">&para;</a></h3>
-<p>Une première approche consiste à utiliser un intégrateur adaptatif, comme <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.dblquad.html"><code>scipy.integrate.dblquad</code></a>.</p>
-<p>Principe :</p>
-<ul>
-<li>l'intégrale est évaluée de manière récursive,</li>
-<li>la précision est contrôlée automatiquement,</li>
-<li>les zones "difficiles" sont raffinées.</li>
-</ul>
-<p>Avantages :</p>
-<ul>
-<li>très robuste,</li>
-<li>gère naturellement les cas dégénérés (arêtes communes, sommets partagés),</li>
-<li>peu sensible aux singularités locales.</li>
-</ul>
-<p>Limites :</p>
-<ul>
-<li>coût computationnel élevé,</li>
-<li>difficile à utiliser pour des matrices complètes de grande taille,</li>
-<li>dépendance à <a href="https://scipy.org/">SciPy</a>.</li>
-</ul>
-<div class="admonition info">
-<p class="admonition-title">Interprétation</p>
-<p>Cette approche peut être vue comme une "référence numérique" : lente mais fiable.</p>
-</div>
-<h3 id="62-quadrature-de-gausslegendre">6.2 Quadrature de Gauss–Legendre<a class="headerlink" href="#62-quadrature-de-gausslegendre" title="Permanent link">&para;</a></h3>
-<p>Une alternative consiste à utiliser une quadrature de <a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_quadrature">Gauss–Legendre</a> sur <span class="arithmatex">\([0,1]\)</span>.</p>
-<p>Principe :</p>
-<ul>
-<li>l'intégrale est approximée par une somme pondérée :
-  $$
-  \int_0^1 f(\lambda) d\lambda \approx \sum_i w_i f(x_i)
-  $$</li>
-<li>les points <span class="arithmatex">\(x_i\)</span> et poids <span class="arithmatex">\(w_i\)</span> sont optimisés pour maximiser la précision.</li>
-</ul>
-<p>Dans notre cas :</p>
-<ul>
-<li>la double intégrale devient une double somme,</li>
-<li>le coût est fixe pour un ordre donné,</li>
-<li>l'implémentation est très efficace avec des boucles compilées (Numba).</li>
-</ul>
-<p>Avantages :</p>
-<ul>
-<li>très rapide,</li>
-<li>parfaitement déterministe,</li>
-<li>bien adaptée aux calculs massifs (matrices complètes).</li>
-</ul>
-<p>Limites :</p>
-<ul>
-<li>précision dépend du nombre de points,</li>
-<li>moins robuste lorsque les surfaces sont très proches ou adjacentes,</li>
-<li>nécessite une bonne gestion des cas limites.</li>
-</ul>
-<h3 id="63-strategie-hybride">6.3 Stratégie hybride<a class="headerlink" href="#63-strategie-hybride" title="Permanent link">&para;</a></h3>
-<p>Dans la pratique, aucune des deux méthodes ne suffit seule.</p>
-<p>Une stratégie efficace consiste à :</p>
-<ul>
-<li>utiliser <strong>Gauss–Legendre</strong> pour les surfaces disjointes (cas majoritaires),</li>
-<li>basculer vers <strong><code>dblquad</code></strong> pour les cas difficiles :</li>
-<li>surfaces adjacentes,</li>
-<li>partage de sommet,</li>
-<li>proximité géométrique.</li>
+<li><strong>supprime ce biais</strong> en traitant les cas adjacents de manière exacte,</li>
+<li>est <strong>compilé avec Numba</strong> (<code>prange</code>) pour une parallélisation automatique,</li>
+<li>atteint un <strong>gain de ×33</strong> sur un cas urbain de 382 faces.</li>
 </ul>
 <div class="admonition success">
-<p class="admonition-title">Idée clé</p>
-<p>Cette approche permet de conserver la performance globale tout en garantissant la robustesse dans les cas critiques.</p>
+<p class="admonition-title">Pour aller plus loin</p>
+<p>Le détail mathématique complet (dérivation de la forme fermée, mesures de performance, diagramme de Pareto précision/vitesse) est présenté dans <a href="https://lhypercube.arep.fr/blog/pyviewfactor_v110/">l'article de blog dédié à la v1.1.0</a>.</p>
 </div>
 <div class="footnote">
 <hr />
